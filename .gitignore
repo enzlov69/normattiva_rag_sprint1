@@ -96,3 +96,36 @@ data/cache/
 *.7z
 *.tar
 *.gz
+# Cantieri e working folders
+cantiere_118/
+cantiere_36/
+cantiere_36_allegati/
+kit_cantiere_118/
+Verali collaudo/
+
+# Documenti locali/storici
+*.odt
+*.docx
+README.txt
+README_1.txt
+README_odd_1.md
+README_old.md
+ARCHITETTURA_FINALE_MVP.md
+CHANGELOG_MVP.md
+MVP_CONTROLLATO_DUAL_VALIDATION.md
+RELEASE_NOTES_MVP.md
+
+# Data storica o non da versionare
+data/cantieri/
+data/chroma_backup_before_main_fix_*/
+data/manifests/
+data/rag_ready/
+data/raw/
+data/src/
+data/test_queries/
+data/test_results/
+
+# Federated tests junk / provvisori
+tools/federated_tests/Nuova cartella/
+tools/federated_tests/from __future__ import annotations_1.txt
+tools/federated_tests/runner funzinante solo 1 no.txt
