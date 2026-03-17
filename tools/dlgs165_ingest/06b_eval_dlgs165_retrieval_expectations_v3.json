@@ -1,0 +1,98 @@
+{
+  "dataset_id": "dlgs165_2001",
+  "versione": "vigente",
+  "description": "Aspettative di validazione retrieval corpus-scoped v3 per D.Lgs. 165/2001",
+  "expectations": [
+    {
+      "query_id": "dlgs165_q001",
+      "expected_global_any_of": [
+        { "articolo": "4", "comma": "1" },
+        { "articolo": "4", "comma": "2" },
+        { "articolo": "4", "comma": "4" },
+        { "articolo": "4" },
+        { "articolo": "2", "comma": "1" }
+      ],
+      "notes": "Separazione indirizzo politico-amministrativo / gestione."
+    },
+    {
+      "query_id": "dlgs165_q002",
+      "expected_global_any_of": [
+        { "articolo": "4", "comma": "2" },
+        { "articolo": "4" },
+        { "articolo": "17" },
+        { "articolo": "17-bis" }
+      ],
+      "notes": "Competenze dirigenziali e adozione atti."
+    },
+    {
+      "query_id": "dlgs165_q003",
+      "expected_global_any_of": [
+        { "articolo": "2", "comma": "1" },
+        { "articolo": "2" },
+        { "articolo": "6", "comma": "1" },
+        { "articolo": "6" }
+      ],
+      "notes": "Organizzazione degli uffici."
+    },
+    {
+      "query_id": "dlgs165_q004",
+      "expected_global_any_of": [
+        { "articolo": "21", "comma": "1" },
+        { "articolo": "21" }
+      ],
+      "notes": "Responsabilità dirigenziale."
+    },
+    {
+      "query_id": "dlgs165_q005",
+      "expected_global_any_of": [
+        { "articolo": "55-bis", "comma": "2" },
+        { "articolo": "55-bis" }
+      ],
+      "notes": "UPD."
+    },
+    {
+      "query_id": "dlgs165_q006",
+      "expected_global_any_of": [
+        { "articolo": "55-bis" },
+        { "articolo": "55-bis", "comma": "1" },
+        { "articolo": "55-ter" },
+        { "articolo": "55-quater" }
+      ],
+      "notes": "Procedimento disciplinare."
+    },
+    {
+      "query_id": "dlgs165_q007",
+      "expected_global_any_of": [
+        { "articolo": "19" },
+        { "articolo": "19", "comma": "1" },
+        { "articolo": "19", "comma": "6" }
+      ],
+      "notes": "Conferimento incarichi di funzione dirigenziale."
+    },
+    {
+      "query_id": "dlgs165_q008",
+      "expected_global_any_of": [
+        { "articolo": "6" },
+        { "articolo": "6", "comma": "1" },
+        { "articolo": "6-ter" },
+        { "articolo": "6-ter", "comma": "1" }
+      ],
+      "notes": "Fabbisogno del personale."
+    },
+    {
+      "query_id": "dlgs165_q009",
+      "skip_evaluation": true,
+      "notes": "Performance esclusa dal test corpus-scoped."
+    },
+    {
+      "query_id": "dlgs165_q010",
+      "expected_global_any_of": [
+        { "articolo": "1" },
+        { "articolo": "2" },
+        { "articolo": "2", "comma": "1" },
+        { "articolo": "36" }
+      ],
+      "notes": "Query generale di inquadramento."
+    }
+  ]
+}
