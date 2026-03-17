@@ -1,0 +1,16 @@
+{
+  "status": "OK",
+  "collection": "normattiva_l241_1990",
+  "persist_dir": "data/chroma",
+  "embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "ingested_chunks": 51,
+  "collection_count": 51,
+  "skipped_chunks": 0,
+  "source_document": {
+    "atto_tipo": "Legge",
+    "atto_numero": "241",
+    "atto_anno": "1990",
+    "titolo": "Nuove norme in materia di procedimento amministrativo e di diritto di accesso ai documenti amministrativi",
+    "uri_ufficiale": "https://www.normattiva.it/atto/caricaDettaglioAtto?atto.codiceRedazionale=090G0294&atto.dataPubblicazioneGazzetta=1990-08-18&bloccoAggiornamentoBreadCrumb=true&classica=true&dataVigenza=&generaTabId=true&tabID=&tipoDettaglio=multivigenza&title=lbl.dettaglioAtto"
+  }
+}

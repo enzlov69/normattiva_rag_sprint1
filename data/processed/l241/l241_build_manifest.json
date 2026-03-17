@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-03-11T14:11:55+00:00",
+  "input_raw_dir": "data\\raw\\l241_1990\\articles",
+  "output_json": "data\\processed\\l241\\l241_rag_ready.json",
+  "output_ndjson": "data\\processed\\l241\\l241_rag_ready.ndjson",
+  "domain_code": "l241_1990",
+  "source_id": "source_norm_241_1990",
+  "counts": {
+    "articles": 51,
+    "norm_units": 51,
+    "chunk_records": 51,
+    "vigenza_records": 51,
+    "citation_records": 51
+  },
+  "status": "READY"
+}
