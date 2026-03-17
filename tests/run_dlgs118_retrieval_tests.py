@@ -1,4 +1,16 @@
 #!/usr/bin/env python3
+"""
+Canonical broader accounting-branch validation baseline for the active
+D.Lgs. 118/2011 + D.Lgs. 126/2014 collections.
+
+Scope of this file:
+- validates the active 118/126 accounting collections as a branch
+- does not replace the separate surgical maintenance baseline for
+  normattiva_dlgs118_2011_all_4_2 under tools/normattiva_dlgs118_all_4_2_restore/
+- does not promote cantiere_118/ to active baseline; cantiere_118/ remains
+  rebuild provenance unless explicitly reconsolidated
+"""
+
 from __future__ import annotations
 
 import json
