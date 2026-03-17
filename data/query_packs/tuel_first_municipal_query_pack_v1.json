@@ -1,0 +1,115 @@
+{
+  "pack_id": "tuel_first_municipal_query_pack_v1",
+  "status": "draft_governance_only",
+  "description": "Draft municipal TUEL-first query pack derived from TUEL routing governance artifacts for future controlled validation.",
+  "queries": [
+    {
+      "query_id": "tuel_first_q001",
+      "use_case": "Quando serve il parere ex art. 49 TUEL per una proposta di delibera?",
+      "query_text": "quando serve il parere ex art. 49 tuel per una proposta di delibera",
+      "routing_bucket": "governance/competence",
+      "expected_primary_domain": "tuel",
+      "expected_secondary_domain": "none",
+      "notes": "Pure TUEL-first governance case. The answer should remain centered on municipal competence and parere framing."
+    },
+    {
+      "query_id": "tuel_first_q002",
+      "use_case": "Per questa decisione è competente il consiglio o la giunta comunale?",
+      "query_text": "per questa decisione e competente il consiglio o la giunta comunale",
+      "routing_bucket": "governance/competence",
+      "expected_primary_domain": "tuel",
+      "expected_secondary_domain": "none",
+      "notes": "Pure TUEL-first competence case. The answer should identify the competent municipal organ before any specialist doctrine."
+    },
+    {
+      "query_id": "tuel_first_q003",
+      "use_case": "Annullamento d'ufficio di un provvedimento comunale: chi lo avvia e con quali limiti?",
+      "query_text": "annullamento d'ufficio di un provvedimento comunale chi lo avvia e con quali limiti",
+      "routing_bucket": "procedure",
+      "expected_primary_domain": "l241",
+      "expected_secondary_domain": "none",
+      "notes": "TUEL should frame the municipal context first; L. 241/1990 should provide the substantive procedural rule."
+    },
+    {
+      "query_id": "tuel_first_q004",
+      "use_case": "Accesso agli atti di un procedimento amministrativo del comune",
+      "query_text": "accesso agli atti di un procedimento amministrativo del comune",
+      "routing_bucket": "procedure",
+      "expected_primary_domain": "l241",
+      "expected_secondary_domain": "none",
+      "notes": "Ordinary municipal procedure access case. TUEL frames the local setting; L. 241/1990 remains primary."
+    },
+    {
+      "query_id": "tuel_first_q005",
+      "use_case": "Il comune deve pubblicare questo atto o documento ai fini della trasparenza?",
+      "query_text": "il comune deve pubblicare questo atto o documento ai fini della trasparenza",
+      "routing_bucket": "transparency",
+      "expected_primary_domain": "dlgs33",
+      "expected_secondary_domain": "none",
+      "notes": "TUEL should identify the municipal act/publication context. D.Lgs. 33/2013 should be the primary transparency domain."
+    },
+    {
+      "query_id": "tuel_first_q006",
+      "use_case": "Obblighi di pubblicazione per bandi di concorso del comune",
+      "query_text": "obblighi di pubblicazione per bandi di concorso del comune",
+      "routing_bucket": "transparency",
+      "expected_primary_domain": "dlgs33",
+      "expected_secondary_domain": "dlgs165",
+      "notes": "Primary routing should stay on D.Lgs. 33/2013. D.Lgs. 165/2001 is secondary only if the personnel side is needed."
+    },
+    {
+      "query_id": "tuel_first_q007",
+      "use_case": "Affidamento diretto sotto soglia da parte del comune",
+      "query_text": "affidamento diretto sotto soglia da parte del comune",
+      "routing_bucket": "procurement",
+      "expected_primary_domain": "dlgs36",
+      "expected_secondary_domain": "none",
+      "notes": "TUEL should orient the municipal contracting frame first. D.Lgs. 36/2023 should remain primary."
+    },
+    {
+      "query_id": "tuel_first_q008",
+      "use_case": "Accesso agli atti di gara del comune",
+      "query_text": "accesso agli atti di gara del comune",
+      "routing_bucket": "procurement",
+      "expected_primary_domain": "dlgs36",
+      "expected_secondary_domain": "l241",
+      "notes": "Procurement remains primary. L. 241/1990 is secondary only if needed to complete the procedural access side."
+    },
+    {
+      "query_id": "tuel_first_q009",
+      "use_case": "Chi è competente per l'ufficio procedimenti disciplinari nel comune?",
+      "query_text": "chi e competente per l'ufficio procedimenti disciplinari nel comune",
+      "routing_bucket": "personnel/discipline",
+      "expected_primary_domain": "dlgs165",
+      "expected_secondary_domain": "none",
+      "notes": "TUEL should frame the local institutional context. D.Lgs. 165/2001 should remain the primary personnel/discipline domain."
+    },
+    {
+      "query_id": "tuel_first_q010",
+      "use_case": "Rapporto tra indirizzo politico e gestione dei dirigenti nel comune",
+      "query_text": "rapporto tra indirizzo politico e gestione dei dirigenti nel comune",
+      "routing_bucket": "personnel/discipline",
+      "expected_primary_domain": "dlgs165",
+      "expected_secondary_domain": "none",
+      "notes": "Political-management separation should be municipally framed through TUEL and substantively answered through D.Lgs. 165/2001."
+    },
+    {
+      "query_id": "tuel_first_q011",
+      "use_case": "Debiti fuori bilancio del comune e necessità del parere del revisore",
+      "query_text": "debiti fuori bilancio del comune e necessita del parere del revisore",
+      "routing_bucket": "accounting/budget",
+      "expected_primary_domain": "dlgs118",
+      "expected_secondary_domain": "dlgs126",
+      "notes": "TUEL should identify the municipal control and decision frame. D.Lgs. 118/2011 is primary; D.Lgs. 126/2014 is secondary only if strictly needed."
+    },
+    {
+      "query_id": "tuel_first_q012",
+      "use_case": "Riaccertamento ordinario dei residui e reimputazione nel bilancio comunale",
+      "query_text": "riaccertamento ordinario dei residui e reimputazione nel bilancio comunale",
+      "routing_bucket": "accounting/budget",
+      "expected_primary_domain": "dlgs118",
+      "expected_secondary_domain": "dlgs126",
+      "notes": "TUEL should orient the municipal accounting frame. D.Lgs. 118/2011 stays primary; D.Lgs. 126/2014 is secondary support only when required."
+    }
+  ]
+}
