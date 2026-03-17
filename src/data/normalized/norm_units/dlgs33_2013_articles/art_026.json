@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_026",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_026",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "26",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Obblighi di pubblicazione degli atti di concessione di sovvenzioni, contributi, sussidi e attribuzione di vantaggi economici a persone fisiche ed enti pubblici e privati.",
+  "testo_unita": "1.\nLe pubbliche amministrazioni pubblicano gli atti con i quali sono determinati, ai sensi dell'\narticolo 12 della legge 7 agosto 1990, n. 241\n, i criteri e le modalità cui le amministrazioni stesse devono attenersi per la concessione di sovvenzioni, contributi, sussidi ed ausili finanziari e per l'attribuzione di vantaggi economici di qualunque genere a persone ed enti pubblici e privati.\n2.\nLe pubbliche amministrazioni pubblicano gli atti di concessione delle sovvenzioni, contributi, sussidi ed ausili finanziari alle imprese, e comunque di vantaggi economici di qualunque genere a persone ed enti pubblici e privati ai sensi del citato\narticolo 12 della legge n. 241 del 1990\n, di importo superiore a mille euro.\n3.\nLa pubblicazione ai sensi del presente articolo costituisce condizione legale di efficacia dei provvedimenti che dispongano concessioni e attribuzioni di importo complessivo superiore a mille euro nel corso dell'anno solare al medesimo beneficiario; la sua eventuale omissione o incompletezza è rilevata d'ufficio dagli organi dirigenziali, sotto la propria responsabilità amministrativa, patrimoniale e contabile per l'indebita concessione o attribuzione del beneficio economico. La mancata, incompleta o ritardata pubblicazione rilevata d'ufficio dagli organi di controllo è altresì rilevabile dal destinatario della prevista concessione o attribuzione e da chiunque altro abbia interesse, anche ai fini del risarcimento del danno da ritardo da parte dell'amministrazione, ai sensi dell'\narticolo 30 del decreto legislativo 2 luglio 2010, n. 104\n.\n4.\nÈ esclusa la pubblicazione dei dati identificativi delle persone fisiche destinatarie dei provvedimenti di cui al presente articolo, qualora da tali dati sia possibile ricavare informazioni relative allo stato di salute ovvero alla situazione di disagio economico-sociale degli interessati.\nNote all'art. 26:\nSi riporta il testo dell'articolo 12 della citata\nlegge n. 241 del 1990\n:\n«Art. 12. (Provvedimenti attributivi di vantaggi economici)\n1. La concessione di sovvenzioni, contributi, sussidi ed ausili finanziari e l'attribuzione di vantaggi economici di qualunque genere a persone ed enti pubblici e privati sono subordinate alla predeterminazione ed alla pubblicazione da parte delle amministrazioni procedenti, nelle forme previste dai rispettivi ordinamenti, dei criteri e delle modalità cui le amministrazioni stesse devono attenersi.\n2. L'effettiva osservanza dei criteri e delle modalità di cui al comma 1 deve risultare dai singoli provvedimenti relativi agli interventi di cui al medesimo comma 1.».\nSi riporta il testo dell'\narticolo 30 del decreto legislativo 2 luglio 2010, n. 104\n:\n«Art. 30 - Azione di condanna\n1. L'azione di condanna può essere proposta contestualmente ad altra azione o, nei soli casi di giurisdizione esclusiva e nei casi di cui al presente articolo, anche in via autonoma.\n2. Può essere chiesta la condanna al risarcimento del danno ingiusto derivante dall'illegittimo esercizio dell'attività amministrativa o dal mancato esercizio di quella obbligatoria. Nei casi di giurisdizione esclusiva può altresì essere chiesto il risarcimento del danno da lesione di diritti soggettivi. Sussistendo i presupposti previsti dall'\narticolo 2058 del codice civile\n, può essere chiesto il risarcimento del danno in forma specifica.\n3. La domanda di risarcimento per lesione di interessi legittimi è proposta entro il termine di decadenza di centoventi giorni decorrente dal giorno in cui il fatto si è verificato ovvero dalla conoscenza del provvedimento se il danno deriva direttamente da questo. Nel determinare il risarcimento il giudice valuta tutte le circostanze di fatto e il comportamento complessivo delle parti e, comunque, esclude il risarcimento dei danni che si sarebbero potuti evitare usando l'ordinaria diligenza, anche attraverso l'esperimento degli strumenti di tutela previsti.\n4. Per il risarcimento dell'eventuale danno che il ricorrente comprovi di aver subito in conseguenza dell'inosservanza dolosa o colposa del termine di conclusione del procedimento, il termine di cui al comma 3 non decorre fintanto che perdura l'inadempimento. Il termine di cui al comma 3 inizia comunque a decorrere dopo un anno dalla scadenza del termine per provvedere.\n5. Nel caso in cui sia stata proposta azione di annullamento la domanda risarcitoria può essere formulata nel corso del giudizio o, comunque, sino a centoventi giorni dal passaggio in giudicato della relativa sentenza.\n6. Di ogni domanda di condanna al risarcimento di danni per lesioni di interessi legittimi o, nelle materie di giurisdizione esclusiva, di diritti soggettivi conosce esclusivamente il giudice amministrativo.».",
+  "position_index": 26,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 26",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "4",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "dataset_id": "dlgs165_2001",
+  "versione": "vigente",
+  "description": "Query pack v3 mirato per validazione retrieval del D.Lgs. 165/2001 vigente",
+  "collections_target": [
+    "normattiva_dlgs165_2001_vigente_articles",
+    "normattiva_dlgs165_2001_vigente_commi"
+  ],
+  "queries": [
+    {
+      "query_id": "dlgs165_q001",
+      "active": true,
+      "area": "indirizzo_vs_gestione",
+      "query_text": "distinzione tra indirizzo politico amministrativo e gestione dei dirigenti"
+    },
+    {
+      "query_id": "dlgs165_q002",
+      "active": true,
+      "area": "competenze_dirigenziali",
+      "query_text": "dirigenti adozione atti e provvedimenti amministrativi gestione finanziaria tecnica amministrativa"
+    },
+    {
+      "query_id": "dlgs165_q003",
+      "active": true,
+      "area": "organizzazione_uffici",
+      "query_text": "organizzazione degli uffici linee fondamentali atti organizzativi uffici"
+    },
+    {
+      "query_id": "dlgs165_q004",
+      "active": true,
+      "area": "responsabilita_dirigenziale",
+      "query_text": "responsabilità dirigenziale mancato raggiungimento degli obiettivi inosservanza direttive"
+    },
+    {
+      "query_id": "dlgs165_q005",
+      "active": true,
+      "area": "upd",
+      "query_text": "ufficio procedimenti disciplinari competente sanzione superiore al rimprovero verbale"
+    },
+    {
+      "query_id": "dlgs165_q006",
+      "active": true,
+      "area": "procedimento_disciplinare",
+      "query_text": "forme e termini del procedimento disciplinare rimprovero verbale ufficio procedimenti disciplinari"
+    },
+    {
+      "query_id": "dlgs165_q007",
+      "active": true,
+      "area": "incarichi_dirigenziali",
+      "query_text": "incarichi di funzione dirigenziale conferiti ai sensi dell'articolo 19"
+    },
+    {
+      "query_id": "dlgs165_q008",
+      "active": true,
+      "area": "fabbisogno_personale",
+      "query_text": "organizzazione degli uffici e fabbisogni di personale linee di indirizzo articolo 6 6-ter"
+    },
+    {
+      "query_id": "dlgs165_q009",
+      "active": false,
+      "area": "performance",
+      "query_text": "performance",
+      "note": "Query esclusa dal test corpus-scoped del D.Lgs. 165/2001; da trattare in logica federata con D.Lgs. 150/2009."
+    },
+    {
+      "query_id": "dlgs165_q010",
+      "active": true,
+      "area": "ordinamento_generale",
+      "query_text": "lavoro alle dipendenze delle amministrazioni pubbliche ordinamento generale"
+    }
+  ]
+}

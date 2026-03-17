@@ -1,0 +1,42 @@
+{
+  "atto": {
+    "titolo": "DECRETO LEGISLATIVO 18 agosto 2000, n. 267",
+    "sottoTitolo": "Testo unico delle leggi sull'ordinamento degli enti locali"
+  },
+  "articoli": [
+    {
+      "articolo": "42",
+      "rubrica": "Attribuzioni dei consigli",
+      "commi": [
+        {
+          "comma": "1",
+          "testo": "Il consiglio è l'organo di indirizzo e di controllo politico-amministrativo."
+        },
+        {
+          "comma": "2",
+          "testo": "Il consiglio esercita atti fondamentali e, per il profilo organizzativo, richiama l'articolo 50 del TUEL."
+        }
+      ]
+    },
+    {
+      "articolo": "50",
+      "rubrica": "Competenze del sindaco e del presidente della provincia",
+      "commi": [
+        {
+          "comma": "1",
+          "testo": "Il sindaco rappresenta l'ente, convoca e presiede la giunta."
+        }
+      ]
+    },
+    {
+      "articolo": "107",
+      "rubrica": "Funzioni e responsabilità della dirigenza",
+      "commi": [
+        {
+          "comma": "3",
+          "testo": "Sono attribuiti ai dirigenti tutti i compiti di gestione."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_020",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_020",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "20",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Obblighi di pubblicazione dei dati relativi alla valutazione della performance e alla distribuzione dei premi al personale.",
+  "testo_unita": "1.\nLe pubbliche amministrazioni pubblicano i dati relativi all'ammontare complessivo dei premi collegati alla performance stanziati e l'ammontare dei premi effettivamente distribuiti.\n2.\nLe pubbliche amministrazioni pubblicano i dati relativi all'entità del premio mediamente conseguibile dal personale dirigenziale e non dirigenziale, i dati relativi alla distribuzione del trattamento accessorio, in forma aggregata, al fine di dare conto del livello di selettività utilizzato nella distribuzione dei premi e degli incentivi, nonché i dati relativi al grado di differenziazione nell'utilizzo della premialità sia per i dirigenti sia per i dipendenti.\n3.\nLe pubbliche amministrazioni pubblicano, altresì, i dati relativi ai livelli di benessere organizzativo.",
+  "position_index": 20,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 20",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "4",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

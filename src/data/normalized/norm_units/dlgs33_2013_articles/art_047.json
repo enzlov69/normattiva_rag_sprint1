@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_047",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_047",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "47",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Sanzioni per casi specifici",
+  "testo_unita": "1.\nLa mancata o incompleta comunicazione delle informazioni e dei dati di cui all'articolo 14, concernenti la situazione patrimoniale complessiva del titolare dell'incarico al momento dell'assunzione in carica, la titolarità di imprese, le partecipazioni azionarie proprie, del coniuge e dei parenti entro il secondo grado, nonché tutti i compensi cui da diritto l'assunzione della carica, dà luogo a una sanzione amministrativa pecuniaria da 500 a 10.000 euro a carico del responsabile della mancata comunicazione e il relativo provvedimento è pubblicato sul sito internet dell'amministrazione o organismo interessato.\n2.\nLa violazione degli obblighi di pubblicazione di cui all'articolo 22, comma 2, dà luogo ad una sanzione amministrativa pecuniaria da 500 a 10.000 euro a carico del responsabile della violazione. La stessa sanzione si applica agli amministratori societari che non comunicano ai soci pubblici il proprio incarico ed il relativo compenso entro trenta giorni dal conferimento ovvero, per le indennità di risultato, entro trenta giorni dal percepimento.\n3.\nLe sanzioni di cui ai commi 1 e 2 sono irrogate dall'autorità amministrativa competente in base a quanto previsto dalla\nlegge 24 novembre 1981, n. 689\n.\nNote all'art. 47:\nLa\nlegge 24 novembre 1981, n. 689\n(Modifiche al sistema penale), è pubblicata nella Gazzetta Ufficiale 30 novembre 1981, n. 329.",
+  "position_index": 47,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 47",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "8",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

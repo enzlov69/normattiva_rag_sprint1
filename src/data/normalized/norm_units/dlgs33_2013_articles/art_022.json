@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_022",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_022",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "22",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Obblighi di pubblicazione dei dati relativi agli enti pubblici vigilati, e agli enti di diritto privato in controllo pubblico, nonché alle partecipazioni in società di diritto privato.",
+  "testo_unita": "1.\nCiascuna amministrazione pubblica e aggiorna annualmente:\na) l'elenco degli enti pubblici, comunque denominati, istituiti, vigilati e finanziati dalla amministrazione medesima ovvero per i quali l'amministrazione abbia il potere di nomina degli amministratori dell'ente, con l'elencazione delle funzioni attribuite e delle attività svolte in favore dell'amministrazione o delle attività di servizio pubblico affidate;\nb) l'elenco delle società di cui detiene direttamente quote di partecipazione anche minoritaria indicandone l'entità, con l'indicazione delle funzioni attribuite e delle attività svolte in favore dell'amministrazione o delle attività di servizio pubblico affidate;\nc) l'elenco degli enti di diritto privato, comunque denominati, in controllo dell'amministrazione, con l'indicazione delle funzioni attribuite e delle attività svolte in favore dell'amministrazione o delle attività di servizio pubblico affidate. Ai fini delle presenti disposizioni sono enti di diritto privato in controllo pubblico gli enti di diritto privato sottoposti a controllo da parte di amministrazioni pubbliche, oppure gli enti costituiti o vigilati da pubbliche amministrazioni nei quali siano a queste riconosciuti, anche in assenza di una partecipazione azionaria, poteri di nomina dei vertici o dei componenti degli organi;\nd) una o più rappresentazioni grafiche che evidenziano i rapporti tra l'amministrazione e gli enti di cui al precedente comma.\n2.\nPer ciascuno degli enti di cui alle lettere da\na) a c) del comma 1 sono pubblicati i dati relativi alla ragione sociale, alla misura della eventuale partecipazione dell'amministrazione, alla durata dell'impegno, all'onere complessivo a qualsiasi titolo gravante per l'anno sul bilancio dell'amministrazione, al numero dei rappresentanti dell'amministrazione negli organi di governo, al trattamento economico complessivo a ciascuno di essi spettante, ai risultati di bilancio degli ultimi tre esercizi finanziari. Sono altresì pubblicati i dati relativi agli incarichi di amministratore dell'ente e il relativo trattamento economico complessivo.\n3.\nNel sito dell'amministrazione è inserito il collegamento con i siti istituzionali degli enti di cui al comma 1, nei quali sono pubblicati i dati relativi ai componenti degli organi di indirizzo e ai soggetti titolari di incarico, in applicazione degli articoli 14 e 15.\n4.\nNel caso di mancata o incompleta pubblicazione dei dati relativi agli enti di cui al comma 1, è vietata l'erogazione in loro favore di somme a qualsivoglia titolo da parte dell'amministrazione interessata.\n5.\nLe amministrazioni titolari di partecipazioni di controllo promuovono l'applicazione dei principi di trasparenza di cui ai commi 1, lettera b), e 2, da parte delle società direttamente controllate nei confronti delle società indirettamente controllate dalle medesime amministrazioni.\n6.\nLe disposizioni di cui al presente articolo non trovano applicazione nei confronti delle società, partecipate da amministrazioni pubbliche, quotate in mercati regolamentati e loro controllate.",
+  "position_index": 22,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 22",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "4",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

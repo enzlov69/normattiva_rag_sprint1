@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_006",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_006",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "6",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Qualità delle informazioni",
+  "testo_unita": "1.\nLe pubbliche amministrazioni garantiscono la qualità delle informazioni riportate nei siti istituzionali nel rispetto degli obblighi di pubblicazione previsti dalla legge, assicurandone l'integrità, il costante aggiornamento, la completezza, la tempestività, la semplicità di consultazione, la comprensibilità, l'omogeneità, la facile accessibilità, nonché la conformità ai documenti originali in possesso dell'amministrazione, l'indicazione della loro provenienza e la riutilizzabilità secondo quanto previsto dall'articolo 7.\n2.\nL'esigenza di assicurare adeguata qualità delle informazioni diffuse non può, in ogni caso, costituire motivo per l'omessa o ritardata pubblicazione dei dati, delle informazioni e dei documenti.",
+  "position_index": 6,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 6",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "1",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

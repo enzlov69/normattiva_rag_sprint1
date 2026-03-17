@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_024",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_024",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "24",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Obblighi di pubblicazione dei dati aggregati relativi all'attività amministrativa",
+  "testo_unita": "1.\nLe pubbliche amministrazioni che organizzano, a fini conoscitivi e statistici, i dati relativi alla propria attività amministrativa, in forma aggregata, per settori di attività, per competenza degli organi e degli uffici, per tipologia di procedimenti, li pubblicano e li tengono costantemente aggiornati.\n2.\nLe amministrazioni pubblicano e rendono consultabili i risultati del monitoraggio periodico concernente il rispetto dei tempi procedimentali effettuato ai sensi dell'\narticolo 1, comma 28, della legge 6 novembre 2012, n. 190\n.\nNote all'art. 24:\nSi riporta il testo dell'articolo 1, comma 28, della citata\nlegge n. 190 del 2012\n:\n«Art. 1.\n(Omissis).\n28. Le amministrazioni provvedono altresì al monitoraggio periodico del rispetto dei tempi procedimentali attraverso la tempestiva eliminazione delle anomalie. I risultati del monitoraggio sono consultabili nel sito web istituzionale di ciascuna amministrazione.\n(Omissis).».",
+  "position_index": 24,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 24",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "4",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

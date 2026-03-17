@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_034",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_034",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "34",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Trasparenza degli oneri informativi",
+  "testo_unita": "1.\nI regolamenti ministeriali o interministeriali, nonché i provvedimenti amministrativi a carattere generale adottati dalle amministrazioni dello Stato per regolare l'esercizio di poteri autorizzatori, concessori o certificatori, nonché l'accesso ai servizi pubblici ovvero la concessione di benefici, recano in allegato l'elenco di tutti gli oneri informativi gravanti sui cittadini e sulle imprese introdotti o eliminati con gli atti medesimi. Per onere informativo si intende qualunque obbligo informativo o adempimento che comporti la raccolta, l'elaborazione, la trasmissione, la conservazione e la produzione di informazioni e documenti alla pubblica amministrazione.\n2.\nFerma restando, ove prevista, la pubblicazione nella Gazzetta Ufficiale, gli atti di cui al comma 1 sono pubblicati sui siti istituzionali delle amministrazioni, secondo i criteri e le modalità definite con il regolamento di cui all'\narticolo 7, commi 2\ne\n4, della legge 11 novembre 2011, n. 180\n.\nNote all'art. 34:\nSi riporta il testo dell'\narticolo 7, commi 2\ne\n4, della legge 11 novembre 2011, n. 180\n:\n«Art. 7.Riduzione e trasparenza degli adempimenti amministrativi a carico di cittadini e imprese\n(Omissis).\n2. Gli atti di cui al comma 1, anche se pubblicati nella Gazzetta Ufficiale, sono pubblicati nei siti istituzionali di ciascuna amministrazione secondo i criteri e le modalità definiti con apposito regolamento da emanare con decreto del Presidente del Consiglio dei Ministri, su proposta del Ministro per la pubblica amministrazione e l'innovazione, entro novanta giorni dalla data di entrata in vigore della presente legge.\n(Omissis).\n4. Con il regolamento di cui al comma 2, ai fini della valutazione degli eventuali profili di responsabilità dei dirigenti preposti agli uffici interessati, sono individuate le modalità di presentazione dei reclami da parte dei cittadini e delle imprese per la mancata applicazione delle disposizioni del presente articolo.».",
+  "position_index": 34,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 34",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "6",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "atto": {
+    "titolo": "LEGGE 7 agosto 1990, n. 241",
+    "sottoTitolo": "Nuove norme in materia di procedimento amministrativo e di diritto di accesso ai documenti amministrativi"
+  },
+  "articoli": [
+    {
+      "articolo": "1",
+      "rubrica": "Principi generali dell'attività amministrativa",
+      "commi": [
+        {
+          "comma": "1",
+          "testo": "L'attività amministrativa persegue i fini determinati dalla legge ed è retta dai criteri di economicità, efficacia, imparzialità, pubblicità e trasparenza, secondo le modalità previste dalla presente legge e dalle altre disposizioni che disciplinano singoli procedimenti, nonché dai principi dell'ordinamento dell'Unione europea. Per i termini del procedimento si richiama l'articolo 2."
+        }
+      ]
+    },
+    {
+      "articolo": "2",
+      "rubrica": "Conclusione del procedimento",
+      "commi": [
+        {
+          "comma": "1",
+          "testo": "Ove il procedimento consegua obbligatoriamente ad un'istanza, ovvero debba essere iniziato d'ufficio, le pubbliche amministrazioni hanno il dovere di concluderlo mediante l'adozione di un provvedimento espresso."
+        },
+        {
+          "comma": "2",
+          "testo": "Nei casi in cui disposizioni di legge ovvero i provvedimenti di cui ai commi 3, 4 e 5 non prevedono un termine diverso, i procedimenti amministrativi di competenza delle amministrazioni statali e degli enti pubblici nazionali devono concludersi entro trenta giorni."
+        }
+      ]
+    },
+    {
+      "articolo": "3",
+      "rubrica": "Motivazione del provvedimento",
+      "commi": [
+        {
+          "comma": "1",
+          "testo": "Ogni provvedimento amministrativo, compresi quelli concernenti l'organizzazione amministrativa, lo svolgimento dei pubblici concorsi ed il personale, deve essere motivato. La motivazione richiama, ove necessario, il responsabile del procedimento di cui all'articolo 5."
+        }
+      ]
+    },
+    {
+      "articolo": "5",
+      "rubrica": "Responsabile del procedimento",
+      "commi": [
+        {
+          "comma": "1",
+          "testo": "Il dirigente di ciascuna unità organizzativa provvede ad assegnare a sé o ad altro dipendente addetto all'unità la responsabilità dell'istruttoria e di ogni altro adempimento inerente il singolo procedimento."
+        }
+      ]
+    },
+    {
+      "articolo": "22",
+      "rubrica": "Definizioni e principi in materia di accesso",
+      "commi": [
+        {
+          "comma": "1",
+          "testo": "Ai fini del presente capo si intende per diritto di accesso il diritto degli interessati di prendere visione e di estrarre copia di documenti amministrativi."
+        }
+      ]
+    }
+  ]
+}

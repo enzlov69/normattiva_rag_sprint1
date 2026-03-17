@@ -1,0 +1,14 @@
+{
+  "dataset_id": "dlgs165_2001",
+  "atto_tipo": "Decreto legislativo",
+  "atto_numero": "165",
+  "atto_anno": "2001",
+  "versione": "vigente",
+  "normattiva_url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2001-03-30;165!vig=",
+  "raw_html_path": "data/raw/dlgs165_2001/vigente/dlgs165_2001_vigente_normattiva.html",
+  "article_index_txt": "data/processed/dlgs165_2001_vigente_article_index.txt",
+  "articles_out_dir": "data/normalized/norm_units/dlgs165_2001_vigente_articles",
+  "commi_out_dir": "data/normalized/norm_units/dlgs165_2001_vigente_commi",
+  "logs_dir": "data/logs",
+  "manifests_dir": "data/manifests/dlgs165_2001"
+}

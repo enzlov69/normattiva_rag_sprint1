@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_041",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_041",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "41",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Trasparenza del servizio sanitario nazionale",
+  "testo_unita": "1.\nLe amministrazioni e gli enti del servizio sanitario nazionale, dei servizi sanitari regionali, ivi comprese le aziende sanitarie territoriali ed ospedaliere, le agenzie e gli altri enti ed organismi pubblici che svolgono attività di programmazione e fornitura dei servizi sanitari, sono tenute all'adempimento di tutti gli obblighi di pubblicazione previsti dalla normativa vigente.\n2 Le aziende sanitarie ed ospedaliere pubblicano tutte le informazioni e i dati concernenti le procedure di conferimento degli incarichi di direttore generale, direttore sanitario e direttore amministrativo, nonché degli incarichi di responsabile di dipartimento e di strutture semplici e complesse, ivi compresi i bandi e gli avvisi di selezione, lo svolgimento delle relative procedure, gli atti di conferimento.\n3 Alla dirigenza sanitaria di cui al comma 2, fatta eccezione per i responsabili di strutture semplici, si applicano gli obblighi di pubblicazione di cui all'articolo 15. Per attività professionali, ai sensi del comma 1, lettera c) dell'articolo 15, si intendono anche le prestazioni professionali svolte in regime intramurario.\n4 È pubblicato e annualmente aggiornato l'elenco delle strutture sanitarie private accreditate. Sono altresì pubblicati gli accordi con esse intercorsi.\n5. Le regioni includono il rispetto di obblighi di pubblicità previsti dalla normativa vigente fra i requisiti necessari all'accreditamento delle strutture sanitarie.\n6. Gli enti, le aziende e le strutture pubbliche e private che erogano prestazioni per conto del servizio sanitario sono tenuti ad indicare nel proprio sito, in una apposita sezione denominata «Liste di attesa», il tempi di attesa previsti e i tempi medi effettivi di attesa per ciascuna tipologia di prestazione erogata.",
+  "position_index": 41,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 41",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "7",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

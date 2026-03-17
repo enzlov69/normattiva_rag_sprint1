@@ -1,0 +1,182 @@
+{
+  "queries": [
+    {
+      "query_id": "fed_q001",
+      "expected_primary_top1_any_of": [
+        "normattiva_tuel_267_2000"
+      ],
+      "expected_primary_top3_any_of": [
+        "normattiva_tuel_267_2000"
+      ],
+      "required_group_hits_top5_all_of": [],
+      "forbidden_top3_any_of": []
+    },
+    {
+      "query_id": "fed_q002",
+      "expected_primary_top1_any_of": [
+        "normattiva_l241_1990"
+      ],
+      "expected_primary_top3_any_of": [
+        "normattiva_l241_1990"
+      ],
+      "required_group_hits_top5_all_of": [],
+      "forbidden_top3_any_of": []
+    },
+    {
+      "query_id": "fed_q003",
+      "expected_primary_top1_any_of": [
+        "normattiva_dlgs165_2001_vigente_articles",
+        "normattiva_dlgs165_2001_vigente_commi",
+        "normattiva_tuel_267_2000"
+      ],
+      "expected_primary_top3_any_of": [
+        "normattiva_dlgs165_2001_vigente_articles",
+        "normattiva_dlgs165_2001_vigente_commi",
+        "normattiva_tuel_267_2000"
+      ],
+      "required_group_hits_top5_all_of": [],
+      "forbidden_top3_any_of": []
+    },
+    {
+      "query_id": "fed_q004",
+      "expected_primary_top1_any_of": [
+        "normattiva_dlgs33_2013_vigente_articles",
+        "normattiva_dlgs33_2013_vigente_commi"
+      ],
+      "expected_primary_top3_any_of": [
+        "normattiva_dlgs33_2013_vigente_articles",
+        "normattiva_dlgs33_2013_vigente_commi"
+      ],
+      "required_group_hits_top5_all_of": [],
+      "forbidden_top3_any_of": []
+    },
+    {
+      "query_id": "fed_q005",
+      "expected_primary_top1_any_of": [
+        "normattiva_dlgs118_2011_all_4_2"
+      ],
+      "expected_primary_top3_any_of": [
+        "normattiva_dlgs118_2011_all_4_2",
+        "normattiva_dlgs118_2011_all_1",
+        "normattiva_dlgs118_2011_main"
+      ],
+      "required_group_hits_top5_all_of": [],
+      "forbidden_top3_any_of": []
+    },
+    {
+      "query_id": "fed_q006",
+      "expected_primary_top1_any_of": [
+        "normattiva_dlgs118_2011_all_4_2"
+      ],
+      "expected_primary_top3_any_of": [
+        "normattiva_dlgs118_2011_all_4_2",
+        "normattiva_dlgs118_2011_all_4_1",
+        "normattiva_tuel_267_2000",
+        "normattiva_dlgs126_2014_main",
+        "normattiva_dlgs126_2014_articles"
+      ],
+      "required_group_hits_top5_all_of": [
+        [
+          "normattiva_dlgs118_2011_all_4_2"
+        ],
+        [
+          "normattiva_tuel_267_2000",
+          "normattiva_dlgs118_2011_all_4_1"
+        ]
+      ],
+      "forbidden_top3_any_of": []
+    },
+    {
+      "query_id": "fed_q007",
+      "expected_primary_top1_any_of": [
+        "normattiva_dlgs36_2023_articles",
+        "normattiva_dlgs36_2023_all_ii1"
+      ],
+      "expected_primary_top3_any_of": [
+        "normattiva_dlgs36_2023_articles",
+        "normattiva_dlgs36_2023_all_ii1",
+        "normattiva_dlgs36_2023_all_i1",
+        "normattiva_dlgs36_2023_all_i2"
+      ],
+      "required_group_hits_top5_all_of": [],
+      "forbidden_top3_any_of": []
+    },
+    {
+      "query_id": "fed_q008",
+      "expected_primary_top1_any_of": [
+        "normattiva_dlgs36_2023_articles"
+      ],
+      "expected_primary_top3_any_of": [
+        "normattiva_dlgs36_2023_articles",
+        "normattiva_l241_1990",
+        "normattiva_dlgs33_2013_vigente_articles",
+        "normattiva_dlgs33_2013_vigente_commi"
+      ],
+      "required_group_hits_top5_all_of": [
+        [
+          "normattiva_dlgs36_2023_articles"
+        ],
+        [
+          "normattiva_dlgs33_2013_vigente_articles",
+          "normattiva_dlgs33_2013_vigente_commi"
+        ]
+      ],
+      "forbidden_top3_any_of": []
+    },
+    {
+      "query_id": "fed_q009",
+      "expected_primary_top1_any_of": [
+        "normattiva_dlgs33_2013_vigente_articles",
+        "normattiva_dlgs33_2013_vigente_commi"
+      ],
+      "expected_primary_top3_any_of": [
+        "normattiva_dlgs33_2013_vigente_articles",
+        "normattiva_dlgs33_2013_vigente_commi"
+      ],
+      "required_group_hits_top5_all_of": [
+        [
+          "normattiva_dlgs33_2013_vigente_articles"
+        ],
+        [
+          "normattiva_dlgs33_2013_vigente_commi"
+        ]
+      ],
+      "forbidden_top3_any_of": []
+    },
+    {
+      "query_id": "fed_q010",
+      "expected_primary_top1_any_of": [
+        "normattiva_tuel_267_2000"
+      ],
+      "expected_primary_top3_any_of": [
+        "normattiva_tuel_267_2000",
+        "normattiva_dlgs118_2011_all_4_2",
+        "normattiva_dlgs118_2011_all_4_1"
+      ],
+      "required_group_hits_top5_all_of": [
+        [
+          "normattiva_tuel_267_2000"
+        ],
+        [
+          "normattiva_dlgs118_2011_all_4_2",
+          "normattiva_dlgs118_2011_all_4_1"
+        ]
+      ],
+      "forbidden_top3_any_of": []
+    },
+    {
+      "query_id": "fed_q011",
+      "expected_primary_top1_any_of": [
+        "normattiva_dlgs165_2001_vigente_articles",
+        "normattiva_dlgs165_2001_vigente_commi"
+      ],
+      "expected_primary_top3_any_of": [
+        "normattiva_dlgs165_2001_vigente_articles",
+        "normattiva_dlgs165_2001_vigente_commi",
+        "normattiva_tuel_267_2000"
+      ],
+      "required_group_hits_top5_all_of": [],
+      "forbidden_top3_any_of": []
+    }
+  ]
+}

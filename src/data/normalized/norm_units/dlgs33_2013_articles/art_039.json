@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_039",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_039",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "39",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Trasparenza dell'attività di pianificazione e governo del territorio",
+  "testo_unita": "1.\nLe pubbliche amministrazioni pubblicano:\na) gli atti di governo del territorio, quali, tra gli altri, piani territoriali, piani di coordinamento, piani paesistici, strumenti urbanistici, generali e di attuazione, nonché le loro varianti;\nb) per ciascuno degli atti di cui alla lettera a) sono pubblicati, tempestivamente, gli schemi di provvedimento prima che siano portati all'approvazione; le delibere di adozione o approvazione; i relativi allegati tecnici.\n2.\nLa documentazione relativa a ciascun procedimento di presentazione e approvazione delle proposte di trasformazione urbanistica d'iniziativa privata o pubblica in variante allo strumento urbanistico generale comunque denominato vigente nonché delle proposte di trasformazione urbanistica d'iniziativa privata o pubblica in attuazione dello strumento urbanistico generale vigente che comportino premialità edificatorie a fronte dell'impegno dei privati alla realizzazione di opere di urbanizzazione extra oneri o della cessione di aree o volumetrie per finalità di pubblico interesse è pubblicata in una sezione apposita nel sito del comune interessato, continuamente aggiornata.\n3.\nLa pubblicità degli atti di cui al comma 1, lettera a), è condizione per l'acquisizione dell'efficacia degli atti stessi.\n4.\nRestano ferme le discipline di dettaglio previste dalla vigente legislazione statale e regionale.",
+  "position_index": 39,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 39",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "7",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

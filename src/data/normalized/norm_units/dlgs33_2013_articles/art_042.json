@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_042",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_042",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "42",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Obblighi di pubblicazione concernenti gli interventi straordinari e di emergenza che comportano deroghe alla legislazione vigente.",
+  "testo_unita": "1.\nLe pubbliche amministrazioni che adottano provvedimenti contingibili e urgenti e in generale provvedimenti di carattere straordinario in caso di calamità naturali o di altre emergenze, ivi comprese le amministrazioni commissariali e straordinarie costituite in base alla\nlegge 24 febbraio 1992, n. 225\n, o a provvedimenti legislativi di urgenza, pubblicano:\na) i provvedimenti adottati, con la indicazione espressa delle norme di legge eventualmente derogate e dei motivi della deroga, nonché l'indicazione di eventuali atti amministrativi o giurisdizionali intervenuti;\nb) i termini temporali eventualmente fissati per l'esercizio dei poteri di adozione dei provvedimenti straordinari;\nc) il costo previsto degli interventi e il costo effettivo sostenuto dall'amministrazione;\nd) le particolari forme di partecipazione degli interessati ai procedimenti di adozione dei provvedimenti straordinari.",
+  "position_index": 42,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 42",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "7",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

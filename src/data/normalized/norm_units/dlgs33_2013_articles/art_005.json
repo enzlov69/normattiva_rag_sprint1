@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_005",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_005",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "5",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Accesso civico",
+  "testo_unita": "1.\nL'obbligo previsto dalla normativa vigente in capo alle pubbliche amministrazioni di pubblicare documenti, informazioni o dati comporta il diritto di chiunque di richiedere i medesimi, nei casi in cui sia stata omessa la loro pubblicazione.\n2.\nLa richiesta di accesso civico non è sottoposta ad alcuna limitazione quanto alla legittimazione soggettiva del richiedente non deve essere motivata, è gratuita e va presentata al responsabile della trasparenza dell'amministrazione obbligata alla pubblicazione di cui al comma 1, che si pronuncia sulla stessa.\n3.\nL'amministrazione, entro trenta giorni, procede alla pubblicazione nel sito del documento, dell'informazione o del dato richiesto e lo trasmette contestualmente al richiedente, ovvero comunica al medesimo l'avvenuta pubblicazione, indicando il collegamento ipertestuale a quanto richiesto. Se il documento, l'informazione o il dato richiesti risultano già pubblicati nel rispetto della normativa vigente, l'amministrazione indica al richiedente il relativo collegamento ipertestuale.\n4.\nNei casi di ritardo o mancata risposta il richiedente può ricorrere al titolare del potere sostitutivo di cui all'\narticolo 2, comma 9-bis della legge 7 agosto 1990, n. 241\n, e successive modificazioni, che, verificata la sussistenza dell'obbligo di pubblicazione, nei termini di cui al comma 9-ter del medesimo articolo, provvede ai sensi del comma 3.\n5.\nLa tutela del diritto di accesso civico è disciplinata dalle disposizioni di cui al\ndecreto legislativo 2 luglio 2010, n. 104\n, così come modificato dal presente decreto.\n6.\nLa richiesta di accesso civico comporta, da parte del Responsabile della trasparenza, l'obbligo di segnalazione di cui all'articolo 43, comma 5.\nNote all'art. 5:\nSi riporta il testo dell'\narticolo 2, commi 9-bis\ne\n9-ter, della legge 7 agosto 1990, n. 241\n:\n«Art. 2. (Conclusione del procedimento)\n(Omissis).\n9-bis. L'organo di governo individua, nell'ambito delle figure apicali dell'amministrazione, il soggetto cui attribuire il potere sostitutivo in caso di inerzia.\nNell'ipotesi di omessa individuazione il potere sostitutivo si considera attribuito al dirigente generale o, in mancanza, al dirigente preposto all'ufficio o in mancanza al funzionario di più elevato livello presente nell'amministrazione.\n9-ter. Decorso inutilmente il termine per la conclusione del procedimento o quello superiore di cui al comma 7, il privato può rivolgersi al responsabile di cui al comma 9-bis perché, entro un termine pari alla metà di quello originariamente previsto, concluda il procedimento attraverso le strutture competenti o con la nomina di un commissario.\n(Omissis).».\nIl\ndecreto legislativo 2 luglio 2010, n. 104\n(Attuazione dell'\narticolo 44 della legge 18 giugno 2009, n. 69\n, recante delega al governo per il riordino del processo amministrativo), è pubblicato nella Gazzetta Ufficiale 7 luglio 2010, n. 156, S.O.",
+  "position_index": 5,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 5",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "1",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

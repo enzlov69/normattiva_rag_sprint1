@@ -1,0 +1,107 @@
+{
+  "pack_id": "federated_active_corpora_query_pack_v1",
+  "description": "Query pack federato v1 sui corpus normativi attivi già ingestiti in Chroma",
+  "chroma_path": "data/chroma",
+  "embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "top_k_per_collection": 3,
+  "global_eval_top_k": 5,
+  "active_collections": [
+    "normattiva_tuel_267_2000",
+    "normattiva_l241_1990",
+    "normattiva_dlgs165_2001_vigente_articles",
+    "normattiva_dlgs165_2001_vigente_commi",
+    "normattiva_dlgs33_2013_vigente_articles",
+    "normattiva_dlgs33_2013_vigente_commi",
+    "normattiva_dlgs118_2011_main",
+    "normattiva_dlgs118_2011_all_1",
+    "normattiva_dlgs118_2011_all_4_1",
+    "normattiva_dlgs118_2011_all_4_2",
+    "normattiva_dlgs126_2014_main",
+    "normattiva_dlgs126_2014_articles",
+    "normattiva_dlgs36_2023_articles",
+    "normattiva_dlgs36_2023_all_i1",
+    "normattiva_dlgs36_2023_all_i2",
+    "normattiva_dlgs36_2023_all_ii1",
+    "normattiva_dlgs36_2023_all_ii4",
+    "normattiva_dlgs36_2023_all_ii14"
+  ],
+  "queries": [
+    {
+      "query_id": "fed_q001",
+      "active": true,
+      "query_type": "single_domain",
+      "area": "tuel_pareri",
+      "query_text": "pareri ex art. 49 tuel"
+    },
+    {
+      "query_id": "fed_q002",
+      "active": true,
+      "query_type": "single_domain",
+      "area": "l241_annullamento",
+      "query_text": "annullamento d'ufficio"
+    },
+    {
+      "query_id": "fed_q003",
+      "active": true,
+      "query_type": "single_domain",
+      "area": "dlgs165_indirizzo_gestione",
+      "query_text": "indirizzo politico amministrativo e gestione dei dirigenti"
+    },
+    {
+      "query_id": "fed_q004",
+      "active": true,
+      "query_type": "single_domain",
+      "area": "dlgs33_concorsi",
+      "query_text": "obblighi di pubblicazione bandi di concorso"
+    },
+    {
+      "query_id": "fed_q005",
+      "active": true,
+      "query_type": "single_domain",
+      "area": "fpv",
+      "query_text": "fondo pluriennale vincolato principio contabile applicato contabilità finanziaria"
+    },
+    {
+      "query_id": "fed_q006",
+      "active": true,
+      "query_type": "pairing",
+      "area": "riaccertamento_residui",
+      "query_text": "riaccertamento ordinario dei residui e reimputazione"
+    },
+    {
+      "query_id": "fed_q007",
+      "active": true,
+      "query_type": "single_domain",
+      "area": "affidamento_diretto",
+      "query_text": "affidamento diretto sotto soglia"
+    },
+    {
+      "query_id": "fed_q008",
+      "active": true,
+      "query_type": "pairing",
+      "area": "accesso_atti_gara",
+      "query_text": "accesso agli atti di gara"
+    },
+    {
+      "query_id": "fed_q009",
+      "active": true,
+      "query_type": "pairing",
+      "area": "trasparenza_concorsi",
+      "query_text": "trasparenza concorsi pubblici"
+    },
+    {
+      "query_id": "fed_q010",
+      "active": true,
+      "query_type": "pairing",
+      "area": "debiti_fuori_bilancio",
+      "query_text": "debiti fuori bilancio e parere revisore"
+    },
+    {
+      "query_id": "fed_q011",
+      "active": true,
+      "query_type": "single_domain",
+      "area": "upd_disciplinare",
+      "query_text": "ufficio procedimenti disciplinari competente"
+    }
+  ]
+}

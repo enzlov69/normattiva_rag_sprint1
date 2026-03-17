@@ -1,0 +1,66 @@
+{
+  "atto": {
+    "titolo": "DECRETO LEGISLATIVO 23 giugno 2011, n. 118",
+    "sottoTitolo": "Disposizioni in materia di armonizzazione dei sistemi contabili e degli schemi di bilancio delle Regioni, degli enti locali e dei loro organismi"
+  },
+  "articoli": [
+    {
+      "articolo": "1",
+      "rubrica": "Oggetto e ambito di applicazione",
+      "commi": [
+        {
+          "comma": "1",
+          "testo": "Il presente decreto detta disposizioni in materia di armonizzazione dei sistemi contabili e degli schemi di bilancio delle regioni, degli enti locali e dei loro organismi."
+        }
+      ]
+    },
+    {
+      "articolo": "3",
+      "rubrica": "Principi contabili generali e applicati",
+      "commi": [
+        {
+          "comma": "1",
+          "testo": "Le amministrazioni pubbliche conformano la gestione ai principi contabili generali e applicati previsti dal presente decreto."
+        },
+        {
+          "comma": "2",
+          "testo": "Le disposizioni del presente articolo si coordinano con l'articolo 11 per gli schemi di bilancio armonizzati."
+        }
+      ]
+    },
+    {
+      "articolo": "11",
+      "rubrica": "Schemi di bilancio",
+      "commi": [
+        {
+          "comma": "1",
+          "testo": "Le regioni e gli enti locali adottano schemi di bilancio comuni secondo quanto previsto dall'articolo 1."
+        },
+        {
+          "comma": "2",
+          "testo": "Gli schemi di bilancio sono redatti in coerenza con i principi richiamati dall'articolo 3."
+        }
+      ]
+    },
+    {
+      "articolo": "18-bis",
+      "rubrica": "Indicatori di bilancio",
+      "commi": [
+        {
+          "comma": "1",
+          "testo": "Gli enti locali adottano indicatori di bilancio coerenti con gli schemi previsti dall'articolo 11."
+        }
+      ]
+    },
+    {
+      "articolo": "36",
+      "rubrica": "Principi generali per la contabilità finanziaria delle regioni",
+      "commi": [
+        {
+          "comma": "1",
+          "testo": "La gestione finanziaria si svolge in coerenza con i principi del presente decreto e con l'articolo 3."
+        }
+      ]
+    }
+  ]
+}

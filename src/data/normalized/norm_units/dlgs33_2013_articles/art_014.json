@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_014",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_014",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "14",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Obblighi di pubblicazione concernenti i componenti degli organi di indirizzo politico",
+  "testo_unita": "1.\nCon riferimento ai titolari di incarichi politici, di carattere elettivo o comunque di esercizio di poteri di indirizzo politico, di livello statale regionale e locale, le pubbliche amministrazioni pubblicano con riferimento a tutti i propri componenti, i seguenti documenti ed informazioni:\na) l'atto di nomina o di proclamazione, con l'indicazione della durata dell'incarico o del mandato elettivo;\nb) il curriculum;\nc) i compensi di qualsiasi natura connessi all'assunzione della carica; gli importi di viaggi di servizio e missioni pagati con fondi pubblici;\nd) i dati relativi all'assunzione di altre cariche, presso enti pubblici o privati, ed i relativi compensi a qualsiasi titolo corrisposti;\ne) gli altri eventuali incarichi con oneri a carico della finanza pubblica e l'indicazione dei compensi spettanti;\nf) le dichiarazioni di cui all'\narticolo 2, della legge 5 luglio 1982, n. 441\n, nonché le attestazioni e dichiarazioni di cui agli articoli 3 e 4 della medesima legge, come modificata dal presente decreto, limitatamente al soggetto, al coniuge non separato e ai parenti entro il secondo grado, ove gli stessi vi consentano. Viene in ogni caso data evidenza al mancato consenso. Alle informazioni di cui alla presente lettera concernenti soggetti diversi dal titolare dell'organo di indirizzo politico non si applicano le disposizioni di cui all'articolo 7.\n2.\nLe pubbliche amministrazioni pubblicano i dati cui al comma 1 entro tre mesi dalla elezione o dalla nomina e per i tre anni successivi dalla cessazione del mandato o dell'incarico dei soggetti, salve le informazioni concernenti la situazione patrimoniale e, ove consentita, la dichiarazione del coniuge non separato e dei parenti entro il secondo grado, che vengono pubblicate fino alla cessazione dell'incarico o del mandato. Decorso il termine di pubblicazione ai sensi del presente comma le informazioni e i dati concernenti la situazione patrimoniale non vengono trasferiti nelle sezioni di archivio.\nNote all'art. 14:\nSi riporta il testo dell'\narticolo 2 della legge 5 luglio 1982, n. 441\n, come modificato dal presente decreto:\n«Art. 2.\nEntro tre mesi dalla proclamazione i membri del Senato della Repubblica ed i membri della Camera dei deputati sono tenuti a depositare presso l'ufficio di presidenza della Camera di appartenenza:\n1) una dichiarazione concernente i diritti reali su beni immobili e su beni mobili iscritti in pubblici registri; le azioni di società; le quote di partecipazione a società; l'esercizio di funzioni di amministratore o di sindaco di società, con l'apposizione della formula \"sul mio onore affermo che la dichiarazione corrisponde al vero\";\n2) copia dell'ultima dichiarazione dei redditi soggetti all'imposta sui redditi delle persone fisiche;\n3) una dichiarazione concernente le spese sostenute e le obbligazioni assunte per la propaganda elettorale ovvero l'attestazione di essersi avvalsi esclusivamente di materiali e di mezzi propagandistici predisposti e messi a disposizione dal partito o dalla formazione politica della cui lista hanno fatto parte, con l'apposizione della formula \"sul mio onore affermo che la dichiarazione corrisponde al vero\". Alla dichiarazione debbono essere allegate le copie delle dichiarazioni di cui al\nterzo comma dell'articolo 4 della legge 18 novembre 1981, n. 659\n, relative agli eventuali contributi ricevuti.\nGli adempimenti indicati nei numeri 1 e 2 del comma precedente concernono anche la situazione patrimoniale e la dichiarazione dei redditi del coniuge non separato, nonché dei figli e dei parenti entro il secondo grado di parentela, se gli stessi vi consentono.\nI senatori di diritto, ai sensi dell'\narticolo 59 della Costituzione\n, ed i senatori nominati ai sensi del\nsecondo comma dell'articolo 59 della Costituzione\nsono tenuti a depositare presso l'ufficio di presidenza del Senato della Repubblica le dichiarazioni di cui ai numeri 1 e 2 del primo comma, entro tre mesi, rispettivamente, dalla cessazione dall'ufficio di Presidente della Repubblica o dalla comunicazione della nomina.».\nSi riporta il testo degli articoli 3 e 4 della citata\nlegge n. 441 del 1982\n:\n«Art. 3.\nEntro un mese dalla scadenza del termine utile per la presentazione della dichiarazione dei redditi soggetti all'imposta sui redditi delle persone fisiche, i soggetti indicati nell'articolo 2 sono tenuti a depositare un'attestazione concernente le variazioni della situazione patrimoniale di cui al numero 1 del primo comma del medesimo articolo 2 intervenute nell'anno precedente e copia della dichiarazione dei redditi. A tale adempimento annuale si applica il penultimo comma dell'articolo 2.»\n«Art. 4\nEntro tre mesi successivi alla cessazione dall'ufficio i soggetti indicati nell'articolo 2 sono tenuti a depositare una dichiarazione concernente le variazioni della situazione patrimoniale di cui al numero 1 del primo comma del medesimo articolo 2 intervenute dopo l'ultima attestazione. Entro un mese successivo alla scadenza del relativo termine, essi sono tenuti a depositare una copia della dichiarazione annuale relativa ai redditi delle persone fisiche. Si applica il secondo comma dell'articolo 2. Le disposizioni contenute nei precedenti commi non si applicano nel caso di rielezione del soggetto, cessato dalla carica per il rinnovo della Camera di appartenenza.».",
+  "position_index": 14,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 14",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "4",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

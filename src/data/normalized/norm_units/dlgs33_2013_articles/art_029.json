@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_029",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_029",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "29",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Obblighi di pubblicazione del bilancio, preventivo e consuntivo, e del Piano degli indicatori e risultati attesi di bilancio, nonché dei dati concernenti il monitoraggio degli obiettivi.",
+  "testo_unita": "1.\nLe pubbliche amministrazioni pubblicano i dati relativi al bilancio di previsione e a quello consuntivo di ciascun anno in forma sintetica, aggregata e semplificata, anche con il ricorso a rappresentazioni grafiche, al fine di assicurare la piena accessibilità e comprensibilità.\n2.\nLe pubbliche amministrazioni pubblicano il Piano di cui all'\narticolo 19 del decreto legislativo 31 maggio 2011, n. 91\n, con le integrazioni e gli aggiornamenti di cui all'articolo 22 del medesimo\ndecreto legislativo n. 91 del 2011\n.\nNote all'art. 29:\nSi riporta il testo degli\narticoli 19\ne\n22 del decreto legislativo 31 maggio 2011, n. 91\n:\n«Art. 19. Principi generali\n1. Le amministrazioni pubbliche, contestualmente al bilancio di previsione ed al bilancio consuntivo, presentano un documento denominato \"Piano degli indicatori e risultati attesi di bilancio\", di seguito denominato \"Piano\", al fine di illustrare gli obiettivi della spesa, misurarne i risultati e monitorarne l'effettivo andamento in termini di servizi forniti e di interventi realizzati.\n2. Il Piano illustra il contenuto di ciascun programma di spesa ed espone informazioni sintetiche relative ai principali obiettivi da realizzare, con riferimento agli stessi programmi del bilancio per il triennio della programmazione finanziaria, e riporta gli indicatori individuati per quantificare tali obiettivi, nonché la misurazione annuale degli stessi indicatori per monitorare i risultati conseguiti.\n3. Il Piano è coerente con il sistema di obiettivi ed indicatori adottati da ciascuna amministrazione ai sensi del\ndecreto legislativo 27 ottobre 2009, n. 150\n, e, per le amministrazioni centrali dello Stato, corrisponde alle note integrative disciplinate dall'\narticolo 21, comma 11, lettera a)\n, e dall'\narticolo 35, comma 2, della legge 31 dicembre 2009, n. 196\n.\n4. Al fine di assicurare il consolidamento e la confrontabilità degli indicatori di risultato, le amministrazioni vigilanti definiscono, per le amministrazioni pubbliche di loro competenza, comprese le unità locali di cui all'articolo 1, comma 1, lettera b), il sistema minimo di indicatori di risultato che ciascuna amministrazione ed unità locale deve inserire nel proprio Piano. Tale sistema minimo è stabilito con decreto del Ministro competente d'intesa con il Ministro dell'economia e delle finanze, da adottare ai sensi dell'\narticolo 17, comma 3, della legge 23 agosto 1988, n. 400\n.»\n«Art. 22. Monitoraggio degli obiettivi e indicatori\n1. Alla fine di ciascun esercizio finanziario e in accompagnamento al bilancio consuntivo, il Piano è integrato con le risultanze osservate in termini di raggiungimento dei risultati attesi e le motivazioni degli eventuali scostamenti. I destinatari e le modalità di divulgazione sono disciplinate secondo i criteri stabiliti dall'articolo 20.\n2. Ai fini del monitoraggio del Piano, gli obiettivi e gli indicatori selezionati, nonché i valori obiettivo per l'esercizio finanziario di riferimento e per l'arco temporale pluriennale sono i medesimi indicati nella fase di previsione. Il Piano è aggiornato in corrispondenza di ogni nuovo esercizio di bilancio, sia tramite la specificazione di nuovi obiettivi e indicatori, che attraverso l'aggiornamento dei valori obiettivo e la soppressione di obiettivi già raggiunti oppure oggetto di ripianificazione.».",
+  "position_index": 29,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 29",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "5",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

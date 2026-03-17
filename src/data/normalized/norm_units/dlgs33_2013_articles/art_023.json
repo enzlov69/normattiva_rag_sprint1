@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_023",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_023",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "23",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Obblighi di pubblicazione concernenti i provvedimenti amministrativi",
+  "testo_unita": "1.\nLe pubbliche amministrazioni pubblicano e aggiornano ogni sei mesi, in distinte partizioni della sezione «Amministrazione trasparente», gli elenchi dei provvedimenti adottati dagli organi di indirizzo politico e dai dirigenti, con particolare riferimento ai provvedimenti finali dei procedimenti di:\na) autorizzazione o concessione;\nb) scelta del contraente per l'affidamento di lavori, forniture e servizi, anche con riferimento alla modalità di selezione prescelta ai sensi del\ncodice dei contratti pubblici\n, relativi a lavori, servizi e forniture, di cui al\ndecreto legislativo 12 aprile 2006, n. 163\n;\nc) concorsi e prove selettive per l'assunzione del personale e progressioni di carriera di cui all'\narticolo 24 del decreto legislativo n. 150 del 2009\n;\nd) accordi stipulati dall'amministrazione con soggetti privati o con altre amministrazioni pubbliche.\n2.\nPer ciascuno dei provvedimenti compresi negli elenchi di cui al comma 1 sono pubblicati il contenuto, l'oggetto, la eventuale spesa prevista e gli estremi relativi ai principali documenti contenuti nel fascicolo relativo al procedimento. La pubblicazione avviene nella forma di una scheda sintetica, prodotta automaticamente in sede di formazione del documento che contiene l'atto.\nNote all'art. 23:\nIl\ndecreto legislativo 12 aprile 2006, n. 163\n(\nCodice dei contratti pubblici\nrelativi a lavori, servizi e forniture in attuazione delle\ndirettive 2004/17/CE\ne\n2004/18/CE)\n, è pubblicato nella Gazzetta Ufficiale 2 maggio 2006, n. 100.\nSi riporta il testo dell'articolo 24 del citato\ndecreto legislativo n. 150 del 2009\n:\n«Art. 24. Progressioni di carriera\n1. Ai sensi dell'\narticolo 52, comma 1-bis, del decreto legislativo n. 165 del 2001\n, come introdotto dall'articolo 62 del presente decreto, le amministrazioni pubbliche, a decorrere dal 1° gennaio 2010, coprono i posti disponibili nella dotazione organica attraverso concorsi pubblici, con riserva non superiore al cinquanta per cento a favore del personale interno, nel rispetto delle disposizioni vigenti in materia di assunzioni.\n2. L'attribuzione dei posti riservati al personale interno è finalizzata a riconoscere e valorizzare le competenze professionali sviluppate dai dipendenti, in relazione alle specifiche esigenze delle amministrazioni.\n3. La collocazione nella fascia di merito alta, di cui all'articolo19, comma 2, lettera a), per tre anni consecutivi, ovvero per cinque annualità anche non consecutive, costituisce titolo rilevante ai fini della progressione di carriera.».",
+  "position_index": 23,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 23",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "4",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

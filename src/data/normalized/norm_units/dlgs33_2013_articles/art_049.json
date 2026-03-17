@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_049",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_049",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "49",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Norme transitorie e finali",
+  "testo_unita": "1.\nL'obbligo di pubblicazione dei dati di cui all'articolo 24 decorre dal termine di sei mesi dalla data di entrata in vigore del presente decreto.\n2.\nCon uno o più decreti del Presidente del Consiglio dei Ministri sono determinate le modalità di applicazione delle disposizioni del presente decreto alla Presidenza del Consiglio dei Ministri, in considerazione delle peculiarità del relativo ordinamento ai sensi degli articoli 92 e 95 della Costituzione.\n3.\nLe sanzioni di cui all'articolo 47 si applicano, per ciascuna amministrazione, a partire dalla data di adozione del primo aggiornamento annuale del Piano triennale della trasparenza e comunque a partire dal centottantesimo giorno successivo alla data di entrata in vigore del presente decreto.\n4.\nLe regioni a Statuto speciale e le province autonome di Trento e Bolzano possono individuare forme e modalità di applicazione del presente decreto in ragione della peculiarità dei propri ordinamenti.\nNote all'art. 49:\nSi riporta il testo degli\narticoli 92\ne\n95 della Costituzione\n:\n«Art. 92. Il Governo della Repubblica è composto del Presidente del Consiglio e dei Ministri, che costituiscono insieme il Consiglio dei ministri.\nIl Presidente della Repubblica nomina il Presidente del Consiglio dei ministri e, su proposta di questo, i Ministri»\n«Art. 95. Il Presidente del Consiglio dei ministri dirige la politica generale del Governo e ne è responsabile. Mantiene la unità di indirizzo politico ed amministrativo, promovendo e coordinando l'attività dei Ministri.\nI Ministri sono responsabili collegialmente degli atti del Consiglio dei ministri, e individualmente degli atti dei loro dicasteri.\nLa legge provvede all'ordinamento della Presidenza del Consiglio e determina il numero, le attribuzioni e l'organizzazione dei Ministeri.».",
+  "position_index": 49,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 49",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "9",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}

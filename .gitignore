@@ -1,0 +1,98 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.python-version
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# =========================
+# Virtual environments
+# =========================
+.venv/
+venv/
+env/
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# OS / temporary files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*
+*.tmp
+*.bak
+
+# =========================
+# Logs
+# =========================
+*.log
+data/logs/
+logs/
+
+# =========================
+# Runtime / local databases
+# =========================
+*.sqlite
+*.db
+*.sqlite3
+
+# =========================
+# Chroma / vector db / heavy generated artifacts
+# =========================
+data/chroma/
+chroma/
+*.parquet
+
+# =========================
+# Generated datasets / build artifacts
+# =========================
+dist/
+build/
+site/
+tmp/
+temp/
+
+# =========================
+# Large generated data folders
+# (manteniamo versionati solo i file di configurazione utili)
+# =========================
+data/processed/
+data/chunks/
+data/normalized/
+data/exports/
+data/cache/
+
+# Eccezioni: questi file/cartelle restano tracciati
+!data/query_packs/
+!data/query_packs/**
+!data/logs/.gitkeep
+
+# =========================
+# Office / local docs cache
+# =========================
+*.odt#
+*.docx.tmp
+*.xlsx.tmp
+
+# =========================
+# Optional: binary outputs
+# =========================
+*.zip
+*.7z
+*.tar
+*.gz

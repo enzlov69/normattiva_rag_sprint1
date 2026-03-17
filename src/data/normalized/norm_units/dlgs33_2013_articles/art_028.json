@@ -1,0 +1,31 @@
+{
+  "record_id": "nu_dlgs33_2013_art_028",
+  "record_type": "NormUnit",
+  "norm_unit_id": "dlgs33_2013_art_028",
+  "source_id": "normattiva_dlgs33_2013_main",
+  "unit_type": "articolo",
+  "articolo": "28",
+  "comma": "",
+  "lettera": "",
+  "numero": "",
+  "allegato": "",
+  "rubrica": "Pubblicità dei rendiconti dei gruppi consiliari regionali e provinciali",
+  "testo_unita": "1.\nLe regioni, le province autonome di Trento e Bolzano e le province pubblicano i rendiconti di cui all'\narticolo 1, comma 10, del decreto-legge 10 ottobre 2012, n. 174\n, convertito, con modificazioni, dalla\nlegge 7 dicembre 2012, n. 213\n, dei gruppi consiliari regionali e provinciali, con evidenza delle risorse trasferite o assegnate a ciascun gruppo, con indicazione del titolo di trasferimento e dell'impiego delle risorse utilizzate. Sono altresì pubblicati gli atti e le relazioni degli organi di controllo.\n2.\nLa mancata pubblicazione dei rendiconti comporta la riduzione del 50 per cento delle risorse da trasferire o da assegnare nel corso dell'anno.\nNote all'art. 28:\nSi riporta il testo dell'\narticolo 1, comma 10, del decreto-legge 10 ottobre 2012, n. 174\n:\n«Art. 1. (Rafforzamento della partecipazione della Corte dei conti al controllo sulla gestione finanziaria delle regioni)\n(Omissis).\n10. Il rendiconto è trasmesso da ciascun gruppo consiliare al presidente del consiglio regionale, che lo trasmette al presidente della regione. Entro sessanta giorni dalla chiusura dell'esercizio, il presidente della regione trasmette il rendiconto di ciascun gruppo alla competente sezione regionale di controllo della Corte dei conti perché si pronunci, nel termine di trenta giorni dal ricevimento, sulla regolarità dello stesso con apposita delibera, che è trasmessa al presidente della regione per il successivo inoltro al presidente del consiglio regionale, che ne cura la pubblicazione. In caso di mancata pronuncia nei successivi trenta giorni, il rendiconto di esercizio si intende comunque approvato. Il rendiconto è, altresì, pubblicato in allegato al conto consuntivo del consiglio regionale e nel sito istituzionale della regione.\n(Omissis).».",
+  "position_index": 28,
+  "hierarchy_path": "D.Lgs. 33/2013 > Art. 28",
+  "cross_reference_ids": [],
+  "vigenza_ref_id": "",
+  "norm_unit_status": "ACTIVE_STRUCTURED",
+  "created_at": "2026-03-14T17:10:17Z",
+  "updated_at": "2026-03-14T17:10:17Z",
+  "schema_version": "2.0",
+  "record_version": 1,
+  "source_layer": "B",
+  "trace_id": "trace_dlgs33_bootstrap_v1",
+  "active_flag": true,
+  "technical_meta": {
+    "fetch_group_id": "4",
+    "codice_redazionale": "13G00076",
+    "data_gazzetta": "2013-04-05"
+  }
+}
