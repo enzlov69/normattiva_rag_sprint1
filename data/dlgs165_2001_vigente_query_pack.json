@@ -1,0 +1,61 @@
+{
+  "dataset_id": "dlgs165_2001",
+  "versione": "vigente",
+  "description": "Query pack iniziale per collaudo retrieval del D.Lgs. 165/2001 vigente",
+  "collections_target": [
+    "normattiva_dlgs165_2001_vigente_articles",
+    "normattiva_dlgs165_2001_vigente_commi"
+  ],
+  "queries": [
+    {
+      "query_id": "dlgs165_q001",
+      "area": "indirizzo_vs_gestione",
+      "query_text": "distinzione tra indirizzo politico e gestione amministrativa"
+    },
+    {
+      "query_id": "dlgs165_q002",
+      "area": "competenze_responsabili",
+      "query_text": "competenze dei responsabili"
+    },
+    {
+      "query_id": "dlgs165_q003",
+      "area": "organizzazione_uffici",
+      "query_text": "organizzazione degli uffici"
+    },
+    {
+      "query_id": "dlgs165_q004",
+      "area": "responsabilita_dirigenziale",
+      "query_text": "responsabilità dirigenziale"
+    },
+    {
+      "query_id": "dlgs165_q005",
+      "area": "upd",
+      "query_text": "ufficio procedimenti disciplinari"
+    },
+    {
+      "query_id": "dlgs165_q006",
+      "area": "procedimento_disciplinare",
+      "query_text": "procedimento disciplinare"
+    },
+    {
+      "query_id": "dlgs165_q007",
+      "area": "incarichi",
+      "query_text": "conferimento incarichi"
+    },
+    {
+      "query_id": "dlgs165_q008",
+      "area": "fabbisogno_personale",
+      "query_text": "fabbisogno del personale"
+    },
+    {
+      "query_id": "dlgs165_q009",
+      "area": "performance",
+      "query_text": "performance"
+    },
+    {
+      "query_id": "dlgs165_q010",
+      "area": "ordinamento_generale",
+      "query_text": "lavoro alle dipendenze delle amministrazioni pubbliche"
+    }
+  ]
+}
