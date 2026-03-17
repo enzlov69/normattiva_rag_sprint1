@@ -1,0 +1,62 @@
+[
+  {
+    "test_id": "dlgs33_q_001",
+    "query": "accesso civico semplice",
+    "target_collection": "articles",
+    "expected_article": "5"
+  },
+  {
+    "test_id": "dlgs33_q_002",
+    "query": "accesso civico generalizzato esclusioni e limiti",
+    "target_collection": "articles",
+    "expected_article": "5-bis"
+  },
+  {
+    "test_id": "dlgs33_q_003",
+    "query": "amministrazione trasparente",
+    "target_collection": "articles",
+    "expected_article": "9"
+  },
+  {
+    "test_id": "dlgs33_q_004",
+    "query": "banche dati obblighi di pubblicazione",
+    "target_collection": "articles",
+    "expected_article": "9-bis"
+  },
+  {
+    "test_id": "dlgs33_q_005",
+    "query": "obblighi di pubblicazione titolari di incarichi politici",
+    "target_collection": "articles",
+    "expected_article": "14"
+  },
+  {
+    "test_id": "dlgs33_q_006",
+    "query": "sovvenzioni contributi sussidi vantaggi economici",
+    "target_collection": "articles",
+    "expected_article": "26"
+  },
+  {
+    "test_id": "dlgs33_q_007",
+    "query": "obblighi di pubblicazione concernenti i contratti pubblici",
+    "target_collection": "articles",
+    "expected_article": "37"
+  },
+  {
+    "test_id": "dlgs33_q_008",
+    "query": "responsabile per la trasparenza",
+    "target_collection": "articles",
+    "expected_article": "43"
+  },
+  {
+    "test_id": "dlgs33_q_009",
+    "query": "sanzioni per la violazione degli obblighi di trasparenza",
+    "target_collection": "articles",
+    "expected_article": "47"
+  },
+  {
+    "test_id": "dlgs33_q_010",
+    "query": "durata della pubblicazione",
+    "target_collection": "articles",
+    "expected_article": "8"
+  }
+]

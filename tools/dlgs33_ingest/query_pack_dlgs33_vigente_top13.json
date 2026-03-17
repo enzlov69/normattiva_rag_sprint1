@@ -1,0 +1,92 @@
+[
+  {
+    "test_id": "dlgs33_top13_001",
+    "query": "accesso civico semplice",
+    "target_collection": "articles",
+    "expected_article": "5",
+    "must_be_top1": true,
+    "must_be_top3": true,
+    "note": "query specifica: art. 5 deve stare in top1"
+  },
+  {
+    "test_id": "dlgs33_top13_002",
+    "query": "accesso civico generalizzato esclusioni e limiti",
+    "target_collection": "articles",
+    "expected_article": "5-bis",
+    "must_be_top1": true,
+    "must_be_top3": true,
+    "note": "query specialistica: art. 5-bis deve stare in top1"
+  },
+  {
+    "test_id": "dlgs33_top13_003",
+    "query": "amministrazione trasparente",
+    "target_collection": "articles",
+    "expected_article": "9",
+    "must_be_top1": true,
+    "must_be_top3": true,
+    "note": "caso critico: art. 9 deve prevalere su art. 1"
+  },
+  {
+    "test_id": "dlgs33_top13_004",
+    "query": "banche dati obblighi di pubblicazione",
+    "target_collection": "articles",
+    "expected_article": "9-bis",
+    "must_be_top1": true,
+    "must_be_top3": true,
+    "note": "query precisa: art. 9-bis deve stare in top1"
+  },
+  {
+    "test_id": "dlgs33_top13_005",
+    "query": "obblighi di pubblicazione titolari di incarichi politici",
+    "target_collection": "articles",
+    "expected_article": "14",
+    "must_be_top1": true,
+    "must_be_top3": true,
+    "note": "query precisa: art. 14 deve stare in top1"
+  },
+  {
+    "test_id": "dlgs33_top13_006",
+    "query": "sovvenzioni contributi sussidi vantaggi economici",
+    "target_collection": "articles",
+    "expected_article": "26",
+    "must_be_top1": true,
+    "must_be_top3": true,
+    "note": "query precisa: art. 26 deve stare in top1"
+  },
+  {
+    "test_id": "dlgs33_top13_007",
+    "query": "obblighi di pubblicazione contratti pubblici",
+    "target_collection": "articles",
+    "expected_article": "37",
+    "must_be_top1": true,
+    "must_be_top3": true,
+    "note": "query precisa: art. 37 deve stare in top1"
+  },
+  {
+    "test_id": "dlgs33_top13_008",
+    "query": "responsabile per la trasparenza",
+    "target_collection": "articles",
+    "expected_article": "43",
+    "must_be_top1": true,
+    "must_be_top3": true,
+    "note": "caso critico: art. 43 deve prevalere su art. 1"
+  },
+  {
+    "test_id": "dlgs33_top13_009",
+    "query": "sanzioni violazione obblighi di trasparenza",
+    "target_collection": "articles",
+    "expected_article": "47",
+    "must_be_top1": true,
+    "must_be_top3": true,
+    "note": "query precisa: art. 47 deve stare in top1"
+  },
+  {
+    "test_id": "dlgs33_top13_010",
+    "query": "durata obbligo di pubblicazione",
+    "target_collection": "articles",
+    "expected_article": "8",
+    "must_be_top1": true,
+    "must_be_top3": true,
+    "note": "query precisa: art. 8 deve stare in top1"
+  }
+]
