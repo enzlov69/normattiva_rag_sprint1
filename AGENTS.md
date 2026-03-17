@@ -85,3 +85,18 @@ For any future modification on code or test runners:
 8. Si preferiscono fix ultra-locali a euristiche globali.
 9. I debug temporanei si rimuovono prima del consolidamento finale.
 10. Ogni patch validata diventa nuova baseline solo dopo backup o commit.
+## TEST RUNNER GOVERNANCE RULE
+
+When working inside `/tests`:
+
+1. Always prefer the current active test runner as the base.
+2. Never use historical runners (`*_old.py`, `*_v25_*`, numbered variants) as the default starting point if a current stable runner already exists.
+3. Treat versioned runners as historical references, not as active baselines.
+4. Use `*_STABLE.py` files only when they are explicitly confirmed as the current validated baseline.
+5. Apply the same policy used for the federated runner:
+   - stable base first
+   - one minimal change at a time
+   - immediate test rerun
+   - reject regressions
+6. Do not refactor historical test files unless explicitly requested.
+7. If a fix is validated, promote only the active runner, not its historical variants.
