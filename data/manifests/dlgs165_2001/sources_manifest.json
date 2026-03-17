@@ -1,0 +1,35 @@
+{
+  "manifest_type": "sources_manifest",
+  "schema_version": "1.0",
+  "dataset_id": "dlgs165_2001",
+  "dataset_title": "Decreto legislativo 165/2001 - Corpus vigente",
+  "sources": [
+    {
+      "source_id": "normattiva_dlgs165_2001_vigente_html",
+      "source_type": "html",
+      "authority": "Normattiva",
+      "title": "Decreto legislativo 165/2001 - testo vigente",
+      "local_path": "data/raw/normattiva/dlgs165_2001_vigente/dlgs165_2001_vigente_landing.html",
+      "status": "active",
+      "role": "primary_source"
+    },
+    {
+      "source_id": "normattiva_dlgs165_2001_vigente_articles",
+      "source_type": "norm_units_json",
+      "authority": "Normattiva / pipeline interna",
+      "title": "Decreto legislativo 165/2001 - articoli vigente",
+      "local_path": "data/normalized/norm_units/dlgs165_2001_vigente_articles",
+      "status": "active",
+      "role": "structured_articles"
+    },
+    {
+      "source_id": "normattiva_dlgs165_2001_vigente_commi",
+      "source_type": "norm_units_json",
+      "authority": "Normattiva / pipeline interna",
+      "title": "Decreto legislativo 165/2001 - commi vigente",
+      "local_path": "data/normalized/norm_units/dlgs165_2001_vigente_commi",
+      "status": "active",
+      "role": "structured_commi"
+    }
+  ]
+}
