@@ -1,4 +1,16 @@
-﻿from pathlib import Path
+"""
+Canonical strong validation baseline for the D.Lgs. 36/2023 branch.
+
+Current branch status:
+- validation-centered active baseline
+- this file is the canonical strong validation entrypoint
+- cantiere_36/ and cantiere_36_allegati/ remain rebuild provenance, not active baseline
+
+Do not treat cantiere rebuild scripts as the default runtime baseline unless
+the branch is explicitly reconsolidated around them.
+"""
+
+from pathlib import Path
 import json
 import chromadb
 from chromadb.utils import embedding_functions
