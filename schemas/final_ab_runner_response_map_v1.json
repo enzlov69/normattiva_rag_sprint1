@@ -1,0 +1,52 @@
+{
+  "schema_version": "v1",
+  "map_name": "final_ab_runner_response_map_v1",
+  "description": "Regole di normalizzazione della risposta raw del runner in ABResponseEnvelope con DocumentaryPacket.",
+  "accepted_documentary_roots": [
+    "documentary_packet",
+    "payload",
+    "result",
+    "results",
+    "root"
+  ],
+  "required_documentary_fields": [
+    "sources",
+    "norm_units",
+    "citations_valid",
+    "citations_blocked",
+    "vigenza_records",
+    "cross_reference_records",
+    "coverage_assessment",
+    "warnings",
+    "errors",
+    "blocks",
+    "shadow_fragment"
+  ],
+  "forbidden_level_b_fields": [
+    "final_decision",
+    "applicability_final",
+    "m07_closed",
+    "m07_certified",
+    "reading_integral_certified",
+    "compliance_go",
+    "go_no_go",
+    "output_authorized",
+    "final_validation",
+    "opponible_output",
+    "rac_opponibile",
+    "go_final",
+    "no_go"
+  ],
+  "status_rules": {
+    "REJECTED": "Forbidden Level B fields or conclusory semantics detected.",
+    "BLOCKED": "Critical blocks present in the normalized documentary payload.",
+    "DEGRADED": "Documentary payload incomplete but still normalizable.",
+    "SUCCESS_WITH_WARNINGS": "No critical blocks but warnings present.",
+    "SUCCESS": "Normalized documentary payload complete and clean."
+  },
+  "notes": [
+    "Il mapper non può inventare contenuti sostanziali mancanti.",
+    "Il supporto a M07 resta esclusivamente documentale.",
+    "La response raw del runner viene accettata solo se traducibile in forma documentale e non conclusiva."
+  ]
+}

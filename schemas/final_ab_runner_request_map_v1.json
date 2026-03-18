@@ -1,0 +1,54 @@
+{
+  "schema_version": "v1",
+  "map_name": "final_ab_runner_request_map_v1",
+  "description": "Mapping controllato tra ABRequestEnvelope del frontdoor e RunnerInvocationRequest minimo del runner federato black-box.",
+  "required_envelope_fields": [
+    "request_id",
+    "case_id",
+    "trace_id",
+    "api_version",
+    "caller_module",
+    "target_module",
+    "timestamp",
+    "payload"
+  ],
+  "runner_request_fields": {
+    "request_id": "request_id",
+    "case_id": "case_id",
+    "trace_id": "trace_id",
+    "query_text": [
+      "payload.query_text",
+      "payload.query",
+      "payload.document_request.query_text"
+    ],
+    "domain_target": [
+      "payload.domain_target",
+      "payload.domain",
+      "payload.document_request.domain_target"
+    ],
+    "metadata_filters": [
+      "payload.metadata_filters",
+      "payload.filters"
+    ],
+    "top_k": [
+      "payload.top_k",
+      "payload.limit"
+    ],
+    "runtime_flags": [
+      "payload.runtime_flags",
+      "payload.flags"
+    ]
+  },
+  "prohibited_semantics": [
+    "final_decision",
+    "applicability_final",
+    "m07_closed",
+    "compliance_go",
+    "output_authorized"
+  ],
+  "notes": [
+    "Il mapping è minimale e non trasferisce campi decisori o validativi al runner.",
+    "Il runner riceve solo dati documentali e parametri tecnici di retrieval già ammessi dal Livello B.",
+    "Nessun campo GO/NO-GO, RAC o chiusura M07 può transitare nel runner request payload."
+  ]
+}

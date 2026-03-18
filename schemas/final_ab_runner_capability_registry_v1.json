@@ -1,0 +1,68 @@
+{
+  "schema_version": "v1",
+  "registry_name": "final_ab_runner_capability_registry_v1",
+  "description": "Registry minimo delle capacità ammesse per il controlled runtime handoff verso il runner federato black-box.",
+  "target_modules": [
+    "level_b_runtime_handoff",
+    "level_b_documentary_runtime"
+  ],
+  "capabilities": [
+    {
+      "capability_id": "RUNNER_BLACKBOX_DOCUMENTARY_QUERY",
+      "source_layer": "B",
+      "black_box_runner": true,
+      "entrypoint_kind": "python_callable_or_dotted_path",
+      "allowed_runner_request_fields": [
+        "request_id",
+        "case_id",
+        "trace_id",
+        "query_text",
+        "domain_target",
+        "metadata_filters",
+        "top_k",
+        "runtime_flags"
+      ],
+      "allowed_runner_response_semantics": [
+        "sources",
+        "norm_units",
+        "citations_valid",
+        "citations_blocked",
+        "vigenza_records",
+        "cross_reference_records",
+        "coverage_assessment",
+        "warnings",
+        "errors",
+        "blocks",
+        "shadow_fragment",
+        "human_completion_required"
+      ],
+      "forbidden_semantics": [
+        "final_decision",
+        "applicability_final",
+        "m07_closed",
+        "m07_certified",
+        "compliance_go",
+        "output_authorized",
+        "go_no_go",
+        "rac_opponibile"
+      ],
+      "notes": [
+        "Il runner resta sottostante e non decisorio.",
+        "Il wrapper non altera retrieval, router, ranking o corpus.",
+        "Il collegamento è ammesso solo tramite adapter controllato A→B→runner→B→A."
+      ]
+    }
+  ],
+  "critical_block_codes": [
+    "CORPUS_MISSING",
+    "SOURCE_UNVERIFIED",
+    "CITATION_INCOMPLETE",
+    "VIGENZA_UNCERTAIN",
+    "CROSSREF_UNRESOLVED",
+    "M07_REQUIRED",
+    "RAG_SCOPE_VIOLATION",
+    "AUDIT_INCOMPLETE",
+    "OUTPUT_NOT_OPPONIBLE",
+    "COVERAGE_INADEQUATE"
+  ]
+}
