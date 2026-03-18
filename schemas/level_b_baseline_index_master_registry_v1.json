@@ -1,0 +1,232 @@
+{
+  "registry_id": "LB-BIM-REG-v1",
+  "version": "1.0.0",
+  "scope": "level_b_offline_baseline_index_master",
+  "decision_vocab": [
+    "COMPLETE",
+    "HOLD",
+    "ERROR"
+  ],
+  "canonical_execution_order": [
+    {
+      "order": 1,
+      "checkpoint_id": "LB-VAL2",
+      "label": "Validation suites"
+    },
+    {
+      "order": 2,
+      "checkpoint_id": "LB-GOLD",
+      "label": "Golden baseline suite"
+    },
+    {
+      "order": 3,
+      "checkpoint_id": "LB-GOLD",
+      "label": "Release gate offline"
+    },
+    {
+      "order": 4,
+      "checkpoint_id": "LB-RUN",
+      "label": "Runbook preflight"
+    },
+    {
+      "order": 5,
+      "checkpoint_id": "LB-CC",
+      "label": "Change control precheck"
+    },
+    {
+      "order": 6,
+      "checkpoint_id": "LB-TRACE",
+      "label": "Traceability bundle"
+    },
+    {
+      "order": 7,
+      "checkpoint_id": "LB-BIM",
+      "label": "Baseline index master"
+    }
+  ],
+  "checkpoints": [
+    {
+      "id": "LB-VAL1",
+      "order": 1,
+      "label": "Level B validation package v1",
+      "git_tags": [
+        "stable-level-b-validation-v1"
+      ],
+      "status": "historical_stable",
+      "depends_on": [],
+      "key_files": [
+        "docs/LEVEL_B_VALIDATION_TRACEABILITY_MATRIX_v1.md",
+        "schemas/level_b_payload_schema_v1.json",
+        "schemas/level_b_status_registry_v1.json",
+        "schemas/level_b_fail_code_registry_v1.json",
+        "schemas/level_b_validation_traceability_matrix_v1.json",
+        "validators/level_b_result_model.py",
+        "validators/level_b_semantic_rules.py",
+        "validators/level_b_payload_validator.py",
+        "tests/test_level_b_payload_contract.py",
+        "tests/test_level_b_payload_semantics.py",
+        "tests/test_level_b_m07_boundaries.py",
+        "tests/test_level_b_audit_shadow.py",
+        "tests/test_level_b_block_propagation.py",
+        "tests/test_level_b_traceability_matrix.py"
+      ]
+    },
+    {
+      "id": "LB-VAL2",
+      "order": 2,
+      "label": "Level B validation package v2",
+      "git_tags": [
+        "stable-level-b-validation-v2"
+      ],
+      "status": "active_stable",
+      "depends_on": [
+        "LB-VAL1"
+      ],
+      "key_files": [
+        "docs/LEVEL_B_VALIDATION_TRACEABILITY_MATRIX_v1.md",
+        "schemas/level_b_payload_schema_v1.json",
+        "schemas/level_b_status_registry_v1.json",
+        "schemas/level_b_fail_code_registry_v1.json",
+        "schemas/level_b_validation_traceability_matrix_v1.json",
+        "validators/level_b_result_model.py",
+        "validators/level_b_semantic_rules.py",
+        "validators/level_b_payload_validator.py",
+        "tests/test_level_b_payload_contract.py",
+        "tests/test_level_b_payload_semantics.py",
+        "tests/test_level_b_m07_boundaries.py",
+        "tests/test_level_b_audit_shadow.py",
+        "tests/test_level_b_block_propagation.py",
+        "tests/test_level_b_traceability_matrix.py"
+      ]
+    },
+    {
+      "id": "LB-GOLD",
+      "order": 3,
+      "label": "Golden baseline + release gate",
+      "git_tags": [
+        "stable-level-b-golden-release-v1"
+      ],
+      "status": "active_stable",
+      "depends_on": [
+        "LB-VAL2"
+      ],
+      "key_files": [
+        "docs/LEVEL_B_GOLDEN_BASELINE_MATRIX_v1.md",
+        "schemas/level_b_golden_baseline_registry_v1.json",
+        "validators/level_b_golden_rules.py",
+        "tests/test_level_b_golden_baseline.py",
+        "docs/LEVEL_B_RELEASE_GATE_OFFLINE_v1.md",
+        "schemas/level_b_release_gate_manifest_v1.json",
+        "schemas/level_b_release_gate_report_schema_v1.json",
+        "validators/level_b_release_gate_rules.py",
+        "tools/run_level_b_release_gate_offline.py",
+        "tests/test_level_b_release_gate_manifest.py",
+        "tests/test_level_b_release_gate_rules.py"
+      ]
+    },
+    {
+      "id": "LB-RUN",
+      "order": 4,
+      "label": "Runbook offline",
+      "git_tags": [
+        "stable-level-b-runbook-v1"
+      ],
+      "status": "active_stable",
+      "depends_on": [
+        "LB-GOLD"
+      ],
+      "key_files": [
+        "docs/LEVEL_B_RUNBOOK_OFFLINE_v1.md",
+        "schemas/level_b_runbook_checklist_v1.json",
+        "schemas/level_b_runbook_preflight_report_schema_v1.json",
+        "validators/level_b_runbook_rules.py",
+        "tools/run_level_b_runbook_preflight.py",
+        "tests/test_level_b_runbook_checklist.py",
+        "tests/test_level_b_runbook_rules.py"
+      ]
+    },
+    {
+      "id": "LB-CC",
+      "order": 5,
+      "label": "Change control pack",
+      "git_tags": [
+        "stable-level-b-change-control-v1"
+      ],
+      "status": "active_stable",
+      "depends_on": [
+        "LB-GOLD",
+        "LB-RUN"
+      ],
+      "key_files": [
+        "docs/LEVEL_B_CHANGE_CONTROL_PACK_v1.md",
+        "schemas/level_b_change_control_registry_v1.json",
+        "schemas/level_b_change_request_schema_v1.json",
+        "schemas/level_b_change_control_report_schema_v1.json",
+        "validators/level_b_change_control_rules.py",
+        "tools/run_level_b_change_control_precheck.py",
+        "tests/test_level_b_change_control_registry.py",
+        "tests/test_level_b_change_control_rules.py",
+        "tests/test_level_b_change_control_runner.py",
+        "tests/fixtures/level_b_change_requests/hold/cc_hold_001_protected_asset_missing_approval.json",
+        "tests/fixtures/level_b_change_requests/pass/cc_pass_001_additive_non_fondative.json",
+        "tests/fixtures/level_b_change_requests/reject/cc_reject_001_runner_touch.json",
+        "tests/fixtures/level_b_change_requests/reject/cc_reject_002_enables_m07_closure.json"
+      ]
+    },
+    {
+      "id": "LB-TRACE",
+      "order": 6,
+      "label": "Traceability bundle",
+      "git_tags": [
+        "stable-level-b-traceability-v1"
+      ],
+      "status": "active_stable",
+      "depends_on": [
+        "LB-GOLD",
+        "LB-RUN",
+        "LB-CC"
+      ],
+      "key_files": [
+        "docs/LEVEL_B_TRACEABILITY_BUNDLE_v1.md",
+        "schemas/level_b_traceability_bundle_registry_v1.json",
+        "schemas/level_b_traceability_bundle_report_schema_v1.json",
+        "validators/level_b_traceability_bundle_rules.py",
+        "tools/run_level_b_traceability_bundle.py",
+        "tests/test_level_b_traceability_bundle_registry.py",
+        "tests/test_level_b_traceability_bundle_rules.py",
+        "tests/test_level_b_traceability_bundle_runner.py"
+      ]
+    },
+    {
+      "id": "LB-BIM",
+      "order": 7,
+      "label": "Baseline index master",
+      "git_tags": [
+        "stable-level-b-baseline-index-v1"
+      ],
+      "status": "candidate",
+      "depends_on": [
+        "LB-VAL2",
+        "LB-GOLD",
+        "LB-RUN",
+        "LB-CC",
+        "LB-TRACE"
+      ],
+      "key_files": [
+        "docs/LEVEL_B_BASELINE_INDEX_MASTER_v1.md",
+        "schemas/level_b_baseline_index_master_registry_v1.json",
+        "schemas/level_b_baseline_index_master_report_schema_v1.json",
+        "validators/level_b_baseline_index_rules.py",
+        "tools/run_level_b_baseline_index_master.py",
+        "tests/test_level_b_baseline_index_master_registry.py",
+        "tests/test_level_b_baseline_index_master_rules.py",
+        "tests/test_level_b_baseline_index_master_runner.py"
+      ]
+    }
+  ],
+  "protected_alignment_rules": [
+    "Release gate and runbook must remain aligned on golden prerequisite presence.",
+    "Traceability bundle must not claim checkpoints that are missing on disk.",
+    "Baseline index master must not mark candidate checkpoints as active_stable before commit/tag consolidation."
+  ]
+}

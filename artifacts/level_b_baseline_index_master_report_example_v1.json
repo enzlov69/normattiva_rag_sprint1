@@ -1,0 +1,81 @@
+{
+  "report_id": "LB-BIM-REPORT-v1",
+  "decision": "COMPLETE",
+  "base_dir": "C:/normattiva_rag_sprint1",
+  "git_status_clean": true,
+  "registry_problems": [],
+  "checkpoints": [
+    {
+      "id": "LB-VAL1",
+      "label": "Level B validation package v1",
+      "status": "historical_stable",
+      "git_tags": [
+        "stable-level-b-validation-v1"
+      ],
+      "all_key_files_present": true,
+      "missing_files": []
+    },
+    {
+      "id": "LB-VAL2",
+      "label": "Level B validation package v2",
+      "status": "active_stable",
+      "git_tags": [
+        "stable-level-b-validation-v2"
+      ],
+      "all_key_files_present": true,
+      "missing_files": []
+    },
+    {
+      "id": "LB-GOLD",
+      "label": "Golden baseline + release gate",
+      "status": "active_stable",
+      "git_tags": [
+        "stable-level-b-golden-release-v1"
+      ],
+      "all_key_files_present": true,
+      "missing_files": []
+    },
+    {
+      "id": "LB-RUN",
+      "label": "Runbook offline",
+      "status": "active_stable",
+      "git_tags": [
+        "stable-level-b-runbook-v1"
+      ],
+      "all_key_files_present": true,
+      "missing_files": []
+    },
+    {
+      "id": "LB-CC",
+      "label": "Change control pack",
+      "status": "active_stable",
+      "git_tags": [
+        "stable-level-b-change-control-v1"
+      ],
+      "all_key_files_present": true,
+      "missing_files": []
+    },
+    {
+      "id": "LB-TRACE",
+      "label": "Traceability bundle",
+      "status": "active_stable",
+      "git_tags": [
+        "stable-level-b-traceability-v1"
+      ],
+      "all_key_files_present": true,
+      "missing_files": []
+    },
+    {
+      "id": "LB-BIM",
+      "label": "Baseline index master",
+      "status": "candidate",
+      "git_tags": [
+        "stable-level-b-baseline-index-v1"
+      ],
+      "all_key_files_present": true,
+      "missing_files": []
+    }
+  ],
+  "reasons": [],
+  "next_action": "Baseline index master is structurally coherent. Preserve current checkpoint map and rerun after future Level B offline changes."
+}

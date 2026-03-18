@@ -1,0 +1,87 @@
+{
+  "title": "Level B Baseline Index Master Report v1",
+  "type": "object",
+  "required": [
+    "report_id",
+    "decision",
+    "base_dir",
+    "git_status_clean",
+    "registry_problems",
+    "checkpoints",
+    "reasons",
+    "next_action"
+  ],
+  "properties": {
+    "report_id": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "COMPLETE",
+        "HOLD",
+        "ERROR"
+      ]
+    },
+    "base_dir": {
+      "type": "string"
+    },
+    "git_status_clean": {
+      "type": "boolean"
+    },
+    "registry_problems": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "checkpoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "status",
+          "all_key_files_present",
+          "missing_files"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "all_key_files_present": {
+            "type": "boolean"
+          },
+          "missing_files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "git_tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_action": {
+      "type": "string"
+    }
+  }
+}
