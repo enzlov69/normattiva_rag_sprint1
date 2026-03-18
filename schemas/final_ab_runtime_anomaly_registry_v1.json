@@ -560,6 +560,25 @@
       "traceability_sensitive": true,
       "release_allowed": false,
       "notes": "Technical legal reliability not sufficient for full opponibility."
+    },
+    {
+      "anomaly_code": "TECHNICAL_INTERNAL_SIGNAL",
+      "title": "Technical internal signal",
+      "family": "COMPLETENESS",
+      "description": "Non-blocking internal technical signal for offline governance and telemetry consistency.",
+      "default_severity": "LOW",
+      "default_signal_class": "INTERNAL",
+      "default_runtime_effect": "INTERNAL_SIGNAL",
+      "default_envelope_status": "SUCCESS",
+      "propagate_to_level_a": false,
+      "level_a_effect": "NONE",
+      "blocks_opponibility": false,
+      "boundary_sensitive": false,
+      "m07_sensitive": false,
+      "documentary_integrity_sensitive": false,
+      "traceability_sensitive": false,
+      "release_allowed": true,
+      "notes": "EXCEPTION: Internal-only diagnostic signal added for Phase 9 golden fixture completeness."
     }
   ]
 }
