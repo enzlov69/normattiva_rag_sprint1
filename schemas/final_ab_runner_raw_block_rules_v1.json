@@ -1,0 +1,87 @@
+{
+  "registry_id": "final_ab_runner_raw_block_rules_v1",
+  "registry_version": "1.0.0",
+  "default_status": "SUCCESS",
+  "status_precedence": [
+    "SUCCESS",
+    "SUCCESS_WITH_WARNINGS",
+    "DEGRADED",
+    "BLOCKED",
+    "REJECTED",
+    "ERROR"
+  ],
+  "rules": {
+    "RAW_NOT_OBJECT": {
+      "status": "ERROR",
+      "severity": "CRITICAL",
+      "block_code": "RAW_PAYLOAD_INVALID",
+      "message": "Raw runner output is not a JSON object."
+    },
+    "RAW_FIELD_TYPE_MISMATCH": {
+      "status": "ERROR",
+      "severity": "CRITICAL",
+      "block_code": "RAW_PAYLOAD_TYPE_MISMATCH",
+      "message": "Raw runner output contains a field with incompatible type."
+    },
+    "RAW_REQUIRED_FIELD_MISSING": {
+      "status": "REJECTED",
+      "severity": "CRITICAL",
+      "block_code": "RAW_CONTRACT_MISSING",
+      "message": "Raw runner output misses a required control channel."
+    },
+    "RAW_OPTIONAL_FIELD_MISSING": {
+      "status": "DEGRADED",
+      "severity": "MEDIUM",
+      "block_code": "RAW_STRUCTURE_INCOMPLETE",
+      "message": "Raw runner output misses a non-critical documentary nucleus."
+    },
+    "FORBIDDEN_FIELD": {
+      "status": "REJECTED",
+      "severity": "CRITICAL",
+      "block_code": "RAG_SCOPE_VIOLATION",
+      "message": "Raw runner output exposes a forbidden decisive or conclusive field."
+    },
+    "FORBIDDEN_VALUE": {
+      "status": "REJECTED",
+      "severity": "CRITICAL",
+      "block_code": "RAG_SCOPE_VIOLATION",
+      "message": "Raw runner output exposes a forbidden decisive or conclusive value."
+    },
+    "M07_SCOPE_VIOLATION": {
+      "status": "REJECTED",
+      "severity": "CRITICAL",
+      "block_code": "RAG_SCOPE_VIOLATION",
+      "message": "Raw runner output tries to close, certify or complete M07."
+    },
+    "CITATION_MISSING_ESSENTIAL": {
+      "status": "BLOCKED",
+      "severity": "CRITICAL",
+      "block_code": "CITATION_INCOMPLETE",
+      "message": "At least one essential citation is incomplete."
+    },
+    "VIGENZA_ESSENTIAL_UNCERTAIN": {
+      "status": "BLOCKED",
+      "severity": "CRITICAL",
+      "block_code": "VIGENZA_UNCERTAIN",
+      "message": "Vigenza is uncertain on an essential point."
+    },
+    "CROSSREF_ESSENTIAL_UNRESOLVED": {
+      "status": "BLOCKED",
+      "severity": "CRITICAL",
+      "block_code": "CROSSREF_UNRESOLVED",
+      "message": "An essential cross-reference is unresolved."
+    },
+    "COVERAGE_ESSENTIAL_INADEQUATE": {
+      "status": "BLOCKED",
+      "severity": "CRITICAL",
+      "block_code": "COVERAGE_INADEQUATE",
+      "message": "Coverage is inadequate on an essential point."
+    },
+    "SIGNALS_MISSING_WITH_EVIDENT_CRITICALITY": {
+      "status": "BLOCKED",
+      "severity": "HIGH",
+      "block_code": "RAW_SIGNAL_INCONSISTENT",
+      "message": "The raw payload contains evident criticality but warnings, errors and blocks are all empty."
+    }
+  }
+}

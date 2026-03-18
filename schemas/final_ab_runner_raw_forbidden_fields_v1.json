@@ -1,0 +1,155 @@
+{
+  "registry_id": "final_ab_runner_raw_forbidden_fields_v1",
+  "registry_version": "1.0.0",
+  "description": "Forbidden raw fields, aliases and textual patterns that would make Level B conclusive, decisive, authorizing or M07-certifying.",
+  "exact_fields": [
+    "final_decision",
+    "decision",
+    "legal_outcome",
+    "applicability_final",
+    "applicable_yes_no",
+    "compliance_go",
+    "final_go",
+    "authorization_status",
+    "output_authorized",
+    "ready_to_sign",
+    "m07_closed",
+    "m07_completed",
+    "m07_certified",
+    "m07_completion_flag",
+    "rac_final",
+    "case_resolved",
+    "definitive_result",
+    "signature_ready",
+    "go_finale",
+    "decision_status",
+    "approved",
+    "authorization",
+    "rac_approved",
+    "compliance_passed",
+    "no_go_final"
+  ],
+  "aliases": {
+    "final_decision": [
+      "finalDecision",
+      "final-decision",
+      "final decision",
+      "decision_finale",
+      "esito_finale",
+      "decisione_finale"
+    ],
+    "decision": [
+      "Decision",
+      "DECISION",
+      "decision_status",
+      "final outcome"
+    ],
+    "legal_outcome": [
+      "legalOutcome",
+      "legal-outcome",
+      "legal outcome",
+      "esito_giuridico"
+    ],
+    "applicability_final": [
+      "applicabilityFinal",
+      "applicability-final",
+      "applicability final",
+      "final_applicability",
+      "applicabilita_finale"
+    ],
+    "output_authorized": [
+      "outputAuthorized",
+      "output-authorized",
+      "output authorized",
+      "autorizzazione_output",
+      "output autorizzato"
+    ],
+    "ready_to_sign": [
+      "readyToSign",
+      "ready-to-sign",
+      "ready to sign",
+      "signature_ready",
+      "pronto_per_firma",
+      "pronto per firma"
+    ],
+    "m07_closed": [
+      "m07Closed",
+      "m07-closed",
+      "m07 closed",
+      "chiusura_m07",
+      "m07_chiuso"
+    ],
+    "m07_completed": [
+      "m07Completed",
+      "m07-completed",
+      "m07 completed",
+      "m07_complete",
+      "m07 completato"
+    ],
+    "m07_certified": [
+      "m07Certified",
+      "m07-certified",
+      "m07 certified",
+      "lettura_integrale_certificata",
+      "m07_certificato"
+    ],
+    "rac_final": [
+      "racFinal",
+      "rac-final",
+      "rac final",
+      "rac_finalized",
+      "rac concluso"
+    ],
+    "case_resolved": [
+      "caseResolved",
+      "case-resolved",
+      "case resolved",
+      "caso_risolto",
+      "resolved_case"
+    ],
+    "definitive_result": [
+      "definitiveResult",
+      "definitive-result",
+      "definitive result",
+      "risultato_definitivo"
+    ]
+  },
+  "key_regex_patterns": [
+    "(?i)^final[\\s_\\-]?decision$",
+    "(?i)^decision[\\s_\\-]?status$",
+    "(?i)^legal[\\s_\\-]?outcome$",
+    "(?i)^applicability[\\s_\\-]?final$",
+    "(?i)^final[\\s_\\-]?applicability$",
+    "(?i)^output[\\s_\\-]?authorized$",
+    "(?i)^authorization[\\s_\\-]?status$",
+    "(?i)^ready[\\s_\\-]?to[\\s_\\-]?sign$",
+    "(?i)^signature[\\s_\\-]?ready$",
+    "(?i)^case[\\s_\\-]?resolved$",
+    "(?i)^definitive[\\s_\\-]?result$",
+    "(?i)^compliance[\\s_\\-]?go$",
+    "(?i)^final[\\s_\\-]?go$",
+    "(?i)^go[\\s_\\-]?finale$",
+    "(?i)^m07[\\s_\\-]?(closed|completed|certified|completion[\\s_\\-]?flag)$",
+    "(?i)^rac[\\s_\\-]?(final|approved|finalized)$"
+  ],
+  "value_regex_patterns": [
+    "(?i)\\boutput authorized\\b",
+    "(?i)\\bready to sign\\b",
+    "(?i)\\bcase resolved\\b",
+    "(?i)\\bfinal decision\\b",
+    "(?i)\\bdefinitive result\\b",
+    "(?i)\\bm07\\s+(closed|completed|certified)\\b",
+    "(?i)\\bcompliance\\s+go\\b",
+    "(?i)\\bgo\\b\\s+finale\\b",
+    "(?i)\\bautorizzato\\s+alla\\s+firma\\b",
+    "(?i)\\bm07\\s+completato\\b",
+    "(?i)\\bm07\\s+chiuso\\b"
+  ],
+  "allowed_near_misses": [
+    "decision_points",
+    "decision_path",
+    "decision_trace",
+    "authorization_required",
+    "authorization_reference"
+  ]
+}

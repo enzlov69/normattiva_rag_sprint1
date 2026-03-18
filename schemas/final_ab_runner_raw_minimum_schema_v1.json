@@ -1,0 +1,112 @@
+{
+  "schema_id": "final_ab_runner_raw_minimum_schema_v1",
+  "schema_version": "1.0.0",
+  "description": "Minimum structural contract for the raw output produced by the federated runner before response mapping.",
+  "root_type": "object",
+  "required_top_level_fields": [
+    "warnings",
+    "errors",
+    "blocks"
+  ],
+  "typed_fields": {
+    "sources": "list",
+    "norm_units": "list",
+    "citations_valid": "list",
+    "citations_blocked": "list",
+    "vigenza_records": "list",
+    "cross_reference_records": "list",
+    "coverage_assessment": [
+      "object",
+      "null"
+    ],
+    "warnings": "list",
+    "errors": "list",
+    "blocks": "list",
+    "shadow_fragment": [
+      "object",
+      "null"
+    ]
+  },
+  "optional_top_level_fields": [
+    "sources",
+    "norm_units",
+    "citations_valid",
+    "citations_blocked",
+    "vigenza_records",
+    "cross_reference_records",
+    "coverage_assessment",
+    "shadow_fragment"
+  ],
+  "documentary_nuclei": {
+    "sources": {
+      "critical": false,
+      "absent_policy": "degrade_if_missing"
+    },
+    "norm_units": {
+      "critical": false,
+      "absent_policy": "degrade_if_missing"
+    },
+    "citations_valid": {
+      "critical": false,
+      "absent_policy": "degrade_if_missing"
+    },
+    "citations_blocked": {
+      "critical": false,
+      "absent_policy": "degrade_if_missing"
+    },
+    "vigenza_records": {
+      "critical": false,
+      "absent_policy": "degrade_if_missing"
+    },
+    "cross_reference_records": {
+      "critical": false,
+      "absent_policy": "degrade_if_missing"
+    },
+    "coverage_assessment": {
+      "critical": false,
+      "absent_policy": "degrade_if_missing"
+    },
+    "shadow_fragment": {
+      "critical": false,
+      "absent_policy": "degrade_if_missing"
+    },
+    "warnings": {
+      "critical": true,
+      "absent_policy": "reject_if_missing"
+    },
+    "errors": {
+      "critical": true,
+      "absent_policy": "reject_if_missing"
+    },
+    "blocks": {
+      "critical": true,
+      "absent_policy": "reject_if_missing"
+    }
+  },
+  "citation_required_fields": [
+    "atto_tipo",
+    "atto_numero",
+    "atto_anno",
+    "articolo",
+    "uri_ufficiale",
+    "stato_vigenza"
+  ],
+  "vigenza_uncertain_values": [
+    "VIGENZA_INCERTA",
+    "IMPOSSIBILE_VERIFICARE",
+    "UNCERTAIN",
+    "UNKNOWN"
+  ],
+  "crossref_unresolved_values": [
+    "UNRESOLVED",
+    "IRRESOLTO",
+    "PENDING",
+    "NOT_FOUND"
+  ],
+  "coverage_block_values": [
+    "INADEQUATE",
+    "INSUFFICIENT",
+    "CRITICAL_GAP",
+    "GAP_ESSENTIAL"
+  ]
+}
