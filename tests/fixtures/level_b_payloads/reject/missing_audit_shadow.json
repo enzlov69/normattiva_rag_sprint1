@@ -1,0 +1,15 @@
+{
+  "request_id": "req_lb_006",
+  "case_id": "case_001",
+  "trace_id": "trace_001",
+  "api_version": "1.0",
+  "responder_module": "B21_ReportGenerator",
+  "status": "SUCCESS",
+  "payload": {
+    "support_only_flag": true
+  },
+  "warnings": [],
+  "errors": [],
+  "blocks": [],
+  "timestamp": "2026-03-18T09:13:00Z"
+}

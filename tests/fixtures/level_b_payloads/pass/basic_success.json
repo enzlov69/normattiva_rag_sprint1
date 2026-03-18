@@ -1,0 +1,79 @@
+{
+  "request_id": "req_lb_001",
+  "case_id": "case_001",
+  "trace_id": "trace_001",
+  "api_version": "1.0",
+  "responder_module": "B21_ReportGenerator",
+  "status": "SUCCESS",
+  "payload": {
+    "sources": [
+      {
+        "source_id": "src_tuel_267_2000",
+        "uri_ufficiale": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2000-08-18;267"
+      }
+    ],
+    "norm_units": [
+      {
+        "norm_unit_id": "art_176_comma_1"
+      }
+    ],
+    "citations_valid": [
+      {
+        "citation_id": "cit_001",
+        "atto_tipo": "D.Lgs.",
+        "atto_numero": "267",
+        "atto_anno": "2000",
+        "articolo": "176",
+        "comma": "1",
+        "uri_ufficiale": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2000-08-18;267",
+        "stato_vigenza": "VIGENTE_VERIFICATA",
+        "citation_status": "VALID"
+      }
+    ],
+    "audit": {
+      "events_present": true,
+      "audit_event_count": 3,
+      "critical_nodes_logged": true,
+      "missing_nodes": []
+    },
+    "shadow": {
+      "executed_modules": [
+        "B10_HybridRetriever",
+        "B15_CitationBuilder",
+        "B19_AuditLogger",
+        "B20_ShadowTracer"
+      ],
+      "retrieval_queries": [
+        "fondo di riserva art. 176 tuel"
+      ],
+      "filters_applied": [
+        "domain=tuel",
+        "source_authoritative=true"
+      ],
+      "documents_seen": [
+        "src_tuel_267_2000"
+      ],
+      "norm_units_seen": [
+        "art_176_comma_1"
+      ],
+      "warnings": [],
+      "errors": [],
+      "blocks": [],
+      "decision_points": [
+        "retrieval_completed",
+        "citation_validated"
+      ],
+      "technical_notes": [
+        "supporto documentale non conclusivo"
+      ]
+    },
+    "support_only_flag": true,
+    "technical_report": {
+      "report_type": "documentary_support"
+    }
+  },
+  "warnings": [],
+  "errors": [],
+  "blocks": [],
+  "timestamp": "2026-03-18T09:00:00Z"
+}

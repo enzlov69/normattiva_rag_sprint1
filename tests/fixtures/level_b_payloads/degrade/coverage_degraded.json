@@ -1,0 +1,95 @@
+{
+  "request_id": "req_lb_002",
+  "case_id": "case_002",
+  "trace_id": "trace_002",
+  "api_version": "1.0",
+  "responder_module": "B12_CoverageEstimator",
+  "status": "DEGRADED",
+  "payload": {
+    "coverage": {
+      "coverage_score": 0.61,
+      "coverage_status": "PARTIAL",
+      "critical_gap_flag": false,
+      "missing_sources": [
+        "annex_x"
+      ],
+      "missing_crossrefs": []
+    },
+    "m07_support": {
+      "human_completion_required": true,
+      "ordered_reading_sequence": [
+        "art_1",
+        "art_2",
+        "annex_x"
+      ],
+      "annex_refs": [
+        "annex_x"
+      ],
+      "crossref_refs": [],
+      "missing_elements": [
+        "annex_x"
+      ],
+      "m07_support_status": "SUPPORT_READY"
+    },
+    "audit": {
+      "events_present": true,
+      "audit_event_count": 4,
+      "critical_nodes_logged": true,
+      "missing_nodes": []
+    },
+    "shadow": {
+      "executed_modules": [
+        "B10_HybridRetriever",
+        "B12_CoverageEstimator",
+        "B16_M07SupportLayer"
+      ],
+      "retrieval_queries": [
+        "allegato essenziale mancante"
+      ],
+      "filters_applied": [
+        "domain=dlgs36"
+      ],
+      "documents_seen": [
+        "src_dlgs36_2023"
+      ],
+      "norm_units_seen": [
+        "art_50"
+      ],
+      "warnings": [
+        "coverage_partial"
+      ],
+      "errors": [],
+      "blocks": [
+        "COVERAGE_INADEQUATE"
+      ],
+      "decision_points": [
+        "support_only"
+      ],
+      "technical_notes": [
+        "nessuna semantica conclusiva"
+      ]
+    },
+    "support_only_flag": true
+  },
+  "warnings": [
+    {
+      "code": "COVERAGE_PARTIAL",
+      "message": "Copertura documentale parziale; uso limitato a supporto istruttorio."
+    }
+  ],
+  "errors": [],
+  "blocks": [
+    {
+      "block_code": "COVERAGE_INADEQUATE",
+      "block_category": "coverage",
+      "block_severity": "HIGH",
+      "origin_module": "B12_CoverageEstimator",
+      "affected_object_type": "CoverageAssessment",
+      "affected_object_id": "cov_002",
+      "block_reason": "Allegato non ricostruito in questa risposta.",
+      "block_status": "OPEN",
+      "release_condition": "Integrazione documentale dell'allegato mancante."
+    }
+  ],
+  "timestamp": "2026-03-18T09:05:00Z"
+}

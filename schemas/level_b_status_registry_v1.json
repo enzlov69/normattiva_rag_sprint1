@@ -1,0 +1,84 @@
+{
+  "registry_name": "level_b_status_registry_v1",
+  "version": "1.0",
+  "statuses": [
+    {
+      "status": "SUCCESS",
+      "class": "informational",
+      "level_b_terminal": true,
+      "requires_level_a_gate": true,
+      "permits_final_authorization": false,
+      "minimum_contract_expectation": {
+        "warnings_min": 0,
+        "errors_min": 0,
+        "blocks_min": 0
+      },
+      "notes": "Esito documentale tecnicamente valido senza criticità aperte."
+    },
+    {
+      "status": "SUCCESS_WITH_WARNINGS",
+      "class": "informational",
+      "level_b_terminal": true,
+      "requires_level_a_gate": true,
+      "permits_final_authorization": false,
+      "minimum_contract_expectation": {
+        "warnings_min": 1,
+        "errors_min": 0,
+        "blocks_min": 0
+      },
+      "notes": "Esito documentale valido con warning non bloccanti."
+    },
+    {
+      "status": "DEGRADED",
+      "class": "support_only",
+      "level_b_terminal": true,
+      "requires_level_a_gate": true,
+      "permits_final_authorization": false,
+      "minimum_contract_expectation": {
+        "warnings_min": 1,
+        "errors_min": 0,
+        "blocks_min": 0
+      },
+      "notes": "Esito degradato a supporto istruttorio; nessun significato decisorio."
+    },
+    {
+      "status": "BLOCKED",
+      "class": "blocking",
+      "level_b_terminal": true,
+      "requires_level_a_gate": true,
+      "permits_final_authorization": false,
+      "minimum_contract_expectation": {
+        "warnings_min": 0,
+        "errors_min": 0,
+        "blocks_min": 1
+      },
+      "notes": "Presenza di blocco aperto incompatibile con uso opponibile pieno."
+    },
+    {
+      "status": "REJECTED",
+      "class": "contract_rejection",
+      "level_b_terminal": true,
+      "requires_level_a_gate": true,
+      "permits_final_authorization": false,
+      "minimum_contract_expectation": {
+        "warnings_min": 0,
+        "errors_min": 1,
+        "blocks_min": 0
+      },
+      "notes": "Payload o chiamata rigettati per violazione contrattuale o di perimetro."
+    },
+    {
+      "status": "ERROR",
+      "class": "technical_error",
+      "level_b_terminal": true,
+      "requires_level_a_gate": true,
+      "permits_final_authorization": false,
+      "minimum_contract_expectation": {
+        "warnings_min": 0,
+        "errors_min": 1,
+        "blocks_min": 0
+      },
+      "notes": "Errore tecnico o di esecuzione; nessun valore istruttorio conclusivo."
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "registry_name": "level_b_fail_code_registry_v1",
+  "version": "1.0",
+  "fail_codes": [
+    {
+      "code": "MISSING_REQUEST_ID",
+      "class": "contract",
+      "severity": "HIGH",
+      "maps_to_block_code": null,
+      "message": "request_id mancante."
+    },
+    {
+      "code": "MISSING_CASE_ID",
+      "class": "contract",
+      "severity": "HIGH",
+      "maps_to_block_code": null,
+      "message": "case_id mancante."
+    },
+    {
+      "code": "MISSING_TRACE_ID",
+      "class": "contract",
+      "severity": "HIGH",
+      "maps_to_block_code": "AUDIT_INCOMPLETE",
+      "message": "trace_id mancante."
+    },
+    {
+      "code": "MISSING_API_VERSION",
+      "class": "contract",
+      "severity": "MEDIUM",
+      "maps_to_block_code": null,
+      "message": "api_version mancante."
+    },
+    {
+      "code": "MISSING_RESPONDER_MODULE",
+      "class": "contract",
+      "severity": "MEDIUM",
+      "maps_to_block_code": null,
+      "message": "responder_module mancante."
+    },
+    {
+      "code": "INVALID_STATUS",
+      "class": "contract",
+      "severity": "HIGH",
+      "maps_to_block_code": null,
+      "message": "status non ammesso dal contratto."
+    },
+    {
+      "code": "INVALID_TIMESTAMP",
+      "class": "contract",
+      "severity": "MEDIUM",
+      "maps_to_block_code": null,
+      "message": "timestamp non conforme a ISO 8601."
+    },
+    {
+      "code": "MISSING_PAYLOAD",
+      "class": "contract",
+      "severity": "HIGH",
+      "maps_to_block_code": null,
+      "message": "payload mancante."
+    },
+    {
+      "code": "SCHEMA_VALIDATION_FAILED",
+      "class": "schema",
+      "severity": "HIGH",
+      "maps_to_block_code": null,
+      "message": "Violazione del JSON schema."
+    },
+    {
+      "code": "FORBIDDEN_LEVEL_B_FIELD",
+      "class": "scope",
+      "severity": "CRITICAL",
+      "maps_to_block_code": "RAG_SCOPE_VIOLATION",
+      "message": "Campo vietato nel Livello B."
+    },
+    {
+      "code": "FORBIDDEN_LEVEL_B_SEMANTICS",
+      "class": "scope",
+      "severity": "CRITICAL",
+      "maps_to_block_code": "RAG_SCOPE_VIOLATION",
+      "message": "Semantica conclusiva o validativa nel Livello B."
+    },
+    {
+      "code": "M07_BOUNDARY_VIOLATION",
+      "class": "scope",
+      "severity": "CRITICAL",
+      "maps_to_block_code": "RAG_SCOPE_VIOLATION",
+      "message": "Tentativo di chiusura o certificazione di M07 dal Livello B."
+    },
+    {
+      "code": "AUDIT_SHADOW_REQUIRED",
+      "class": "audit",
+      "severity": "CRITICAL",
+      "maps_to_block_code": "AUDIT_INCOMPLETE",
+      "message": "Audit o SHADOW mancanti."
+    },
+    {
+      "code": "AUDIT_INCOMPLETE",
+      "class": "audit",
+      "severity": "CRITICAL",
+      "maps_to_block_code": "AUDIT_INCOMPLETE",
+      "message": "Audit incompleto su nodi critici."
+    },
+    {
+      "code": "SHADOW_INCOMPLETE",
+      "class": "audit",
+      "severity": "CRITICAL",
+      "maps_to_block_code": "AUDIT_INCOMPLETE",
+      "message": "SHADOW incompleto o non ricostruibile."
+    },
+    {
+      "code": "BLOCKS_REQUIRED_FOR_BLOCKED_STATUS",
+      "class": "block",
+      "severity": "CRITICAL",
+      "maps_to_block_code": "OUTPUT_NOT_OPPONIBLE",
+      "message": "Status BLOCKED senza blocchi aperti."
+    },
+    {
+      "code": "ERRORS_REQUIRED_FOR_REJECTED_STATUS",
+      "class": "block",
+      "severity": "HIGH",
+      "maps_to_block_code": null,
+      "message": "Status REJECTED senza errori."
+    },
+    {
+      "code": "WARNINGS_REQUIRED_FOR_DEGRADED_STATUS",
+      "class": "block",
+      "severity": "MEDIUM",
+      "maps_to_block_code": null,
+      "message": "Status DEGRADED senza warning o blocchi."
+    },
+    {
+      "code": "CRITICAL_BLOCK_STATUS_MISMATCH",
+      "class": "block",
+      "severity": "CRITICAL",
+      "maps_to_block_code": "OUTPUT_NOT_OPPONIBLE",
+      "message": "Blocco critico aperto con status non coerente."
+    },
+    {
+      "code": "INVALID_BLOCK_CODE",
+      "class": "block",
+      "severity": "HIGH",
+      "maps_to_block_code": null,
+      "message": "Codice blocco non registrato."
+    },
+    {
+      "code": "BLOCK_PROPAGATION_INCOHERENT",
+      "class": "block",
+      "severity": "CRITICAL",
+      "maps_to_block_code": "OUTPUT_NOT_OPPONIBLE",
+      "message": "Criticità presenti ma non propagate in blocks."
+    },
+    {
+      "code": "CITATION_VALID_WITHOUT_URI",
+      "class": "data",
+      "severity": "CRITICAL",
+      "maps_to_block_code": "CITATION_INCOMPLETE",
+      "message": "Citazione VALID priva di uri_ufficiale."
+    },
+    {
+      "code": "M07_SUPPORT_HUMAN_COMPLETION_REQUIRED",
+      "class": "scope",
+      "severity": "CRITICAL",
+      "maps_to_block_code": "M07_REQUIRED",
+      "message": "Nel supporto M07 manca human_completion_required=true."
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "matrix_name": "level_b_validation_traceability_matrix_v1",
+  "version": "1.0",
+  "entries": [
+    {
+      "rule_id": "LBR-001",
+      "source_document": "00_Fondativo_Normattiva_RAG_Metodo_Cerda_v2.md",
+      "source_principle": "I payload del Livello B non contengono campi decisori o validativi.",
+      "validator_entrypoint": "validators.level_b_semantic_rules.scan_for_forbidden_fields",
+      "semantic_rule": "Intercetta campi vietati come final_decision, legal_conclusion, output_authorized, go_finale.",
+      "fixture_path": "tests/fixtures/level_b_payloads/reject/forbidden_final_decision.json",
+      "test_module": "tests/test_level_b_traceability_matrix.py",
+      "expected_ok": false,
+      "expected_findings_any_of": [
+        "FORBIDDEN_LEVEL_B_FIELD"
+      ]
+    },
+    {
+      "rule_id": "LBR-002",
+      "source_document": "01_architettura_v2.md",
+      "source_principle": "Il Livello B non può dichiarare risolto il caso né trasformare un report tecnico in parere conclusivo.",
+      "validator_entrypoint": "validators.level_b_semantic_rules.scan_for_forbidden_fields",
+      "semantic_rule": "Intercetta marker testuali conclusivi o validativi nel payload.",
+      "fixture_path": "tests/fixtures/level_b_payloads/reject/forbidden_text_semantics.json",
+      "test_module": "tests/test_level_b_traceability_matrix.py",
+      "expected_ok": false,
+      "expected_findings_any_of": [
+        "FORBIDDEN_LEVEL_B_SEMANTICS"
+      ]
+    },
+    {
+      "rule_id": "LBR-003",
+      "source_document": "MASTER_Normattiva_RAG_Metodo_Cerda_v2.docx",
+      "source_principle": "Il RAG può solo supportare M07-LPR e non può dichiarare completato M07.",
+      "validator_entrypoint": "validators.level_b_semantic_rules.validate_m07_boundaries",
+      "semantic_rule": "Vieta campi di chiusura o certificazione M07 nel supporto documentale.",
+      "fixture_path": "tests/fixtures/level_b_payloads/reject/m07_closed_true.json",
+      "test_module": "tests/test_level_b_traceability_matrix.py",
+      "expected_ok": false,
+      "expected_findings_any_of": [
+        "M07_BOUNDARY_VIOLATION",
+        "M07_SUPPORT_HUMAN_COMPLETION_REQUIRED"
+      ]
+    },
+    {
+      "rule_id": "LBR-004",
+      "source_document": "00_Fondativo_Normattiva_RAG_Metodo_Cerda_v2.md",
+      "source_principle": "Audit trail e SHADOW sono obbligatori e non sostitutivi del livello metodologico.",
+      "validator_entrypoint": "validators.level_b_semantic_rules.validate_audit_shadow",
+      "semantic_rule": "Rende obbligatori audit e SHADOW con nodi minimi ricostruibili.",
+      "fixture_path": "tests/fixtures/level_b_payloads/reject/missing_audit_shadow.json",
+      "test_module": "tests/test_level_b_traceability_matrix.py",
+      "expected_ok": false,
+      "expected_findings_any_of": [
+        "AUDIT_SHADOW_REQUIRED"
+      ]
+    },
+    {
+      "rule_id": "LBR-005",
+      "source_document": "04_test_v2.md",
+      "source_principle": "Un blocco critico non propagato o incoerente sospende il rilascio.",
+      "validator_entrypoint": "validators.level_b_semantic_rules.validate_status_coherence",
+      "semantic_rule": "Status BLOCKED richiede blocchi aperti; blocchi critici aperti impongono status blocking/error/rejected.",
+      "fixture_path": "tests/fixtures/level_b_payloads/reject/blocked_without_blocks.json",
+      "test_module": "tests/test_level_b_traceability_matrix.py",
+      "expected_ok": false,
+      "expected_findings_any_of": [
+        "BLOCKS_REQUIRED_FOR_BLOCKED_STATUS"
+      ]
+    },
+    {
+      "rule_id": "LBR-006",
+      "source_document": "04_test_v2.md",
+      "source_principle": "Un blocco critico non si può mascherare dietro uno status non coerente.",
+      "validator_entrypoint": "validators.level_b_semantic_rules.validate_status_coherence",
+      "semantic_rule": "Un blocco CRITICAL aperto richiede BLOCKED, REJECTED o ERROR.",
+      "fixture_path": "tests/fixtures/level_b_payloads/reject/critical_block_status_mismatch.json",
+      "test_module": "tests/test_level_b_traceability_matrix.py",
+      "expected_ok": false,
+      "expected_findings_any_of": [
+        "CRITICAL_BLOCK_STATUS_MISMATCH"
+      ]
+    },
+    {
+      "rule_id": "LBR-007",
+      "source_document": "00_Fondativo_Normattiva_RAG_Metodo_Cerda_v2.md",
+      "source_principle": "Ogni citazione opponibile deve includere URI ufficiale e stato di vigenza.",
+      "validator_entrypoint": "validators.level_b_semantic_rules.validate_citations",
+      "semantic_rule": "Una citazione marcata VALID senza uri_ufficiale è non conforme.",
+      "fixture_path": "tests/fixtures/level_b_payloads/reject/citation_valid_without_uri.json",
+      "test_module": "tests/test_level_b_traceability_matrix.py",
+      "expected_ok": false,
+      "expected_findings_any_of": [
+        "CITATION_VALID_WITHOUT_URI"
+      ]
+    },
+    {
+      "rule_id": "LBR-008",
+      "source_document": "01_architettura_v2.md",
+      "source_principle": "Il Livello B può degradare a supporto istruttorio senza significato decisorio.",
+      "validator_entrypoint": "validators.level_b_payload_validator.validate_level_b_payload",
+      "semantic_rule": "Un payload DEGRADED con warning e supporto M07 resta ammissibile come supporto-only.",
+      "fixture_path": "tests/fixtures/level_b_payloads/degrade/coverage_degraded.json",
+      "test_module": "tests/test_level_b_traceability_matrix.py",
+      "expected_ok": true,
+      "expected_findings_any_of": []
+    },
+    {
+      "rule_id": "LBR-009",
+      "source_document": "schemas/level_b_status_registry_v1.json",
+      "source_principle": "SUCCESS_WITH_WARNINGS richiede almeno un warning.",
+      "validator_entrypoint": "validators.level_b_semantic_rules.validate_status_coherence",
+      "semantic_rule": "Status SUCCESS_WITH_WARNINGS senza warning è incoerente.",
+      "fixture_path": "tests/fixtures/level_b_payloads/reject/success_with_warnings_without_warnings.json",
+      "test_module": "tests/test_level_b_traceability_matrix.py",
+      "expected_ok": false,
+      "expected_findings_any_of": [
+        "WARNINGS_REQUIRED_FOR_DEGRADED_STATUS"
+      ]
+    },
+    {
+      "rule_id": "LBR-010",
+      "source_document": "schemas/level_b_status_registry_v1.json",
+      "source_principle": "SUCCESS_WITH_WARNINGS è ammesso solo come esito documentale non conclusivo con warning non bloccanti.",
+      "validator_entrypoint": "validators.level_b_payload_validator.validate_level_b_payload",
+      "semantic_rule": "Payload SUCCESS_WITH_WARNINGS con warning e senza blocchi aperti passa la validazione.",
+      "fixture_path": "tests/fixtures/level_b_payloads/pass/success_with_warnings_valid.json",
+      "test_module": "tests/test_level_b_traceability_matrix.py",
+      "expected_ok": true,
+      "expected_findings_any_of": []
+    },
+    {
+      "rule_id": "LBR-011",
+      "source_document": "MASTER_Normattiva_RAG_Metodo_Cerda_v2.docx",
+      "source_principle": "Il supporto documentale a M07 richiede completamento umano obbligatorio.",
+      "validator_entrypoint": "validators.level_b_semantic_rules.validate_m07_boundaries",
+      "semantic_rule": "Nel supporto M07 human_completion_required deve essere true.",
+      "fixture_path": "tests/fixtures/level_b_payloads/reject/m07_support_human_completion_missing.json",
+      "test_module": "tests/test_level_b_traceability_matrix.py",
+      "expected_ok": false,
+      "expected_findings_any_of": [
+        "M07_SUPPORT_HUMAN_COMPLETION_REQUIRED"
+      ]
+    }
+  ]
+}

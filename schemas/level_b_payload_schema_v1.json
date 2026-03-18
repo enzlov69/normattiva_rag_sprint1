@@ -1,0 +1,444 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/level_b_payload_schema_v1.json",
+  "title": "Level B Payload Contract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "case_id",
+    "trace_id",
+    "api_version",
+    "responder_module",
+    "status",
+    "payload",
+    "warnings",
+    "errors",
+    "blocks",
+    "timestamp"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "api_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "responder_module": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "SUCCESS_WITH_WARNINGS",
+        "DEGRADED",
+        "BLOCKED",
+        "REJECTED",
+        "ERROR"
+      ]
+    },
+    "payload": {
+      "$ref": "#/$defs/payload"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/message"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/message"
+      }
+    },
+    "blocks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/block"
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "message": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pointer": {
+          "type": "string"
+        },
+        "module": {
+          "type": "string"
+        }
+      }
+    },
+    "block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "block_code",
+        "block_category",
+        "block_severity",
+        "origin_module",
+        "affected_object_type",
+        "affected_object_id",
+        "block_reason",
+        "block_status"
+      ],
+      "properties": {
+        "block_code": {
+          "type": "string",
+          "enum": [
+            "CORPUS_MISSING",
+            "SOURCE_UNVERIFIED",
+            "METADATA_INSUFFICIENT",
+            "PARSE_INCONSISTENT",
+            "CHUNK_ORPHAN",
+            "RETRIEVAL_EMPTY",
+            "CITATION_INCOMPLETE",
+            "VIGENZA_UNCERTAIN",
+            "CROSSREF_UNRESOLVED",
+            "M07_REQUIRED",
+            "RAG_SCOPE_VIOLATION",
+            "AUDIT_INCOMPLETE",
+            "OUTPUT_NOT_OPPONIBLE",
+            "COVERAGE_INADEQUATE",
+            "FASTTRACK_NOT_ALLOWED"
+          ]
+        },
+        "block_category": {
+          "type": "string",
+          "minLength": 1
+        },
+        "block_severity": {
+          "type": "string",
+          "enum": [
+            "CRITICAL",
+            "HIGH",
+            "MEDIUM",
+            "LOW"
+          ]
+        },
+        "origin_module": {
+          "type": "string",
+          "minLength": 1
+        },
+        "affected_object_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "affected_object_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "block_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "block_status": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "REVIEW",
+            "RELEASED",
+            "CONFIRMED"
+          ]
+        },
+        "release_condition": {
+          "type": "string"
+        }
+      }
+    },
+    "citation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "citation_id",
+        "atto_tipo",
+        "atto_numero",
+        "atto_anno",
+        "articolo",
+        "uri_ufficiale",
+        "stato_vigenza",
+        "citation_status"
+      ],
+      "properties": {
+        "citation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "atto_tipo": {
+          "type": "string",
+          "minLength": 1
+        },
+        "atto_numero": {
+          "type": "string",
+          "minLength": 1
+        },
+        "atto_anno": {
+          "type": "string",
+          "minLength": 4
+        },
+        "articolo": {
+          "type": "string",
+          "minLength": 1
+        },
+        "comma": {
+          "type": "string"
+        },
+        "allegato": {
+          "type": "string"
+        },
+        "uri_ufficiale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stato_vigenza": {
+          "type": "string",
+          "minLength": 1
+        },
+        "citation_status": {
+          "type": "string",
+          "enum": [
+            "DRAFT",
+            "VALID",
+            "INVALID",
+            "BLOCKED"
+          ]
+        }
+      }
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "events_present",
+        "critical_nodes_logged"
+      ],
+      "properties": {
+        "events_present": {
+          "type": "boolean"
+        },
+        "audit_event_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "critical_nodes_logged": {
+          "type": "boolean"
+        },
+        "missing_nodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "shadow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "executed_modules",
+        "retrieval_queries",
+        "documents_seen",
+        "blocks"
+      ],
+      "properties": {
+        "executed_modules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "retrieval_queries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filters_applied": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "documents_seen": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "norm_units_seen": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "decision_points": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "technical_notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "m07_support": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "human_completion_required",
+        "ordered_reading_sequence",
+        "missing_elements"
+      ],
+      "properties": {
+        "human_completion_required": {
+          "type": "boolean",
+          "const": true
+        },
+        "ordered_reading_sequence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "annex_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "crossref_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "missing_elements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "m07_support_status": {
+          "type": "string"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "audit",
+        "shadow"
+      ],
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "norm_units": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "citations_valid": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/citation"
+          }
+        },
+        "citations_blocked": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/citation"
+          }
+        },
+        "vigenza": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "crossrefs": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "coverage": {
+          "type": "object"
+        },
+        "m07_support": {
+          "$ref": "#/$defs/m07_support"
+        },
+        "audit": {
+          "$ref": "#/$defs/audit"
+        },
+        "shadow": {
+          "$ref": "#/$defs/shadow"
+        },
+        "technical_report": {
+          "type": "object"
+        },
+        "support_only_flag": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
