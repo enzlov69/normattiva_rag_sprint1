@@ -1,0 +1,143 @@
+{
+  "registry_id": "LB-CC-REGISTRY-V1",
+  "version": "1.0.0",
+  "package_name": "Level B Change Control Pack v1",
+  "decision_states": [
+    "ALLOW",
+    "HOLD",
+    "REJECT",
+    "ERROR"
+  ],
+  "protected_assets": [
+    "schemas/level_b_golden_baseline_registry_v1.json",
+    "docs/LEVEL_B_GOLDEN_BASELINE_MATRIX_v1.md",
+    "tests/test_level_b_golden_baseline.py",
+    "schemas/level_b_release_gate_manifest_v1.json",
+    "schemas/level_b_release_gate_report_schema_v1.json",
+    "tools/run_level_b_release_gate_offline.py",
+    "docs/LEVEL_B_RUNBOOK_OFFLINE_v1.md",
+    "schemas/level_b_runbook_checklist_v1.json",
+    "tools/run_level_b_runbook_preflight.py"
+  ],
+  "forbidden_touchpoints": [
+    "runner_federato",
+    "runtime",
+    "retrieval",
+    "router",
+    "corpus",
+    "bridge_applicativo",
+    "livello_a_methodology"
+  ],
+  "protected_keywords": [
+    "finalize",
+    "authorize",
+    "go/no-go",
+    "decision",
+    "rac/build",
+    "m07_closed",
+    "human_completion_required_false"
+  ],
+  "change_classes": {
+    "housekeeping_non_fondative": {
+      "risk_level": "low",
+      "required_evidence": [
+        "before_after_summary",
+        "suites_to_run",
+        "human_approvals"
+      ]
+    },
+    "additive_non_fondative": {
+      "risk_level": "medium",
+      "required_evidence": [
+        "before_after_summary",
+        "suites_to_run",
+        "human_approvals",
+        "expected_precheck_decision"
+      ]
+    },
+    "protected_asset_update": {
+      "risk_level": "high",
+      "required_evidence": [
+        "before_after_summary",
+        "suites_to_run",
+        "human_approvals",
+        "impact_statement",
+        "compatibility_statement"
+      ]
+    },
+    "foundational_tightening": {
+      "risk_level": "high",
+      "required_evidence": [
+        "before_after_summary",
+        "suites_to_run",
+        "human_approvals",
+        "impact_statement",
+        "compatibility_statement"
+      ]
+    },
+    "foundational_weakening": {
+      "risk_level": "critical",
+      "required_evidence": [
+        "before_after_summary",
+        "suites_to_run",
+        "human_approvals",
+        "impact_statement",
+        "compatibility_statement",
+        "supersession_plan"
+      ]
+    }
+  },
+  "required_human_approvals": {
+    "default": [
+      "technical_reviewer"
+    ],
+    "protected_asset_update": [
+      "technical_reviewer",
+      "metodo_owner"
+    ],
+    "foundational_tightening": [
+      "technical_reviewer",
+      "metodo_owner"
+    ],
+    "foundational_weakening": [
+      "technical_reviewer",
+      "metodo_owner"
+    ]
+  },
+  "required_suites_by_asset_prefix": {
+    "schemas/level_b_golden_": [
+      "tests/test_level_b_golden_baseline.py"
+    ],
+    "docs/LEVEL_B_GOLDEN_": [
+      "tests/test_level_b_golden_baseline.py"
+    ],
+    "schemas/level_b_release_gate_": [
+      "tests/test_level_b_release_gate_manifest.py",
+      "tests/test_level_b_release_gate_rules.py"
+    ],
+    "tools/run_level_b_release_gate_offline.py": [
+      "tests/test_level_b_release_gate_manifest.py",
+      "tests/test_level_b_release_gate_rules.py"
+    ],
+    "docs/LEVEL_B_RUNBOOK_": [
+      "tests/test_level_b_runbook_checklist.py",
+      "tests/test_level_b_runbook_rules.py"
+    ],
+    "schemas/level_b_runbook_": [
+      "tests/test_level_b_runbook_checklist.py",
+      "tests/test_level_b_runbook_rules.py"
+    ],
+    "tools/run_level_b_runbook_preflight.py": [
+      "tests/test_level_b_runbook_checklist.py",
+      "tests/test_level_b_runbook_rules.py"
+    ]
+  },
+  "stop_conditions": [
+    "touches_forbidden_scope",
+    "weakens_foundational_controls",
+    "enables_level_b_conclusion",
+    "enables_m07_closure_by_level_b",
+    "removes_audit_or_shadow",
+    "deletes_foundational_golden_without_supersession"
+  ]
+}

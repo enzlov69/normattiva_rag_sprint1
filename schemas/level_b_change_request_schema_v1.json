@@ -1,0 +1,56 @@
+{
+  "schema_id": "LB-CHANGE-REQUEST-SCHEMA-V1",
+  "version": "1.0.0",
+  "required_top_level": [
+    "change_id",
+    "title",
+    "scope",
+    "change_class",
+    "change_intent",
+    "target_assets",
+    "touchpoints",
+    "rationale",
+    "risk_assessment",
+    "evidence",
+    "requested_by",
+    "human_approval_required",
+    "human_approvals"
+  ],
+  "allowed_scopes": [
+    "level_b_offline_only"
+  ],
+  "allowed_change_classes": [
+    "housekeeping_non_fondative",
+    "additive_non_fondative",
+    "protected_asset_update",
+    "foundational_tightening",
+    "foundational_weakening"
+  ],
+  "allowed_change_intents": [
+    "clarify",
+    "add",
+    "tighten",
+    "weaken",
+    "remove"
+  ],
+  "required_evidence_keys": [
+    "before_after_summary",
+    "suites_to_run",
+    "expected_precheck_decision",
+    "impact_statement",
+    "compatibility_statement"
+  ],
+  "required_risk_keys": [
+    "risk_level",
+    "foundational_risk",
+    "scope_risk",
+    "notes"
+  ],
+  "approval_shape": {
+    "required_keys": [
+      "role",
+      "approved",
+      "approved_by"
+    ]
+  }
+}

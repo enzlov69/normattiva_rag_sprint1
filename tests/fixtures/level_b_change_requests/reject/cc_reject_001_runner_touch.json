@@ -1,0 +1,48 @@
+{
+  "change_id": "CC-REJECT-001",
+  "title": "Touch federated runner inside offline Level B change control",
+  "scope": "level_b_offline_only",
+  "change_class": "foundational_weakening",
+  "change_intent": "weaken",
+  "target_assets": [
+    "tools/run_router_federato_generale_base_v25_6_4.py"
+  ],
+  "touchpoints": [
+    "runner_federato"
+  ],
+  "rationale": "Attempt to align a runner behavior from this offline-only cantiere.",
+  "risk_assessment": {
+    "risk_level": "critical",
+    "foundational_risk": "critical",
+    "scope_risk": "critical",
+    "notes": "Forbidden touchpoint."
+  },
+  "evidence": {
+    "before_after_summary": "Would change runner behavior.",
+    "suites_to_run": [
+      "tests/test_level_b_change_control_rules.py"
+    ],
+    "expected_precheck_decision": "REJECT",
+    "impact_statement": "Out of perimeter.",
+    "compatibility_statement": "Not compatible."
+  },
+  "requested_by": "enzo",
+  "human_approval_required": true,
+  "human_approvals": [
+    {
+      "role": "technical_reviewer",
+      "approved": true,
+      "approved_by": "reviewer_a"
+    },
+    {
+      "role": "metodo_owner",
+      "approved": true,
+      "approved_by": "reviewer_b"
+    }
+  ],
+  "weakens_controls": true,
+  "enables_level_b_conclusion": false,
+  "enables_m07_closure": false,
+  "removes_audit_or_shadow": false,
+  "deletes_foundational_golden_without_supersession": false
+}

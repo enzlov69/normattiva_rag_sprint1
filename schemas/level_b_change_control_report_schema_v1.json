@@ -1,0 +1,24 @@
+{
+  "schema_id": "LB-CHANGE-CONTROL-REPORT-SCHEMA-V1",
+  "version": "1.0.0",
+  "required_top_level": [
+    "registry_id",
+    "change_id",
+    "title",
+    "decision",
+    "reasons",
+    "scope_ok",
+    "protected_assets_touched",
+    "forbidden_touchpoints_found",
+    "required_suites",
+    "missing_suites",
+    "git_status_clean",
+    "next_action"
+  ],
+  "allowed_decisions": [
+    "ALLOW",
+    "HOLD",
+    "REJECT",
+    "ERROR"
+  ]
+}

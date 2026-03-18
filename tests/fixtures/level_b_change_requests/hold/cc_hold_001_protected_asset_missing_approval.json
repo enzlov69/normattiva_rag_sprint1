@@ -1,0 +1,42 @@
+{
+  "change_id": "CC-HOLD-001",
+  "title": "Update release gate document without complete approvals yet",
+  "scope": "level_b_offline_only",
+  "change_class": "protected_asset_update",
+  "change_intent": "tighten",
+  "target_assets": [
+    "schemas/level_b_release_gate_manifest_v1.json"
+  ],
+  "touchpoints": [],
+  "rationale": "Add a new documented regression suite requirement.",
+  "risk_assessment": {
+    "risk_level": "high",
+    "foundational_risk": "medium",
+    "scope_risk": "low",
+    "notes": "Protected asset touched."
+  },
+  "evidence": {
+    "before_after_summary": "Adds one required suite mapping.",
+    "suites_to_run": [
+      "tests/test_level_b_release_gate_manifest.py",
+      "tests/test_level_b_release_gate_rules.py"
+    ],
+    "expected_precheck_decision": "HOLD",
+    "impact_statement": "Protected asset updated.",
+    "compatibility_statement": "No change to non-delega or M07 closure."
+  },
+  "requested_by": "enzo",
+  "human_approval_required": true,
+  "human_approvals": [
+    {
+      "role": "technical_reviewer",
+      "approved": true,
+      "approved_by": "reviewer_a"
+    }
+  ],
+  "weakens_controls": false,
+  "enables_level_b_conclusion": false,
+  "enables_m07_closure": false,
+  "removes_audit_or_shadow": false,
+  "deletes_foundational_golden_without_supersession": false
+}

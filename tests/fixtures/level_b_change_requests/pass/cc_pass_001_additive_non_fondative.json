@@ -1,0 +1,42 @@
+{
+  "change_id": "CC-PASS-001",
+  "title": "Add non-fondative explanatory note to change control document",
+  "scope": "level_b_offline_only",
+  "change_class": "housekeeping_non_fondative",
+  "change_intent": "clarify",
+  "target_assets": [
+    "docs/LEVEL_B_CHANGE_CONTROL_PACK_v1.md"
+  ],
+  "touchpoints": [],
+  "rationale": "Clarify a documentary sentence without changing any foundational rule.",
+  "risk_assessment": {
+    "risk_level": "low",
+    "foundational_risk": "none",
+    "scope_risk": "none",
+    "notes": "No protected asset touched."
+  },
+  "evidence": {
+    "before_after_summary": "One descriptive sentence clarified.",
+    "suites_to_run": [
+      "tests/test_level_b_change_control_registry.py",
+      "tests/test_level_b_change_control_rules.py"
+    ],
+    "expected_precheck_decision": "ALLOW",
+    "impact_statement": "No impact on foundational controls.",
+    "compatibility_statement": "The Level B remains offline-only and non-conclusive."
+  },
+  "requested_by": "enzo",
+  "human_approval_required": true,
+  "human_approvals": [
+    {
+      "role": "technical_reviewer",
+      "approved": true,
+      "approved_by": "reviewer_a"
+    }
+  ],
+  "weakens_controls": false,
+  "enables_level_b_conclusion": false,
+  "enables_m07_closure": false,
+  "removes_audit_or_shadow": false,
+  "deletes_foundational_golden_without_supersession": false
+}

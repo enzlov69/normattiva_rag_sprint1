@@ -1,0 +1,21 @@
+{
+  "registry_id": "LB-CC-REGISTRY-V1",
+  "change_id": "CC-HOLD-001",
+  "title": "Update release gate document without complete approvals yet",
+  "decision": "HOLD",
+  "reasons": [
+    "PROTECTED_ASSET_APPROVALS_INCOMPLETE"
+  ],
+  "scope_ok": true,
+  "protected_assets_touched": [
+    "schemas/level_b_release_gate_manifest_v1.json"
+  ],
+  "forbidden_touchpoints_found": [],
+  "required_suites": [
+    "tests/test_level_b_release_gate_manifest.py",
+    "tests/test_level_b_release_gate_rules.py"
+  ],
+  "missing_suites": [],
+  "git_status_clean": true,
+  "next_action": "Do not modify the protected assets yet. Complete evidence, approvals, missing suites or clean the worktree, then rerun the precheck."
+}

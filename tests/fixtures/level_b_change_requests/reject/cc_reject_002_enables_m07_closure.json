@@ -1,0 +1,46 @@
+{
+  "change_id": "CC-REJECT-002",
+  "title": "Allow Level B to mark M07 as closed",
+  "scope": "level_b_offline_only",
+  "change_class": "foundational_weakening",
+  "change_intent": "weaken",
+  "target_assets": [
+    "schemas/level_b_golden_baseline_registry_v1.json"
+  ],
+  "touchpoints": [],
+  "rationale": "Attempt to simplify M07 support handling.",
+  "risk_assessment": {
+    "risk_level": "critical",
+    "foundational_risk": "critical",
+    "scope_risk": "high",
+    "notes": "Would violate foundational separation."
+  },
+  "evidence": {
+    "before_after_summary": "Would mark support as closure.",
+    "suites_to_run": [
+      "tests/test_level_b_golden_baseline.py"
+    ],
+    "expected_precheck_decision": "REJECT",
+    "impact_statement": "Breaks non-closure rule.",
+    "compatibility_statement": "Not compatible."
+  },
+  "requested_by": "enzo",
+  "human_approval_required": true,
+  "human_approvals": [
+    {
+      "role": "technical_reviewer",
+      "approved": true,
+      "approved_by": "reviewer_a"
+    },
+    {
+      "role": "metodo_owner",
+      "approved": true,
+      "approved_by": "reviewer_b"
+    }
+  ],
+  "weakens_controls": true,
+  "enables_level_b_conclusion": false,
+  "enables_m07_closure": true,
+  "removes_audit_or_shadow": false,
+  "deletes_foundational_golden_without_supersession": false
+}
