@@ -1,0 +1,48 @@
+{
+  "type": "object",
+  "required": [
+    "bundle_id",
+    "version",
+    "decision",
+    "repository_clean",
+    "checkpoint_results",
+    "expected_tags_present",
+    "excluded_components",
+    "next_step_preconditions",
+    "reasons"
+  ],
+  "properties": {
+    "bundle_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "COMPLETE",
+        "HOLD",
+        "ERROR"
+      ]
+    },
+    "repository_clean": {
+      "type": "boolean"
+    },
+    "checkpoint_results": {
+      "type": "array"
+    },
+    "expected_tags_present": {
+      "type": "array"
+    },
+    "excluded_components": {
+      "type": "array"
+    },
+    "next_step_preconditions": {
+      "type": "array"
+    },
+    "reasons": {
+      "type": "array"
+    }
+  }
+}

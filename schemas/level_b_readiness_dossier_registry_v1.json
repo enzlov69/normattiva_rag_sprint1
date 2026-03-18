@@ -1,0 +1,99 @@
+{
+  "bundle_id": "LB-RD-001",
+  "version": "v1",
+  "title": "Level B Readiness Dossier",
+  "scope": "offline_only",
+  "allowed_decisions": [
+    "COMPLETE",
+    "HOLD",
+    "ERROR"
+  ],
+  "excluded_components": [
+    "runner_federato",
+    "runtime_applicativo",
+    "retrieval_operativo",
+    "router_operativo",
+    "bridge_applicativo",
+    "chiusura_m07_lpr",
+    "semantica_decisoria"
+  ],
+  "checkpoints": [
+    {
+      "checkpoint_id": "LB-VAL-V2",
+      "label": "Validation Kit v2",
+      "expected_tag": "stable-level-b-validation-v2",
+      "required_paths": [
+        "docs/LEVEL_B_VALIDATION_TRACEABILITY_MATRIX_v1.md",
+        "schemas/level_b_payload_schema_v1.json",
+        "validators/level_b_payload_validator.py",
+        "tests/test_level_b_payload_contract.py"
+      ]
+    },
+    {
+      "checkpoint_id": "LB-GOLD-V1",
+      "label": "Golden Baseline + Release Gate v1",
+      "expected_tag": "stable-level-b-golden-release-v1",
+      "required_paths": [
+        "docs/LEVEL_B_GOLDEN_BASELINE_MATRIX_v1.md",
+        "schemas/level_b_golden_baseline_registry_v1.json",
+        "tests/test_level_b_golden_baseline.py",
+        "docs/LEVEL_B_RELEASE_GATE_OFFLINE_v1.md",
+        "tools/run_level_b_release_gate_offline.py"
+      ]
+    },
+    {
+      "checkpoint_id": "LB-RUNBOOK-V1",
+      "label": "Runbook Offline v1",
+      "expected_tag": "stable-level-b-runbook-v1",
+      "required_paths": [
+        "docs/LEVEL_B_RUNBOOK_OFFLINE_v1.md",
+        "schemas/level_b_runbook_checklist_v1.json",
+        "tools/run_level_b_runbook_preflight.py",
+        "tests/test_level_b_runbook_rules.py"
+      ]
+    },
+    {
+      "checkpoint_id": "LB-CC-V1",
+      "label": "Change Control Pack v1",
+      "expected_tag": "stable-level-b-change-control-v1",
+      "required_paths": [
+        "docs/LEVEL_B_CHANGE_CONTROL_PACK_v1.md",
+        "schemas/level_b_change_control_registry_v1.json",
+        "tools/run_level_b_change_control_precheck.py",
+        "tests/test_level_b_change_control_rules.py"
+      ]
+    },
+    {
+      "checkpoint_id": "LB-TRACE-V1",
+      "label": "Traceability Bundle v1",
+      "expected_tag": "stable-level-b-traceability-v1",
+      "required_paths": [
+        "docs/LEVEL_B_TRACEABILITY_BUNDLE_v1.md",
+        "schemas/level_b_traceability_bundle_registry_v1.json",
+        "tools/run_level_b_traceability_bundle.py",
+        "tests/test_level_b_traceability_bundle_rules.py"
+      ]
+    },
+    {
+      "checkpoint_id": "LB-BIM-V1",
+      "label": "Baseline Index Master v1",
+      "expected_tag": "stable-level-b-baseline-index-v1",
+      "required_paths": [
+        "docs/LEVEL_B_BASELINE_INDEX_MASTER_v1.md",
+        "schemas/level_b_baseline_index_master_registry_v1.json",
+        "tools/run_level_b_baseline_index_master.py",
+        "tests/test_level_b_baseline_index_master_rules.py"
+      ]
+    }
+  ],
+  "next_step_preconditions": [
+    "baseline_offline_level_b_consolidata",
+    "working_tree_clean",
+    "golden_baseline_integrita",
+    "release_gate_coerente",
+    "runbook_attivo",
+    "change_control_attivo",
+    "traceability_bundle_aggiornato",
+    "baseline_index_master_aggiornato"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "bundle_id": "LB-RD-001",
+  "version": "v1",
+  "decision": "COMPLETE",
+  "repository_root": "C:/normattiva_rag_sprint1",
+  "repository_clean": true,
+  "checkpoint_results": [
+    {
+      "checkpoint_id": "LB-VAL-V2",
+      "label": "Validation Kit v2",
+      "expected_tag": "stable-level-b-validation-v2",
+      "missing_paths": [],
+      "is_complete": true
+    },
+    {
+      "checkpoint_id": "LB-GOLD-V1",
+      "label": "Golden Baseline + Release Gate v1",
+      "expected_tag": "stable-level-b-golden-release-v1",
+      "missing_paths": [],
+      "is_complete": true
+    },
+    {
+      "checkpoint_id": "LB-RUNBOOK-V1",
+      "label": "Runbook Offline v1",
+      "expected_tag": "stable-level-b-runbook-v1",
+      "missing_paths": [],
+      "is_complete": true
+    },
+    {
+      "checkpoint_id": "LB-CC-V1",
+      "label": "Change Control Pack v1",
+      "expected_tag": "stable-level-b-change-control-v1",
+      "missing_paths": [],
+      "is_complete": true
+    },
+    {
+      "checkpoint_id": "LB-TRACE-V1",
+      "label": "Traceability Bundle v1",
+      "expected_tag": "stable-level-b-traceability-v1",
+      "missing_paths": [],
+      "is_complete": true
+    },
+    {
+      "checkpoint_id": "LB-BIM-V1",
+      "label": "Baseline Index Master v1",
+      "expected_tag": "stable-level-b-baseline-index-v1",
+      "missing_paths": [],
+      "is_complete": true
+    }
+  ],
+  "expected_tags_present": [
+    "stable-level-b-validation-v2",
+    "stable-level-b-golden-release-v1",
+    "stable-level-b-runbook-v1",
+    "stable-level-b-change-control-v1",
+    "stable-level-b-traceability-v1",
+    "stable-level-b-baseline-index-v1"
+  ],
+  "excluded_components": [
+    "runner_federato",
+    "runtime_applicativo",
+    "retrieval_operativo",
+    "router_operativo",
+    "bridge_applicativo",
+    "chiusura_m07_lpr",
+    "semantica_decisoria"
+  ],
+  "next_step_preconditions": [
+    "baseline_offline_level_b_consolidata",
+    "working_tree_clean",
+    "golden_baseline_integrita",
+    "release_gate_coerente",
+    "runbook_attivo",
+    "change_control_attivo",
+    "traceability_bundle_aggiornato",
+    "baseline_index_master_aggiornato"
+  ],
+  "reasons": []
+}
