@@ -1,0 +1,296 @@
+{
+  "runbook_id": "LB-RUNBOOK-OFFLINE-V1",
+  "runbook_version": "1.0.0",
+  "scope": "Operational runbook for the offline-only Level B validation track, to be executed before any offline consolidation or pre-runtime evolution.",
+  "principles": [
+    "Do not touch runner, runtime, retrieval, router, corpus or bridge applicativo.",
+    "Treat the Golden Baseline Pack as a non-negotiable benchmark separate from ordinary tests.",
+    "Use the Release Gate Offline only after the ordered execution of required suites.",
+    "Do not interpret, validate, conclude or close M07-LPR from Level B.",
+    "Audit trail and SHADOW remain structurally mandatory on critical paths.",
+    "Any critical regression leads to hold or suspension before commit or tag.",
+    "The final methodological GO/NO-GO remains exclusive to Level A."
+  ],
+  "preflight": {
+    "decision_values": [
+      "READY",
+      "HOLD",
+      "ERROR"
+    ],
+    "report_default_path": "artifacts/level_b_runbook_preflight_report_v1.json"
+  },
+  "execution_order": [
+    {
+      "step_id": "RB-STEP-001",
+      "order": 1,
+      "title": "Verify repository hygiene",
+      "kind": "repository_hygiene",
+      "outcome_policy": "must_be_clean",
+      "commands": [
+        "git status"
+      ],
+      "success_condition": "Working tree clean or only explicitly admitted local artifacts already ignored."
+    },
+    {
+      "step_id": "RB-STEP-002",
+      "order": 2,
+      "title": "Verify offline baseline assets",
+      "kind": "baseline_presence",
+      "outcome_policy": "must_exist",
+      "commands": [
+        "py tools/run_level_b_runbook_preflight.py"
+      ],
+      "success_condition": "Golden baseline files, release gate files, schemas and helper modules all present."
+    },
+    {
+      "step_id": "RB-STEP-003",
+      "order": 3,
+      "title": "Run Level B critical suites in recommended order",
+      "kind": "suite_execution",
+      "outcome_policy": "must_pass",
+      "commands": [
+        "py -m pytest tests/test_level_b_payload_contract.py -q",
+        "py -m pytest tests/test_level_b_payload_semantics.py -q",
+        "py -m pytest tests/test_level_b_m07_boundaries.py -q",
+        "py -m pytest tests/test_level_b_audit_shadow.py -q",
+        "py -m pytest tests/test_level_b_block_propagation.py -q",
+        "py -m pytest tests/test_level_b_traceability_matrix.py -q",
+        "py -m pytest tests/test_level_b_golden_baseline.py -q"
+      ],
+      "success_condition": "All required offline suites pass, with golden baseline green."
+    },
+    {
+      "step_id": "RB-STEP-004",
+      "order": 4,
+      "title": "Execute Release Gate Offline",
+      "kind": "gate_execution",
+      "outcome_policy": "must_pass",
+      "commands": [
+        "py tools/run_level_b_release_gate_offline.py"
+      ],
+      "success_condition": "Gate returns GO and writes the structured report."
+    },
+    {
+      "step_id": "RB-STEP-005",
+      "order": 5,
+      "title": "Review gate report and reasons",
+      "kind": "report_review",
+      "outcome_policy": "operator_review",
+      "commands": [
+        "type artifacts\\level_b_release_gate_report_v1.json"
+      ],
+      "success_condition": "Operator verifies that no HOLD/SUSPEND/ERROR reasons remain unresolved."
+    },
+    {
+      "step_id": "RB-STEP-006",
+      "order": 6,
+      "title": "Perform local housekeeping",
+      "kind": "housekeeping",
+      "outcome_policy": "must_be_clean",
+      "commands": [
+        "git status"
+      ],
+      "success_condition": "No untracked or transient files unrelated to the cantiere remain in the worktree."
+    },
+    {
+      "step_id": "RB-STEP-007",
+      "order": 7,
+      "title": "Consolidate by commit and tag",
+      "kind": "git_consolidation",
+      "outcome_policy": "operator_review",
+      "commands": [
+        "git add ...",
+        "git commit -m \"...\"",
+        "git tag ..."
+      ],
+      "success_condition": "Commit and tag are created only after the runbook path is fully green."
+    }
+  ],
+  "required_paths": [
+    {
+      "path_id": "LB-PATH-GB-DOC-001",
+      "path": "docs/LEVEL_B_GOLDEN_BASELINE_MATRIX_v1.md",
+      "required_for": "golden_baseline"
+    },
+    {
+      "path_id": "LB-PATH-GB-SCHEMA-001",
+      "path": "schemas/level_b_golden_baseline_registry_v1.json",
+      "required_for": "golden_baseline"
+    },
+    {
+      "path_id": "LB-PATH-GB-HELPER-001",
+      "path": "validators/level_b_golden_rules.py",
+      "required_for": "golden_baseline"
+    },
+    {
+      "path_id": "LB-PATH-RG-DOC-001",
+      "path": "docs/LEVEL_B_RELEASE_GATE_OFFLINE_v1.md",
+      "required_for": "release_gate"
+    },
+    {
+      "path_id": "LB-PATH-RG-MANIFEST-001",
+      "path": "schemas/level_b_release_gate_manifest_v1.json",
+      "required_for": "release_gate"
+    },
+    {
+      "path_id": "LB-PATH-RG-REPORT-SCHEMA-001",
+      "path": "schemas/level_b_release_gate_report_schema_v1.json",
+      "required_for": "release_gate"
+    },
+    {
+      "path_id": "LB-PATH-RG-HELPER-001",
+      "path": "validators/level_b_release_gate_rules.py",
+      "required_for": "release_gate"
+    },
+    {
+      "path_id": "LB-PATH-RG-RUNNER-001",
+      "path": "tools/run_level_b_release_gate_offline.py",
+      "required_for": "release_gate"
+    },
+    {
+      "path_id": "LB-PATH-RB-DOC-001",
+      "path": "docs/LEVEL_B_RUNBOOK_OFFLINE_v1.md",
+      "required_for": "runbook"
+    },
+    {
+      "path_id": "LB-PATH-RB-SCHEMA-001",
+      "path": "schemas/level_b_runbook_checklist_v1.json",
+      "required_for": "runbook"
+    },
+    {
+      "path_id": "LB-PATH-RB-HELPER-001",
+      "path": "validators/level_b_runbook_rules.py",
+      "required_for": "runbook"
+    },
+    {
+      "path_id": "LB-PATH-RB-RUNNER-001",
+      "path": "tools/run_level_b_runbook_preflight.py",
+      "required_for": "runbook"
+    }
+  ],
+  "required_suites": [
+    {
+      "suite_id": "LB-SUITE-001",
+      "path": "tests/test_level_b_payload_contract.py",
+      "critical": true,
+      "golden": false
+    },
+    {
+      "suite_id": "LB-SUITE-002",
+      "path": "tests/test_level_b_payload_semantics.py",
+      "critical": true,
+      "golden": false
+    },
+    {
+      "suite_id": "LB-SUITE-003",
+      "path": "tests/test_level_b_m07_boundaries.py",
+      "critical": true,
+      "golden": false
+    },
+    {
+      "suite_id": "LB-SUITE-004",
+      "path": "tests/test_level_b_audit_shadow.py",
+      "critical": true,
+      "golden": false
+    },
+    {
+      "suite_id": "LB-SUITE-005",
+      "path": "tests/test_level_b_block_propagation.py",
+      "critical": true,
+      "golden": false
+    },
+    {
+      "suite_id": "LB-SUITE-006",
+      "path": "tests/test_level_b_traceability_matrix.py",
+      "critical": true,
+      "golden": false
+    },
+    {
+      "suite_id": "LB-SUITE-007",
+      "path": "tests/test_level_b_golden_baseline.py",
+      "critical": true,
+      "golden": true
+    },
+    {
+      "suite_id": "LB-SUITE-008",
+      "path": "tests/test_level_b_release_gate_manifest.py",
+      "critical": false,
+      "golden": false
+    },
+    {
+      "suite_id": "LB-SUITE-009",
+      "path": "tests/test_level_b_release_gate_rules.py",
+      "critical": false,
+      "golden": false
+    }
+  ],
+  "report_review": {
+    "gate_report_path": "artifacts/level_b_release_gate_report_v1.json",
+    "accepted_gate_decisions": [
+      "GO"
+    ],
+    "hold_gate_decisions": [
+      "SUSPEND",
+      "ERROR"
+    ],
+    "operator_must_verify": [
+      "No missing suite reason remains.",
+      "No critical suite failure reason remains.",
+      "Golden baseline did not fail.",
+      "The result does not bypass Level A final governance."
+    ]
+  },
+  "housekeeping": {
+    "remove_transient_files": [
+      "artifacts/level_b_release_gate_report_v1.json"
+    ],
+    "allowed_persistent_artifacts": [
+      "artifacts/level_b_release_gate_report_example_v1.json"
+    ]
+  },
+  "git_consolidation": {
+    "recommended_sequence": [
+      "git status",
+      "git add <runbook scope files>",
+      "git commit -m \"...\"",
+      "git tag ...",
+      "git log --oneline -n 3",
+      "git status"
+    ],
+    "forbidden_mix": [
+      "Do not include runner federato changes inside the offline Level B cantiere.",
+      "Do not tag if the release gate decision is not GO.",
+      "Do not commit transient local reports as stable artifacts."
+    ]
+  },
+  "change_policy": {
+    "allowed_without_new_version": [
+      "Editorial clarifications in the markdown runbook that do not alter execution semantics.",
+      "Stable examples in artifacts that do not change operational rules."
+    ],
+    "require_new_version": [
+      "Any change to ordered steps.",
+      "Any change to required suites.",
+      "Any change to accepted or hold gate decisions.",
+      "Any change to stop conditions or freeze policy."
+    ]
+  },
+  "freeze_policy": {
+    "freeze_trigger": "The runbook is frozen once preflight helper, checklist, tests and document converge on the same ordered execution semantics.",
+    "review_before_change": [
+      "Check consistency with the fondativo v2 and master v2.",
+      "Check consistency with the Golden Baseline Pack and Release Gate Offline.",
+      "Confirm no runtime or runner scope expansion is introduced."
+    ]
+  },
+  "stop_conditions": [
+    "Working tree not clean on files relevant to the cantiere.",
+    "Any required baseline file missing.",
+    "Any required suite missing.",
+    "Any critical suite fails.",
+    "Golden baseline fails.",
+    "Release Gate Offline returns SUSPEND or ERROR.",
+    "An intended change leaks into runner, runtime, retrieval, router, corpus or bridge applicativo.",
+    "A proposed change gives Level B conclusive, certificative or decision-making semantics."
+  ]
+}

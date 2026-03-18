@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "level_b_runbook_preflight_report_schema_v1",
+  "title": "Level B Runbook Preflight Report v1",
+  "type": "object",
+  "required": [
+    "runbook_id",
+    "runbook_version",
+    "scope",
+    "base_dir",
+    "decision",
+    "reasons",
+    "git_status_clean",
+    "checklist_problems",
+    "required_paths",
+    "required_suites",
+    "next_action"
+  ],
+  "properties": {
+    "runbook_id": {
+      "type": "string"
+    },
+    "runbook_version": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "base_dir": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "READY",
+        "HOLD",
+        "ERROR"
+      ]
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "git_status_clean": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "checklist_problems": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "required_paths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path_id",
+          "path",
+          "required_for",
+          "exists"
+        ],
+        "properties": {
+          "path_id": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "required_for": {
+            "type": "string"
+          },
+          "exists": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "required_suites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "suite_id",
+          "path",
+          "critical",
+          "golden",
+          "exists"
+        ],
+        "properties": {
+          "suite_id": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "critical": {
+            "type": "boolean"
+          },
+          "golden": {
+            "type": "boolean"
+          },
+          "exists": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "next_action": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

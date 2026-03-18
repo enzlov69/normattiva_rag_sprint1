@@ -1,0 +1,54 @@
+{
+  "runbook_id": "LB-RUNBOOK-OFFLINE-V1",
+  "runbook_version": "1.0.0",
+  "scope": "Operational runbook for the offline-only Level B validation track, to be executed before any offline consolidation or pre-runtime evolution.",
+  "base_dir": "C:/normattiva_rag_sprint1",
+  "decision": "READY",
+  "reasons": [],
+  "git_status_clean": true,
+  "checklist_problems": [],
+  "required_paths": [
+    {
+      "path_id": "LB-PATH-GB-DOC-001",
+      "path": "docs/LEVEL_B_GOLDEN_BASELINE_MATRIX_v1.md",
+      "required_for": "golden_baseline",
+      "exists": true
+    },
+    {
+      "path_id": "LB-PATH-RG-DOC-001",
+      "path": "docs/LEVEL_B_RELEASE_GATE_OFFLINE_v1.md",
+      "required_for": "release_gate",
+      "exists": true
+    },
+    {
+      "path_id": "LB-PATH-RB-DOC-001",
+      "path": "docs/LEVEL_B_RUNBOOK_OFFLINE_v1.md",
+      "required_for": "runbook",
+      "exists": true
+    }
+  ],
+  "required_suites": [
+    {
+      "suite_id": "LB-SUITE-001",
+      "path": "tests/test_level_b_payload_contract.py",
+      "critical": true,
+      "golden": false,
+      "exists": true
+    },
+    {
+      "suite_id": "LB-SUITE-007",
+      "path": "tests/test_level_b_golden_baseline.py",
+      "critical": true,
+      "golden": true,
+      "exists": true
+    },
+    {
+      "suite_id": "LB-SUITE-009",
+      "path": "tests/test_level_b_release_gate_rules.py",
+      "critical": false,
+      "golden": false,
+      "exists": true
+    }
+  ],
+  "next_action": "Proceed with the ordered offline runbook execution and then run the Release Gate Offline."
+}
