@@ -1,0 +1,55 @@
+{
+  "registry_name": "final_ab_frontdoor_runtime_registry_v1",
+  "schema_version": "1.0",
+  "status": "PROPOSED",
+  "frontdoor_entrypoint": "runtime/final_ab_runner_frontdoor.py",
+  "mandatory_base_component": "adapters/final_ab_pre_runtime_adapter.py",
+  "insertion_point": "before_federated_runner",
+  "handoff_path": [
+    "LevelA",
+    "FrontDoor",
+    "FinalABPreRuntimeAdapter",
+    "FederatedRunner",
+    "FinalABPreRuntimeAdapter",
+    "FrontDoor",
+    "LevelA"
+  ],
+  "allowed_caller_modules": [
+    "A1_OrchestratorePPAV",
+    "A2_CaseClassifier",
+    "A4_M07Governor",
+    "A5_FinalComplianceGate"
+  ],
+  "allowed_operations": [
+    "request_contract_validation",
+    "response_contract_validation",
+    "forbidden_field_detection",
+    "critical_block_propagation",
+    "m07_boundary_guard",
+    "adapter_bridge_invocation"
+  ],
+  "forbidden_operations": [
+    "retrieval_query_rewrite",
+    "router_override",
+    "ranking_override",
+    "corpus_override",
+    "runner_logic_mutation",
+    "rac_generation",
+    "m07_closure",
+    "go_final_generation",
+    "output_authorization"
+  ],
+  "critical_block_codes": [
+    "CORPUS_MISSING",
+    "SOURCE_UNVERIFIED",
+    "CITATION_INCOMPLETE",
+    "VIGENZA_UNCERTAIN",
+    "CROSSREF_UNRESOLVED",
+    "M07_REQUIRED",
+    "RAG_SCOPE_VIOLATION",
+    "AUDIT_INCOMPLETE",
+    "OUTPUT_NOT_OPPONIBILE",
+    "COVERAGE_INADEQUATE"
+  ],
+  "reversibility_rule": "single entrypoint removable without runner refactor"
+}
