@@ -1,0 +1,140 @@
+{
+  "schema_id": "final_ab_runtime_propagation_matrix_v1",
+  "schema_version": "1.0.0",
+  "description": "Canonical propagation matrix for final AB runtime anomalies.",
+  "level_a_effects": [
+    "NONE",
+    "REVIEW_REQUIRED",
+    "SUPPORT_ONLY",
+    "STOP_FLOW",
+    "HARD_STOP"
+  ],
+  "rows": [
+    {
+      "family": "COMPLETENESS",
+      "severity": "LOW",
+      "signal_class": "INTERNAL",
+      "runtime_effect": "INTERNAL_SIGNAL",
+      "envelope_status": "SUCCESS",
+      "propagate_to_level_a": false,
+      "level_a_effect": "NONE",
+      "blocks_opponibility": false,
+      "notes": "Purely technical internal signal."
+    },
+    {
+      "family": "COMPLETENESS",
+      "severity": "MEDIUM",
+      "signal_class": "WARNING",
+      "runtime_effect": "PROPAGATE_WARNING",
+      "envelope_status": "SUCCESS_WITH_WARNINGS",
+      "propagate_to_level_a": true,
+      "level_a_effect": "REVIEW_REQUIRED",
+      "blocks_opponibility": false,
+      "notes": "Completeness warning requiring review."
+    },
+    {
+      "family": "CONTRACTUAL",
+      "severity": "MEDIUM",
+      "signal_class": "WARNING",
+      "runtime_effect": "PROPAGATE_WARNING",
+      "envelope_status": "SUCCESS_WITH_WARNINGS",
+      "propagate_to_level_a": true,
+      "level_a_effect": "REVIEW_REQUIRED",
+      "blocks_opponibility": false,
+      "notes": "Contract anomaly visible to Level A review."
+    },
+    {
+      "family": "CONTRACTUAL",
+      "severity": "CRITICAL",
+      "signal_class": "BLOCK",
+      "runtime_effect": "REJECT_RESPONSE",
+      "envelope_status": "REJECTED",
+      "propagate_to_level_a": true,
+      "level_a_effect": "HARD_STOP",
+      "blocks_opponibility": true,
+      "notes": "Critical contractual break requires hard stop."
+    },
+    {
+      "family": "CONTRACTUAL",
+      "severity": "HIGH",
+      "signal_class": "ERROR",
+      "runtime_effect": "DEGRADE_RESPONSE",
+      "envelope_status": "DEGRADED",
+      "propagate_to_level_a": true,
+      "level_a_effect": "SUPPORT_ONLY",
+      "blocks_opponibility": false,
+      "notes": "Contractual reliability degraded."
+    },
+    {
+      "family": "DOCUMENTARY",
+      "severity": "HIGH",
+      "signal_class": "ERROR",
+      "runtime_effect": "DEGRADE_RESPONSE",
+      "envelope_status": "DEGRADED",
+      "propagate_to_level_a": true,
+      "level_a_effect": "SUPPORT_ONLY",
+      "blocks_opponibility": true,
+      "notes": "Essential documentary quality gap; not fully opponible."
+    },
+    {
+      "family": "DOCUMENTARY",
+      "severity": "CRITICAL",
+      "signal_class": "BLOCK",
+      "runtime_effect": "BLOCK_RESPONSE",
+      "envelope_status": "BLOCKED",
+      "propagate_to_level_a": true,
+      "level_a_effect": "STOP_FLOW",
+      "blocks_opponibility": true,
+      "notes": "Critical documentary anomaly."
+    },
+    {
+      "family": "TRACEABILITY",
+      "severity": "HIGH",
+      "signal_class": "ERROR",
+      "runtime_effect": "DEGRADE_RESPONSE",
+      "envelope_status": "DEGRADED",
+      "propagate_to_level_a": true,
+      "level_a_effect": "SUPPORT_ONLY",
+      "blocks_opponibility": true,
+      "notes": "Traceability weakened but not fully blocked."
+    },
+    {
+      "family": "TRACEABILITY",
+      "severity": "CRITICAL",
+      "signal_class": "BLOCK",
+      "runtime_effect": "BLOCK_RESPONSE",
+      "envelope_status": "BLOCKED",
+      "propagate_to_level_a": true,
+      "level_a_effect": "STOP_FLOW",
+      "blocks_opponibility": true,
+      "notes": "Traceability critical failure."
+    },
+    {
+      "family": "COMPLETENESS",
+      "severity": "CRITICAL",
+      "signal_class": "BLOCK",
+      "runtime_effect": "BLOCK_RESPONSE",
+      "envelope_status": "BLOCKED",
+      "propagate_to_level_a": true,
+      "level_a_effect": "STOP_FLOW",
+      "blocks_opponibility": true,
+      "notes": "Critical completeness failure blocks opponibility."
+    },
+    {
+      "family": "BOUNDARY",
+      "severity": "CRITICAL",
+      "signal_class": "BLOCK",
+      "runtime_effect": "REJECT_RESPONSE",
+      "envelope_status": "REJECTED",
+      "propagate_to_level_a": true,
+      "level_a_effect": "HARD_STOP",
+      "blocks_opponibility": true,
+      "notes": "Boundary violation and non-delegable semantic breach."
+    }
+  ],
+  "exception_policy": {
+    "allow_release_on_blocked_or_rejected": false,
+    "exception_marker": "EXCEPTION:",
+    "description": "Any blocked/rejected release exception must be explicit and motivated in anomaly notes."
+  }
+}

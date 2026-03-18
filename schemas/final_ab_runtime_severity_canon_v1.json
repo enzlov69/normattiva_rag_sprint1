@@ -1,0 +1,76 @@
+{
+  "schema_id": "final_ab_runtime_severity_canon_v1",
+  "schema_version": "1.0.0",
+  "description": "Canonical severity and signal semantics for final AB runtime anomalies.",
+  "severities": [
+    {
+      "name": "LOW",
+      "precedence": 0,
+      "semantic": "Minor technical completeness issue with no material impact on documentary opponibility.",
+      "typical_runtime_effect": "INTERNAL_SIGNAL",
+      "typical_envelope_status": "SUCCESS",
+      "typical_level_a_effect": "NONE"
+    },
+    {
+      "name": "MEDIUM",
+      "precedence": 1,
+      "semantic": "Non-blocking runtime anomaly requiring explicit visibility.",
+      "typical_runtime_effect": "PROPAGATE_WARNING",
+      "typical_envelope_status": "SUCCESS_WITH_WARNINGS",
+      "typical_level_a_effect": "REVIEW_REQUIRED"
+    },
+    {
+      "name": "HIGH",
+      "precedence": 2,
+      "semantic": "Material anomaly that degrades reliability and may require flow stop in constrained paths.",
+      "typical_runtime_effect": "DEGRADE_RESPONSE",
+      "typical_envelope_status": "DEGRADED",
+      "typical_level_a_effect": "SUPPORT_ONLY"
+    },
+    {
+      "name": "CRITICAL",
+      "precedence": 3,
+      "semantic": "Boundary or documentary integrity anomaly incompatible with full opponibility.",
+      "typical_runtime_effect": "BLOCK_RESPONSE",
+      "typical_envelope_status": "BLOCKED",
+      "typical_level_a_effect": "STOP_FLOW"
+    }
+  ],
+  "signal_classes": [
+    "INTERNAL",
+    "WARNING",
+    "ERROR",
+    "BLOCK"
+  ],
+  "runtime_effects": [
+    "INTERNAL_SIGNAL",
+    "PROPAGATE_WARNING",
+    "PROPAGATE_ERROR",
+    "DEGRADE_RESPONSE",
+    "BLOCK_RESPONSE",
+    "REJECT_RESPONSE"
+  ],
+  "envelope_statuses": [
+    "SUCCESS",
+    "SUCCESS_WITH_WARNINGS",
+    "DEGRADED",
+    "BLOCKED",
+    "REJECTED",
+    "ERROR"
+  ],
+  "level_a_effects": [
+    "NONE",
+    "REVIEW_REQUIRED",
+    "SUPPORT_ONLY",
+    "STOP_FLOW",
+    "HARD_STOP"
+  ],
+  "hard_rules": [
+    "LOW cannot map to BLOCK_RESPONSE.",
+    "CRITICAL cannot map to INTERNAL signal class.",
+    "BOUNDARY + CRITICAL must map to BLOCKED or REJECTED.",
+    "DOCUMENTARY essential + HIGH/CRITICAL cannot keep full opponibility.",
+    "TRACEABILITY + CRITICAL cannot be classified as cosmetic warning.",
+    "Most restrictive effect always prevails."
+  ]
+}
