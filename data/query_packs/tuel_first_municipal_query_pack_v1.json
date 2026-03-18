@@ -110,6 +110,15 @@
       "expected_primary_domain": "dlgs118",
       "expected_secondary_domain": "dlgs126",
       "notes": "TUEL should orient the municipal accounting frame. D.Lgs. 118/2011 stays primary; D.Lgs. 126/2014 is secondary support only when required."
+    },
+    {
+      "query_id": "tuel_first_q013",
+      "use_case": "Accesso agli atti di gara del comune con profili procedimentali connessi",
+      "query_text": "accesso agli atti di gara del comune con profili procedimentali connessi",
+      "routing_bucket": "mixed municipal case",
+      "expected_primary_domain": "dlgs36",
+      "expected_secondary_domain": "l241",
+      "notes": "TUEL should identify the municipal act/control context and determine that the case is genuinely cross-corpus. D.Lgs. 36/2023 remains primary; L. 241/1990 is secondary only for the connected procedural profiles."
     }
   ]
 }

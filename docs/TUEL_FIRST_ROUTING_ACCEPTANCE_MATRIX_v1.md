@@ -24,6 +24,7 @@ Its purpose is to translate `TUEL_FIRST_ROUTING_SPEC_v1.md` into an operational 
 | 10 | `Rapporto tra indirizzo politico e gestione dei dirigenti nel comune` | `personnel/discipline` | Identify the local government frame and the boundary between political direction and management in the municipality | `D.Lgs. 165/2001` | `none` | Answer with TUEL framing of local institutional actors and D.Lgs. 165/2001 for the substantive rule on political-management separation | `PASS` only if the answer clearly distinguishes municipal institutional framing from the specialist personnel rule and routes primarily to D.Lgs. 165/2001 |
 | 11 | `Debiti fuori bilancio del comune e necessità del parere del revisore` | `accounting/budget` | Identify the municipal accounting/governance context, organ path, and local control surface including revisore involvement | `D.Lgs. 118/2011` | `D.Lgs. 126/2014` | Answer with TUEL first for the municipal governance/control frame, D.Lgs. 118/2011 for the accounting rule, and D.Lgs. 126/2014 only if needed to complete the harmonization/reform support side | `PASS` only if D.Lgs. 118/2011 remains primary and D.Lgs. 126/2014 is used only where indispensable |
 | 12 | `Riaccertamento ordinario dei residui e reimputazione nel bilancio comunale` | `accounting/budget` | Identify the municipal bilancio context and the local accounting/control frame before specialist treatment | `D.Lgs. 118/2011` | `D.Lgs. 126/2014` | Answer with TUEL framing of the municipal accounting context and D.Lgs. 118/2011 for riaccertamento/reimputazione doctrine, with D.Lgs. 126/2014 only if strictly needed | `PASS` only if the case is framed municipally through TUEL and then routed primarily to D.Lgs. 118/2011 without unnecessary multi-corpus spread |
+| 13 | `Accesso agli atti di gara del comune con profili procedimentali connessi` | `mixed municipal case` | Identify the municipal act/control context and determine that the case is cross-corpus | `D.Lgs. 36/2023` | `L. 241/1990` | Answer with TUEL-first municipal framing, D.Lgs. 36/2023 as the primary procurement corpus, and L. 241/1990 as secondary procedural support only for the connected procedural profiles | `PASS` only if the case is recognized as genuinely mixed, TUEL remains the entry layer, D.Lgs. 36/2023 stays primary, and L. 241/1990 is used only as a justified secondary corpus |
 
 ## Validation Rules For Future Testing
 
@@ -48,8 +49,8 @@ The following rules apply to any future manual or automated validation built fro
 
 ## Coverage Note
 
-This v1 matrix validates 6 of the 7 routing buckets through concrete use cases.
+This v1 matrix validates all 7 routing buckets through concrete use cases.
 
-The `mixed municipal case` bucket is intentionally not yet represented by a dedicated acceptance case.
+The `mixed municipal case` bucket is represented by one explicit composite municipal acceptance case.
 
-A future v1.1 matrix should introduce at least one explicit composite municipal case for that bucket.
+Future revisions may extend this bucket with additional composite municipal cases, but v1 now contains a minimum concrete coverage for all seven routing buckets.
