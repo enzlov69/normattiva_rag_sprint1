@@ -1,0 +1,149 @@
+{
+  "registry_name": "final_ab_flow_registry_v1",
+  "registry_version": "1.0.0",
+  "scope": "pre-runtime-controlled-final-a-b-link",
+  "status": "ACTIVE",
+  "governance_rule": "Level A governs the flow; Level B returns documentary packets only; no runtime integration with the federated runner is allowed in this phase.",
+  "recommended_solution": "Controlled contract adapter A->B->A with blocking validation and mandatory block propagation.",
+  "flow": {
+    "flow_id": "FINAL_AB_MIN_FLOW_V1",
+    "flow_type": "A_TO_B_TO_A_PRE_RUNTIME",
+    "step_sequence": [
+      {
+        "step_id": "A01",
+        "step_name": "case_context_prepared",
+        "source_layer": "A",
+        "target_layer": "A",
+        "mandatory": true,
+        "allowed_modules": ["A1_OrchestratorePPAV", "A2_CaseClassifier", "A4_M07Governor"],
+        "required_fields": ["case_id", "trace_id", "level_a_phase"],
+        "stop_conditions": []
+      },
+      {
+        "step_id": "A02",
+        "step_name": "adapter_request_built",
+        "source_layer": "A",
+        "target_layer": "ADAPTER",
+        "mandatory": true,
+        "allowed_modules": ["A1_OrchestratorePPAV"],
+        "required_fields": [
+          "request_id",
+          "case_id",
+          "trace_id",
+          "flow_id",
+          "api_version",
+          "caller_module",
+          "target_module",
+          "target_endpoint",
+          "payload",
+          "timestamp"
+        ],
+        "stop_conditions": ["MISSING_REQUIRED_REQUEST_FIELD", "UNAUTHORIZED_CALLER_MODULE", "UNAUTHORIZED_TARGET_ENDPOINT"]
+      },
+      {
+        "step_id": "AD01",
+        "step_name": "request_contract_validation",
+        "source_layer": "ADAPTER",
+        "target_layer": "ADAPTER",
+        "mandatory": true,
+        "required_fields": ["request_id", "case_id", "trace_id"],
+        "stop_conditions": ["REQUEST_CONTRACT_INVALID"]
+      },
+      {
+        "step_id": "B01",
+        "step_name": "documentary_provider_invoked",
+        "source_layer": "ADAPTER",
+        "target_layer": "B",
+        "mandatory": true,
+        "allowed_endpoints": [
+          "/doc/retrieval/query",
+          "/doc/citation/build",
+          "/doc/vigenza/check",
+          "/doc/crossref/resolve",
+          "/doc/m07/support",
+          "/doc/coverage/check"
+        ],
+        "stop_conditions": []
+      },
+      {
+        "step_id": "B02",
+        "step_name": "documentary_response_received",
+        "source_layer": "B",
+        "target_layer": "ADAPTER",
+        "mandatory": true,
+        "required_fields": [
+          "request_id",
+          "case_id",
+          "trace_id",
+          "api_version",
+          "responder_module",
+          "status",
+          "documentary_packet",
+          "warnings",
+          "errors",
+          "blocks",
+          "timestamp"
+        ],
+        "stop_conditions": ["RESPONSE_CONTRACT_INVALID"]
+      },
+      {
+        "step_id": "AD02",
+        "step_name": "guardrail_and_boundary_checks",
+        "source_layer": "ADAPTER",
+        "target_layer": "ADAPTER",
+        "mandatory": true,
+        "checks": [
+          "FORBIDDEN_FIELDS_CHECK",
+          "M07_BOUNDARY_CHECK",
+          "BLOCK_PROPAGATION_CHECK",
+          "DOCUMENTARY_PACKET_MINIMUM_CHECK"
+        ],
+        "stop_conditions": [
+          "RAG_SCOPE_VIOLATION",
+          "M07_BOUNDARY_VIOLATION",
+          "CRITICAL_BLOCK_NOT_PROPAGATED",
+          "DOCUMENTARY_PACKET_INCOMPLETE"
+        ]
+      },
+      {
+        "step_id": "AD03",
+        "step_name": "adapter_return_envelope_built",
+        "source_layer": "ADAPTER",
+        "target_layer": "A",
+        "mandatory": true,
+        "required_fields": [
+          "support_only_flag",
+          "opponibile_output_flag",
+          "propagated_blocks",
+          "m07_boundary_state",
+          "level_a_action_required"
+        ],
+        "required_values": {
+          "support_only_flag": true,
+          "opponibile_output_flag": false,
+          "level_a_action_required": true
+        },
+        "stop_conditions": []
+      },
+      {
+        "step_id": "A03",
+        "step_name": "methodological_governance_resumes",
+        "source_layer": "A",
+        "target_layer": "A",
+        "mandatory": true,
+        "allowed_modules": ["A4_M07Governor", "A3_RACBuilder", "A5_FinalComplianceGate", "A6_OutputAuthorizer"],
+        "stop_conditions": ["OUT_OF_SCOPE_FOR_PRE_RUNTIME_ADAPTER"]
+      }
+    ]
+  },
+  "global_constraints": {
+    "level_b_must_not_conclude": true,
+    "level_b_must_not_validate": true,
+    "level_b_must_not_close_m07": true,
+    "level_b_must_not_authorize_output": true,
+    "adapter_must_not_emit_go_no_go": true,
+    "adapter_must_not_touch_federated_runner": true,
+    "critical_blocks_must_propagate": true,
+    "support_only_return_mandatory": true
+  }
+}

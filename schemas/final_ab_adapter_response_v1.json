@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/final_ab_adapter_response_v1.json",
+  "title": "FinalABAdapterResponseV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "case_id",
+    "trace_id",
+    "flow_id",
+    "api_version",
+    "responder_module",
+    "status",
+    "documentary_packet",
+    "warnings",
+    "errors",
+    "blocks",
+    "propagated_blocks",
+    "m07_boundary_state",
+    "support_only_flag",
+    "opponibile_output_flag",
+    "level_a_action_required",
+    "shadow_fragment",
+    "timestamp"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "flow_id": {
+      "type": "string",
+      "const": "FINAL_AB_MIN_FLOW_V1"
+    },
+    "api_version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+(\\.[0-9]+)?$"
+    },
+    "responder_module": {
+      "type": "string",
+      "enum": [
+        "ADAPTER_FINAL_AB_PRE_RUNTIME_V1"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "SUCCESS_WITH_WARNINGS",
+        "DEGRADED",
+        "BLOCKED",
+        "REJECTED",
+        "ERROR"
+      ]
+    },
+    "documentary_packet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sources",
+        "norm_units",
+        "citations_valid",
+        "citations_blocked",
+        "vigenza_records",
+        "cross_reference_records",
+        "coverage_assessment",
+        "warnings",
+        "errors",
+        "blocks",
+        "shadow_fragment"
+      ],
+      "properties": {
+        "sources": {"type": "array", "items": {"type": "object"}},
+        "norm_units": {"type": "array", "items": {"type": "object"}},
+        "citations_valid": {"type": "array", "items": {"type": "object"}},
+        "citations_blocked": {"type": "array", "items": {"type": "object"}},
+        "vigenza_records": {"type": "array", "items": {"type": "object"}},
+        "cross_reference_records": {"type": "array", "items": {"type": "object"}},
+        "coverage_assessment": {"type": "object"},
+        "warnings": {"type": "array", "items": {"type": "object"}},
+        "errors": {"type": "array", "items": {"type": "object"}},
+        "blocks": {"type": "array", "items": {"type": "object"}},
+        "shadow_fragment": {"type": "object"}
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "errors": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "blocks": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "propagated_blocks": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "m07_boundary_state": {
+      "type": "string",
+      "enum": [
+        "NOT_REQUESTED",
+        "PREPARATORY_ONLY",
+        "BOUNDARY_VIOLATION"
+      ]
+    },
+    "support_only_flag": {
+      "type": "boolean",
+      "const": true
+    },
+    "opponibile_output_flag": {
+      "type": "boolean",
+      "const": false
+    },
+    "level_a_action_required": {
+      "type": "boolean",
+      "const": true
+    },
+    "shadow_fragment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adapter_version",
+        "flow_id",
+        "request_contract_valid",
+        "response_contract_valid",
+        "forbidden_fields_detected",
+        "propagated_block_codes",
+        "m07_boundary_state",
+        "support_only_flag",
+        "timestamp"
+      ],
+      "properties": {
+        "adapter_version": {"type": "string"},
+        "flow_id": {"type": "string"},
+        "request_contract_valid": {"type": "boolean"},
+        "response_contract_valid": {"type": "boolean"},
+        "forbidden_fields_detected": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "propagated_block_codes": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "m07_boundary_state": {"type": "string"},
+        "support_only_flag": {"type": "boolean"},
+        "timestamp": {"type": "string", "format": "date-time"}
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

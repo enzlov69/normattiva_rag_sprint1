@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/final_ab_adapter_request_v1.json",
+  "title": "FinalABAdapterRequestV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "case_id",
+    "trace_id",
+    "flow_id",
+    "api_version",
+    "caller_module",
+    "target_module",
+    "target_endpoint",
+    "level_a_phase",
+    "m07_context",
+    "block_policy",
+    "payload",
+    "timestamp"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "flow_id": {
+      "type": "string",
+      "const": "FINAL_AB_MIN_FLOW_V1"
+    },
+    "api_version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+(\\.[0-9]+)?$"
+    },
+    "caller_module": {
+      "type": "string",
+      "enum": [
+        "A1_OrchestratorePPAV",
+        "A2_CaseClassifier",
+        "A4_M07Governor"
+      ]
+    },
+    "target_module": {
+      "type": "string",
+      "enum": [
+        "B10_HybridRetriever",
+        "B15_CitationBuilder",
+        "B13_VigenzaChecker",
+        "B14_CrossReferenceResolver",
+        "B16_M07SupportLayer",
+        "B12_CoverageEstimator"
+      ]
+    },
+    "target_endpoint": {
+      "type": "string",
+      "enum": [
+        "/doc/retrieval/query",
+        "/doc/citation/build",
+        "/doc/vigenza/check",
+        "/doc/crossref/resolve",
+        "/doc/m07/support",
+        "/doc/coverage/check"
+      ]
+    },
+    "level_a_phase": {
+      "type": "string",
+      "enum": [
+        "IN_CLASSIFICATION",
+        "IN_RETRIEVAL",
+        "IN_M07"
+      ]
+    },
+    "m07_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "support_requested", "human_completion_required"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "support_requested": {"type": "boolean"},
+        "human_completion_required": {"type": "boolean"},
+        "requested_scope": {
+          "type": "string",
+          "enum": ["NONE", "PREPARATORY", "ORDERING_ONLY", "ANNEX_AND_CROSSREF"]
+        }
+      }
+    },
+    "block_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["propagate_critical", "reject_forbidden_fields", "reject_m07_closure_attempts"],
+      "properties": {
+        "propagate_critical": {"type": "boolean", "const": true},
+        "reject_forbidden_fields": {"type": "boolean", "const": true},
+        "reject_m07_closure_attempts": {"type": "boolean", "const": true}
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["query_text", "domain_target"],
+      "properties": {
+        "query_text": {"type": "string", "minLength": 1},
+        "domain_target": {"type": "string", "minLength": 1},
+        "metadata_filters": {"type": "object"},
+        "top_k": {"type": "integer", "minimum": 1},
+        "source_priority": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "notes": {"type": "string"}
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

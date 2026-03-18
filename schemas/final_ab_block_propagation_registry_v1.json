@@ -1,0 +1,103 @@
+{
+  "registry_name": "final_ab_block_propagation_registry_v1",
+  "registry_version": "1.0.0",
+  "scope": "pre-runtime-controlled-ab-link",
+  "policy": {
+    "critical_blocks_must_propagate": true,
+    "adapter_must_not_downgrade_critical_block_to_warning": true,
+    "level_a_must_receive_propagated_blocks": true,
+    "support_only_return_remains_mandatory": true
+  },
+  "blocks": [
+    {
+      "block_code": "CORPUS_MISSING",
+      "severity": "CRITICAL",
+      "origin_layer": "B",
+      "propagation_mode": "MANDATORY",
+      "adapter_status": "BLOCKED",
+      "level_a_required_handling": "RECEIVE_AND_STOP_OR_DEGRADE_UNTIL_METHOD_HANDLING",
+      "release_control": "LEVEL_A_METHOD_ONLY"
+    },
+    {
+      "block_code": "SOURCE_UNVERIFIED",
+      "severity": "CRITICAL",
+      "origin_layer": "B",
+      "propagation_mode": "MANDATORY",
+      "adapter_status": "BLOCKED",
+      "level_a_required_handling": "RECEIVE_AND_STOP_OR_DEGRADE_UNTIL_METHOD_HANDLING",
+      "release_control": "LEVEL_A_METHOD_ONLY"
+    },
+    {
+      "block_code": "CITATION_INCOMPLETE",
+      "severity": "CRITICAL",
+      "origin_layer": "B",
+      "propagation_mode": "MANDATORY",
+      "adapter_status": "BLOCKED",
+      "level_a_required_handling": "RECEIVE_AND_STOP_OR_DEGRADE_UNTIL_METHOD_HANDLING",
+      "release_control": "LEVEL_A_METHOD_ONLY"
+    },
+    {
+      "block_code": "VIGENZA_UNCERTAIN",
+      "severity": "CRITICAL",
+      "origin_layer": "B",
+      "propagation_mode": "MANDATORY",
+      "adapter_status": "BLOCKED",
+      "level_a_required_handling": "RECEIVE_AND_STOP_OR_DEGRADE_UNTIL_METHOD_HANDLING",
+      "release_control": "LEVEL_A_METHOD_ONLY"
+    },
+    {
+      "block_code": "CROSSREF_UNRESOLVED",
+      "severity": "CRITICAL",
+      "origin_layer": "B",
+      "propagation_mode": "MANDATORY",
+      "adapter_status": "BLOCKED",
+      "level_a_required_handling": "RECEIVE_AND_STOP_OR_DEGRADE_UNTIL_METHOD_HANDLING",
+      "release_control": "LEVEL_A_METHOD_ONLY"
+    },
+    {
+      "block_code": "M07_REQUIRED",
+      "severity": "CRITICAL",
+      "origin_layer": "B",
+      "propagation_mode": "MANDATORY",
+      "adapter_status": "BLOCKED",
+      "level_a_required_handling": "OPEN_OR_CONTINUE_M07_UNDER_LEVEL_A_GOVERNANCE",
+      "release_control": "LEVEL_A_METHOD_ONLY"
+    },
+    {
+      "block_code": "RAG_SCOPE_VIOLATION",
+      "severity": "CRITICAL",
+      "origin_layer": "B_OR_ADAPTER",
+      "propagation_mode": "MANDATORY",
+      "adapter_status": "REJECTED",
+      "level_a_required_handling": "STOP_AND_REVIEW_SCOPE_BOUNDARY",
+      "release_control": "LEVEL_A_METHOD_ONLY"
+    },
+    {
+      "block_code": "AUDIT_INCOMPLETE",
+      "severity": "CRITICAL",
+      "origin_layer": "B_OR_ADAPTER",
+      "propagation_mode": "MANDATORY",
+      "adapter_status": "BLOCKED",
+      "level_a_required_handling": "STOP_UNTIL_AUDIT_COMPLETED_OR_CASE_DEGRADED",
+      "release_control": "LEVEL_A_METHOD_ONLY"
+    },
+    {
+      "block_code": "OUTPUT_NOT_OPPONIBLE",
+      "severity": "CRITICAL",
+      "origin_layer": "B_OR_ADAPTER",
+      "propagation_mode": "MANDATORY",
+      "adapter_status": "BLOCKED",
+      "level_a_required_handling": "KEEP_SUPPORT_ONLY_AND_BLOCK_ANY_OUTPUT_AUTHORIZATION",
+      "release_control": "LEVEL_A_METHOD_ONLY"
+    },
+    {
+      "block_code": "COVERAGE_INADEQUATE",
+      "severity": "CRITICAL",
+      "origin_layer": "B",
+      "propagation_mode": "MANDATORY",
+      "adapter_status": "BLOCKED",
+      "level_a_required_handling": "STOP_OR_DEGRADE_UNTIL_GAP_HANDLED",
+      "release_control": "LEVEL_A_METHOD_ONLY"
+    }
+  ]
+}

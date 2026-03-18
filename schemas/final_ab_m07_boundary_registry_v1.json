@@ -1,0 +1,52 @@
+{
+  "registry_name": "final_ab_m07_boundary_registry_v1",
+  "registry_version": "1.0.0",
+  "scope": "pre-runtime-controlled-ab-link",
+  "principle": "Level B may prepare documentary support for M07 only; it may never close, certify or conclude M07-LPR.",
+  "allowed_support_fields": [
+    "ordered_reading_sequence",
+    "source_ids",
+    "norm_unit_ids",
+    "annex_refs",
+    "crossref_refs",
+    "missing_elements",
+    "human_completion_required",
+    "m07_support_status"
+  ],
+  "required_support_fields": [
+    "human_completion_required",
+    "m07_support_status"
+  ],
+  "required_field_values": {
+    "human_completion_required": true
+  },
+  "allowed_status_values": [
+    "NOT_REQUESTED",
+    "PREPARATORY_ONLY"
+  ],
+  "forbidden_fields": [
+    "m07_closed",
+    "m07_completed",
+    "m07_certified",
+    "m07_finalized",
+    "integral_reading_certified",
+    "reading_completed",
+    "full_reading_completed",
+    "last_comma_verified_as_final",
+    "methodological_completion",
+    "rac_ready_after_m07"
+  ],
+  "forbidden_semantics": [
+    "final methodological completion of M07",
+    "certification of integral reading",
+    "closure of M07-LPR",
+    "equivalence between documentary support and certified reading",
+    "automatic completion based on coverage or retrieval"
+  ],
+  "adapter_reaction": {
+    "boundary_violation_block": "RAG_SCOPE_VIOLATION",
+    "adapter_status_on_violation": "REJECTED",
+    "m07_boundary_state_on_violation": "BOUNDARY_VIOLATION",
+    "level_a_action_required": true
+  }
+}
