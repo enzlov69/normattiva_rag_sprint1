@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "level_b_release_gate_report_schema_v1",
+  "title": "Level B Release Gate Offline Report v1",
+  "type": "object",
+  "required": [
+    "manifest_id",
+    "manifest_version",
+    "gate_scope",
+    "execution_timestamp_utc",
+    "base_dir",
+    "python_executable",
+    "release_decision",
+    "summary",
+    "suite_results"
+  ],
+  "properties": {
+    "manifest_id": {
+      "type": "string"
+    },
+    "manifest_version": {
+      "type": "string"
+    },
+    "gate_scope": {
+      "type": "string"
+    },
+    "execution_timestamp_utc": {
+      "type": "string"
+    },
+    "base_dir": {
+      "type": "string"
+    },
+    "python_executable": {
+      "type": "string"
+    },
+    "release_decision": {
+      "type": "string",
+      "enum": [
+        "GO",
+        "SUSPEND",
+        "ERROR"
+      ]
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "total",
+        "passed",
+        "failed",
+        "errors",
+        "missing",
+        "skipped",
+        "critical_failed",
+        "golden_failed"
+      ],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "passed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "errors": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "missing": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "skipped": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "critical_failed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "golden_failed": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "suite_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "suite_id",
+          "path",
+          "kind",
+          "critical",
+          "outcome",
+          "return_code",
+          "duration_seconds"
+        ],
+        "properties": {
+          "suite_id": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "critical": {
+            "type": "boolean"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "PASSED",
+              "FAILED",
+              "ERROR",
+              "MISSING",
+              "SKIPPED"
+            ]
+          },
+          "return_code": {
+            "type": "integer"
+          },
+          "duration_seconds": {
+            "type": "number",
+            "minimum": 0
+          },
+          "stdout_excerpt": {
+            "type": "string"
+          },
+          "stderr_excerpt": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "suspension_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

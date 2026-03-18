@@ -1,0 +1,286 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "registry_id": "level_b_golden_baseline_registry_v1",
+  "registry_version": "1.0.0",
+  "baseline_scope": "offline_only",
+  "baseline_layer": "B",
+  "baseline_status": "FROZEN",
+  "frozen_on": "2026-03-18",
+  "owners": [
+    "Metodo Cerda / PPAV governance",
+    "Level B offline validation track"
+  ],
+  "purpose": "Frozen non-negotiable regression benchmark for Level B offline validation, to be executed before any future pre-runtime integration.",
+  "governance_rules": [
+    "No runner changes.",
+    "No runtime integration.",
+    "No retrieval/router/corpus modifications.",
+    "No decision or final validation semantics in Level B.",
+    "M07-LPR cannot be closed by Level B.",
+    "Audit trail and SHADOW remain mandatory.",
+    "Critical blocks must remain observable and propagable.",
+    "Golden cases are frozen and can only change with explicit baseline version bump."
+  ],
+  "fixture_families": {
+    "pass": {
+      "meaning": "Positive canonical cases expected to remain admissible in Level B offline validation.",
+      "allowed_statuses": [
+        "SUCCESS"
+      ],
+      "directory": "tests/fixtures/level_b_golden/pass"
+    },
+    "degrade": {
+      "meaning": "Support-only cases still admissible, but intentionally degraded without conclusive or opposable value.",
+      "allowed_statuses": [
+        "DEGRADED"
+      ],
+      "directory": "tests/fixtures/level_b_golden/degrade"
+    },
+    "reject": {
+      "meaning": "Negative golden family. It contains both BLOCKED and REJECTED outcomes. The directory is a non-accepting family, while expected_status remains explicit per case.",
+      "allowed_statuses": [
+        "BLOCKED",
+        "REJECTED"
+      ],
+      "directory": "tests/fixtures/level_b_golden/reject"
+    }
+  },
+  "non_negotiable_invariants": [
+    "No decisive or conclusive field is allowed in Level B payloads.",
+    "No semantic equivalent of final authorization is allowed in Level B text.",
+    "M07 support packages must always expose human_completion_required=true.",
+    "M07 support cannot contain m07_closed or equivalent fields.",
+    "VALID citations require an official URI.",
+    "Audit trail is mandatory for all golden admissible cases.",
+    "SHADOW is mandatory for all golden admissible cases.",
+    "SUCCESS must be clean: no warnings, no errors, no blocks.",
+    "DEGRADED must remain support-only and non-conclusive.",
+    "BLOCKED must expose at least one coherent block code.",
+    "REJECTED must expose at least one contract or scope violation signal.",
+    "Block propagation must remain coherent with status, errors and block codes."
+  ],
+  "freeze_criteria": [
+    "The case protects a foundational project invariant stated in the baseline v2.",
+    "The case is stable across foreseeable validator refactors.",
+    "The case does not depend on runtime services, live retrieval or the federated runner.",
+    "The case can be evaluated deterministically from payload + offline validators.",
+    "The case represents a failure mode whose silent regression would be architecturally dangerous.",
+    "The case has clear expected status and explicit observable evidence."
+  ],
+  "naming_convention": {
+    "golden_case_id_prefix": "GB",
+    "fixture_filename_pattern": "gb_<family>_<nnn>_<slug>.json",
+    "test_scope": "Whole-payload frozen benchmark",
+    "difference_from_ordinary_tests": "Golden tests freeze cross-cutting invariants and outcome families; ordinary tests remain granular, local and evolvable."
+  },
+  "cases": [
+    {
+      "case_id": "GB-PASS-001",
+      "title": "Clean documentary support payload",
+      "family": "pass",
+      "fixture_path": "tests/fixtures/level_b_golden/pass/gb_pass_001_clean_documentary_support.json",
+      "expected_status": "SUCCESS",
+      "expected_blocks": [],
+      "expected_errors": [],
+      "expected_warnings": [],
+      "required_invariants": [
+        "support_only_flag=true",
+        "audit present",
+        "shadow present",
+        "no forbidden fields",
+        "no conclusive semantics",
+        "all VALID citations carry official URI",
+        "if m07_support exists then human_completion_required=true"
+      ],
+      "frozen_reason": "Canonical positive baseline for clean Level B output."
+    },
+    {
+      "case_id": "GB-DEGRADE-001",
+      "title": "M07 support remains open and human-completed",
+      "family": "degrade",
+      "fixture_path": "tests/fixtures/level_b_golden/degrade/gb_degrade_001_m07_support_human_completion.json",
+      "expected_status": "DEGRADED",
+      "expected_blocks": [],
+      "expected_errors": [],
+      "expected_warnings": [
+        "M07_SUPPORT_ONLY",
+        "HUMAN_COMPLETION_REQUIRED"
+      ],
+      "required_invariants": [
+        "human_completion_required=true",
+        "no m07_closed",
+        "support-only narrative",
+        "audit present",
+        "shadow present"
+      ],
+      "frozen_reason": "Protects the non-closure rule for M07-LPR in Level B."
+    },
+    {
+      "case_id": "GB-DEGRADE-002",
+      "title": "Non-critical documentary gap degrades without blocking",
+      "family": "degrade",
+      "fixture_path": "tests/fixtures/level_b_golden/degrade/gb_degrade_002_non_critical_coverage_gap.json",
+      "expected_status": "DEGRADED",
+      "expected_blocks": [],
+      "expected_errors": [],
+      "expected_warnings": [
+        "NON_CRITICAL_COVERAGE_GAP"
+      ],
+      "required_invariants": [
+        "support_only_flag=true",
+        "no forbidden fields",
+        "no conclusive semantics",
+        "audit present",
+        "shadow present"
+      ],
+      "frozen_reason": "Separates degradable documentary incompleteness from hard blocking outcomes."
+    },
+    {
+      "case_id": "GB-BLOCK-001",
+      "title": "Essential vigenza uncertainty blocks output",
+      "family": "reject",
+      "fixture_path": "tests/fixtures/level_b_golden/reject/gb_reject_001_blocked_vigenza_uncertain_essential.json",
+      "expected_status": "BLOCKED",
+      "expected_blocks": [
+        "VIGENZA_UNCERTAIN"
+      ],
+      "expected_errors": [],
+      "expected_warnings": [
+        "ESSENTIAL_POINT_UNCERTAIN"
+      ],
+      "required_invariants": [
+        "block propagation visible",
+        "support_only_flag=true",
+        "no conclusive semantics"
+      ],
+      "frozen_reason": "Protects the mandatory block on uncertain essential vigency."
+    },
+    {
+      "case_id": "GB-BLOCK-002",
+      "title": "Missing audit trail blocks payload",
+      "family": "reject",
+      "fixture_path": "tests/fixtures/level_b_golden/reject/gb_reject_002_blocked_audit_missing.json",
+      "expected_status": "BLOCKED",
+      "expected_blocks": [
+        "AUDIT_INCOMPLETE"
+      ],
+      "expected_errors": [],
+      "expected_warnings": [
+        "AUDIT_TRAIL_MISSING"
+      ],
+      "required_invariants": [
+        "audit mandatory",
+        "block propagation visible"
+      ],
+      "frozen_reason": "Protects audit trail as mandatory offline evidence."
+    },
+    {
+      "case_id": "GB-BLOCK-003",
+      "title": "Missing SHADOW blocks payload",
+      "family": "reject",
+      "fixture_path": "tests/fixtures/level_b_golden/reject/gb_reject_003_blocked_shadow_missing.json",
+      "expected_status": "BLOCKED",
+      "expected_blocks": [
+        "AUDIT_INCOMPLETE"
+      ],
+      "expected_errors": [],
+      "expected_warnings": [
+        "SHADOW_TRACE_MISSING"
+      ],
+      "required_invariants": [
+        "shadow mandatory",
+        "block propagation visible"
+      ],
+      "frozen_reason": "Protects SHADOW completeness as mandatory technical trace."
+    },
+    {
+      "case_id": "GB-REJECT-001",
+      "title": "Forbidden decisive field final_decision",
+      "family": "reject",
+      "fixture_path": "tests/fixtures/level_b_golden/reject/gb_reject_004_forbidden_final_decision.json",
+      "expected_status": "REJECTED",
+      "expected_blocks": [
+        "RAG_SCOPE_VIOLATION"
+      ],
+      "expected_errors": [
+        "FORBIDDEN_FIELD_PRESENT"
+      ],
+      "expected_warnings": [],
+      "required_invariants": [
+        "forbidden field interception"
+      ],
+      "frozen_reason": "Protects the anti-scope boundary at payload level."
+    },
+    {
+      "case_id": "GB-REJECT-002",
+      "title": "Forbidden M07 closure attempt",
+      "family": "reject",
+      "fixture_path": "tests/fixtures/level_b_golden/reject/gb_reject_005_forbidden_m07_closed.json",
+      "expected_status": "REJECTED",
+      "expected_blocks": [
+        "RAG_SCOPE_VIOLATION"
+      ],
+      "expected_errors": [
+        "M07_CLOSURE_FORBIDDEN"
+      ],
+      "expected_warnings": [],
+      "required_invariants": [
+        "m07_closed forbidden",
+        "human completion cannot be bypassed"
+      ],
+      "frozen_reason": "Protects the explicit prohibition on M07 closure by Level B."
+    },
+    {
+      "case_id": "GB-REJECT-003",
+      "title": "VALID citation without official URI",
+      "family": "reject",
+      "fixture_path": "tests/fixtures/level_b_golden/reject/gb_reject_006_valid_citation_without_uri.json",
+      "expected_status": "REJECTED",
+      "expected_blocks": [
+        "CITATION_INCOMPLETE"
+      ],
+      "expected_errors": [
+        "VALID_CITATION_WITHOUT_URI"
+      ],
+      "expected_warnings": [],
+      "required_invariants": [
+        "VALID citation requires official URI"
+      ],
+      "frozen_reason": "Protects citation traceability and opponibility constraints."
+    },
+    {
+      "case_id": "GB-REJECT-004",
+      "title": "Conclusive textual semantics without forbidden key",
+      "family": "reject",
+      "fixture_path": "tests/fixtures/level_b_golden/reject/gb_reject_007_conclusive_text_semantics.json",
+      "expected_status": "REJECTED",
+      "expected_blocks": [
+        "RAG_SCOPE_VIOLATION"
+      ],
+      "expected_errors": [
+        "CONCLUSIVE_SEMANTICS_DETECTED"
+      ],
+      "expected_warnings": [],
+      "required_invariants": [
+        "semantic guardrail must catch textual conclusions"
+      ],
+      "frozen_reason": "Prevents lexical bypass of the forbidden-field guardrail."
+    },
+    {
+      "case_id": "GB-REJECT-005",
+      "title": "Incoherent block propagation",
+      "family": "reject",
+      "fixture_path": "tests/fixtures/level_b_golden/reject/gb_reject_008_incoherent_block_propagation.json",
+      "expected_status": "REJECTED",
+      "expected_blocks": [],
+      "expected_errors": [
+        "BLOCK_PROPAGATION_INCOHERENT"
+      ],
+      "expected_warnings": [],
+      "required_invariants": [
+        "status errors blocks consistency"
+      ],
+      "frozen_reason": "Protects status/warnings/errors/blocks coherence as a foundational contract."
+    }
+  ]
+}

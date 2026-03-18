@@ -1,0 +1,48 @@
+{
+  "api_version": "1.0",
+  "responder_module": "B21_ReportGenerator",
+  "timestamp": "2026-03-18T09:00:00Z",
+  "request_id": "req_gb_blk_002",
+  "case_id": "case_gb_blk_002",
+  "trace_id": "trace_gb_blk_002",
+  "status": "BLOCKED",
+  "payload": {
+    "support_scope": "documentary_only",
+    "support_only_flag": true,
+    "sources": [
+      {
+        "source_id": "src_audit_missing",
+        "atto_tipo": "L.",
+        "atto_numero": "241",
+        "atto_anno": "1990",
+        "uri_ufficiale": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1990-08-07;241"
+      }
+    ],
+    "audit_trail": {
+      "present": false,
+      "event_ids": []
+    },
+    "shadow": {
+      "present": true,
+      "executed_modules": [
+        "B19_AuditLogger",
+        "B20_ShadowTracer"
+      ]
+    },
+    "narrative": "Pacchetto documentale non opponibile per mancanza del tracciamento audit minimo."
+  },
+  "warnings": [
+    {
+      "warning_code": "AUDIT_TRAIL_MISSING",
+      "message": "Manca il tracciamento audit minimo sui nodi critici."
+    }
+  ],
+  "errors": [],
+  "blocks": [
+    {
+      "block_code": "AUDIT_INCOMPLETE",
+      "severity": "CRITICAL",
+      "origin_module": "B19_AuditLogger"
+    }
+  ]
+}

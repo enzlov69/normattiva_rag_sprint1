@@ -1,0 +1,54 @@
+{
+  "api_version": "1.0",
+  "responder_module": "B21_ReportGenerator",
+  "timestamp": "2026-03-18T09:00:00Z",
+  "request_id": "req_gb_rej_003",
+  "case_id": "case_gb_rej_003",
+  "trace_id": "trace_gb_rej_003",
+  "status": "REJECTED",
+  "payload": {
+    "support_scope": "documentary_only",
+    "support_only_flag": true,
+    "citations_valid": [
+      {
+        "citation_id": "cit_gb_rej_003_01",
+        "atto_tipo": "D.Lgs.",
+        "atto_numero": "267",
+        "atto_anno": "2000",
+        "articolo": "107",
+        "comma": "3",
+        "uri_ufficiale": "",
+        "stato_vigenza": "VIGENTE_VERIFICATA",
+        "citation_status": "VALID"
+      }
+    ],
+    "audit_trail": {
+      "present": true,
+      "event_ids": [
+        "ae_gb_rej_003_01"
+      ]
+    },
+    "shadow": {
+      "present": true,
+      "executed_modules": [
+        "B15_CitationBuilder",
+        "B17_GuardrailEngine"
+      ]
+    },
+    "narrative": "Payload respinto per incoerenza della citazione opponibile."
+  },
+  "warnings": [],
+  "errors": [
+    {
+      "error_code": "VALID_CITATION_WITHOUT_URI",
+      "message": "Una citazione marcata VALID è priva di URI ufficiale."
+    }
+  ],
+  "blocks": [
+    {
+      "block_code": "CITATION_INCOMPLETE",
+      "severity": "CRITICAL",
+      "origin_module": "B15_CitationBuilder"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "api_version": "1.0",
+  "responder_module": "B21_ReportGenerator",
+  "timestamp": "2026-03-18T09:00:00Z",
+  "request_id": "req_gb_rej_002",
+  "case_id": "case_gb_rej_002",
+  "trace_id": "trace_gb_rej_002",
+  "status": "REJECTED",
+  "payload": {
+    "support_scope": "documentary_only",
+    "support_only_flag": true,
+    "m07_closed": true,
+    "m07_support": {
+      "pack_id": "m07_pack_gb_rej_002",
+      "human_completion_required": true
+    },
+    "audit_trail": {
+      "present": true,
+      "event_ids": [
+        "ae_gb_rej_002_01"
+      ]
+    },
+    "shadow": {
+      "present": true,
+      "executed_modules": [
+        "B16_M07SupportLayer",
+        "B17_GuardrailEngine"
+      ]
+    },
+    "narrative": "Tentativo vietato di chiudere M07-LPR dal solo Livello B."
+  },
+  "warnings": [],
+  "errors": [
+    {
+      "error_code": "M07_CLOSURE_FORBIDDEN",
+      "message": "Il Livello B non può dichiarare chiuso M07-LPR."
+    }
+  ],
+  "blocks": [
+    {
+      "block_code": "RAG_SCOPE_VIOLATION",
+      "severity": "CRITICAL",
+      "origin_module": "B17_GuardrailEngine"
+    }
+  ]
+}

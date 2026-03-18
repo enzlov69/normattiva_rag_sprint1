@@ -1,0 +1,78 @@
+{
+  "api_version": "1.0",
+  "responder_module": "B21_ReportGenerator",
+  "timestamp": "2026-03-18T09:00:00Z",
+  "request_id": "req_gb_pass_001",
+  "case_id": "case_gb_pass_001",
+  "trace_id": "trace_gb_pass_001",
+  "status": "SUCCESS",
+  "payload": {
+    "support_scope": "documentary_only",
+    "support_only_flag": true,
+    "sources": [
+      {
+        "source_id": "src_267_2000",
+        "atto_tipo": "D.Lgs.",
+        "atto_numero": "267",
+        "atto_anno": "2000",
+        "uri_ufficiale": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2000-08-18;267"
+      }
+    ],
+    "citations_valid": [
+      {
+        "citation_id": "cit_gb_pass_001_01",
+        "atto_tipo": "D.Lgs.",
+        "atto_numero": "267",
+        "atto_anno": "2000",
+        "articolo": "107",
+        "comma": "3",
+        "uri_ufficiale": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2000-08-18;267",
+        "stato_vigenza": "VIGENTE_VERIFICATA",
+        "citation_status": "VALID"
+      }
+    ],
+    "citations_blocked": [],
+    "m07_support": {
+      "pack_id": "m07_pack_gb_pass_001",
+      "human_completion_required": true,
+      "ordered_reading_sequence": [
+        "nu_107_3"
+      ],
+      "missing_elements": [],
+      "m07_support_status": "READY_FOR_HUMAN_REVIEW"
+    },
+    "vigenza_summary": {
+      "status": "VIGENTE_VERIFICATA",
+      "essential_point_flag": false
+    },
+    "crossref_summary": {
+      "status": "RESOLVED",
+      "unresolved_essential_refs": []
+    },
+    "coverage": {
+      "coverage_status": "ADEQUATE",
+      "critical_gap_flag": false
+    },
+    "audit_trail": {
+      "present": true,
+      "event_ids": [
+        "ae_gb_pass_001_01",
+        "ae_gb_pass_001_02"
+      ]
+    },
+    "shadow": {
+      "present": true,
+      "executed_modules": [
+        "B10_HybridRetriever",
+        "B15_CitationBuilder",
+        "B16_M07SupportLayer",
+        "B19_AuditLogger",
+        "B20_ShadowTracer"
+      ]
+    },
+    "narrative": "Pacchetto documentale di supporto istruttorio, privo di conclusioni o autorizzazioni finali."
+  },
+  "warnings": [],
+  "errors": [],
+  "blocks": []
+}

@@ -1,0 +1,36 @@
+{
+  "api_version": "1.0",
+  "responder_module": "B21_ReportGenerator",
+  "timestamp": "2026-03-18T09:00:00Z",
+  "request_id": "req_gb_rej_005",
+  "case_id": "case_gb_rej_005",
+  "trace_id": "trace_gb_rej_005",
+  "status": "REJECTED",
+  "payload": {
+    "support_scope": "documentary_only",
+    "support_only_flag": true,
+    "audit_trail": {
+      "present": true,
+      "event_ids": [
+        "ae_gb_rej_005_01"
+      ]
+    },
+    "shadow": {
+      "present": true,
+      "executed_modules": [
+        "B18_BlockManager",
+        "B19_AuditLogger",
+        "B20_ShadowTracer"
+      ]
+    },
+    "narrative": "Errore critico dichiarato senza blocco propagato nel payload."
+  },
+  "warnings": [],
+  "errors": [
+    {
+      "error_code": "BLOCK_PROPAGATION_INCOHERENT",
+      "message": "È stato rilevato un errore critico senza corrispondente evidenza di blocco."
+    }
+  ],
+  "blocks": []
+}

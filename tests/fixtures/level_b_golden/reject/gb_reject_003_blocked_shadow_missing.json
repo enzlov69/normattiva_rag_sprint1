@@ -1,0 +1,47 @@
+{
+  "api_version": "1.0",
+  "responder_module": "B21_ReportGenerator",
+  "timestamp": "2026-03-18T09:00:00Z",
+  "request_id": "req_gb_blk_003",
+  "case_id": "case_gb_blk_003",
+  "trace_id": "trace_gb_blk_003",
+  "status": "BLOCKED",
+  "payload": {
+    "support_scope": "documentary_only",
+    "support_only_flag": true,
+    "sources": [
+      {
+        "source_id": "src_shadow_missing",
+        "atto_tipo": "D.Lgs.",
+        "atto_numero": "33",
+        "atto_anno": "2013",
+        "uri_ufficiale": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2013-03-14;33"
+      }
+    ],
+    "audit_trail": {
+      "present": true,
+      "event_ids": [
+        "ae_gb_blk_003_01"
+      ]
+    },
+    "shadow": {
+      "present": false,
+      "executed_modules": []
+    },
+    "narrative": "Pacchetto documentale bloccato per assenza della traccia tecnica SHADOW."
+  },
+  "warnings": [
+    {
+      "warning_code": "SHADOW_TRACE_MISSING",
+      "message": "La traccia SHADOW è assente o incompleta."
+    }
+  ],
+  "errors": [],
+  "blocks": [
+    {
+      "block_code": "AUDIT_INCOMPLETE",
+      "severity": "CRITICAL",
+      "origin_module": "B20_ShadowTracer"
+    }
+  ]
+}

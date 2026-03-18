@@ -1,0 +1,99 @@
+{
+  "manifest_id": "level_b_release_gate_manifest_v1",
+  "manifest_version": "1.0.0",
+  "gate_scope": "offline_pre_runtime_only",
+  "execution_timestamp_utc": "2026-03-18T09:30:00Z",
+  "base_dir": ".",
+  "python_executable": "python",
+  "release_decision": "GO",
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "errors": 0,
+    "missing": 0,
+    "skipped": 0,
+    "critical_failed": 0,
+    "golden_failed": 0
+  },
+  "suite_results": [
+    {
+      "suite_id": "LB-CTR-001",
+      "path": "tests/test_level_b_payload_contract.py",
+      "kind": "contract",
+      "critical": true,
+      "outcome": "PASSED",
+      "return_code": 0,
+      "duration_seconds": 0.01,
+      "stdout_excerpt": "1 passed",
+      "stderr_excerpt": ""
+    },
+    {
+      "suite_id": "LB-SEM-001",
+      "path": "tests/test_level_b_payload_semantics.py",
+      "kind": "semantic",
+      "critical": true,
+      "outcome": "PASSED",
+      "return_code": 0,
+      "duration_seconds": 0.01,
+      "stdout_excerpt": "1 passed",
+      "stderr_excerpt": ""
+    },
+    {
+      "suite_id": "LB-M07-001",
+      "path": "tests/test_level_b_m07_boundaries.py",
+      "kind": "m07_boundary",
+      "critical": true,
+      "outcome": "PASSED",
+      "return_code": 0,
+      "duration_seconds": 0.01,
+      "stdout_excerpt": "1 passed",
+      "stderr_excerpt": ""
+    },
+    {
+      "suite_id": "LB-AUD-001",
+      "path": "tests/test_level_b_audit_shadow.py",
+      "kind": "audit_shadow",
+      "critical": true,
+      "outcome": "PASSED",
+      "return_code": 0,
+      "duration_seconds": 0.01,
+      "stdout_excerpt": "1 passed",
+      "stderr_excerpt": ""
+    },
+    {
+      "suite_id": "LB-BLK-001",
+      "path": "tests/test_level_b_block_propagation.py",
+      "kind": "block_propagation",
+      "critical": true,
+      "outcome": "PASSED",
+      "return_code": 0,
+      "duration_seconds": 0.01,
+      "stdout_excerpt": "1 passed",
+      "stderr_excerpt": ""
+    },
+    {
+      "suite_id": "LB-TRC-001",
+      "path": "tests/test_level_b_traceability_matrix.py",
+      "kind": "traceability",
+      "critical": true,
+      "outcome": "PASSED",
+      "return_code": 0,
+      "duration_seconds": 0.01,
+      "stdout_excerpt": "1 passed",
+      "stderr_excerpt": ""
+    },
+    {
+      "suite_id": "LB-GOLD-001",
+      "path": "tests/test_level_b_golden_baseline.py",
+      "kind": "golden_baseline",
+      "critical": true,
+      "outcome": "PASSED",
+      "return_code": 0,
+      "duration_seconds": 0.01,
+      "stdout_excerpt": "1 passed",
+      "stderr_excerpt": ""
+    }
+  ],
+  "suspension_reasons": []
+}

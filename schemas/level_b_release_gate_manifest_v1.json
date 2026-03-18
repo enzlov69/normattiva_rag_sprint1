@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "manifest_id": "level_b_release_gate_manifest_v1",
+  "manifest_version": "1.0.0",
+  "gate_scope": "offline_pre_runtime_only",
+  "gate_layer": "level_b_validation_track",
+  "gate_status": "ACTIVE",
+  "frozen_on": "2026-03-18",
+  "recommended_decision_model": "GO_OR_SUSPEND",
+  "explicit_non_delegation": [
+    "This release gate does not close M07-LPR.",
+    "This release gate does not authorize opposable outputs.",
+    "This release gate does not replace the Final Compliance Gate of Level A.",
+    "This release gate only governs offline technical readiness of Level B validation assets."
+  ],
+  "execution_order": [
+    "tests/test_level_b_payload_contract.py",
+    "tests/test_level_b_payload_semantics.py",
+    "tests/test_level_b_m07_boundaries.py",
+    "tests/test_level_b_audit_shadow.py",
+    "tests/test_level_b_block_propagation.py",
+    "tests/test_level_b_traceability_matrix.py",
+    "tests/test_level_b_golden_baseline.py"
+  ],
+  "required_suites": [
+    {
+      "suite_id": "LB-CTR-001",
+      "path": "tests/test_level_b_payload_contract.py",
+      "kind": "contract",
+      "critical": true,
+      "description": "Schema and payload contract protection for Level B offline outputs."
+    },
+    {
+      "suite_id": "LB-SEM-001",
+      "path": "tests/test_level_b_payload_semantics.py",
+      "kind": "semantic",
+      "critical": true,
+      "description": "Semantic non-delegation and offline admissibility checks."
+    },
+    {
+      "suite_id": "LB-M07-001",
+      "path": "tests/test_level_b_m07_boundaries.py",
+      "kind": "m07_boundary",
+      "critical": true,
+      "description": "Protection against M07-LPR closure or equivalent support-layer overreach."
+    },
+    {
+      "suite_id": "LB-AUD-001",
+      "path": "tests/test_level_b_audit_shadow.py",
+      "kind": "audit_shadow",
+      "critical": true,
+      "description": "Mandatory audit trail and SHADOW guarantees on critical Level B flows."
+    },
+    {
+      "suite_id": "LB-BLK-001",
+      "path": "tests/test_level_b_block_propagation.py",
+      "kind": "block_propagation",
+      "critical": true,
+      "description": "Propagation and observability of critical block conditions."
+    },
+    {
+      "suite_id": "LB-TRC-001",
+      "path": "tests/test_level_b_traceability_matrix.py",
+      "kind": "traceability",
+      "critical": true,
+      "description": "Traceability matrix consistency for Level B offline governance."
+    },
+    {
+      "suite_id": "LB-GOLD-001",
+      "path": "tests/test_level_b_golden_baseline.py",
+      "kind": "golden_baseline",
+      "critical": true,
+      "description": "Frozen non-negotiable regression benchmark for Level B offline readiness."
+    }
+  ],
+  "release_rules": {
+    "go_if_all_required_pass": true,
+    "suspend_if_any_required_fails": true,
+    "suspend_if_any_critical_fails": true,
+    "suspend_if_any_golden_fails": true,
+    "suspend_if_manifest_invalid": true,
+    "suspend_if_report_schema_invalid": true,
+    "suspend_if_required_suite_missing": true,
+    "non_green_outcomes_trigger_suspend": [
+      "FAILED",
+      "ERROR",
+      "MISSING"
+    ],
+    "admitted_suite_outcomes": [
+      "PASSED",
+      "FAILED",
+      "ERROR",
+      "MISSING",
+      "SKIPPED"
+    ]
+  },
+  "report_defaults": {
+    "report_path": "artifacts/level_b_release_gate_report_v1.json",
+    "report_schema_path": "schemas/level_b_release_gate_report_schema_v1.json"
+  },
+  "release_outcomes": {
+    "GO": "All required suites are present and green. Offline Level B release track may proceed to controlled repository tagging.",
+    "SUSPEND": "At least one required suite failed, is missing or produced an execution error. Release must stop.",
+    "ERROR": "The gate itself is invalid or could not complete deterministically. Release must stop."
+  },
+  "maintenance_rule": "The manifest may change only with explicit version bump and documented rationale. It must remain independent from runtime, runner and retrieval logic."
+}
