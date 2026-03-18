@@ -205,6 +205,11 @@ class FinalABResponseEnvelopeGate:
                 )
             )
 
+        documentary_traceability = self._evaluate_documentary_traceability(candidate, documentary_packet)
+        guard_warnings = self._merge_issue_lists(guard_warnings, documentary_traceability["warnings"])
+        guard_errors = self._merge_issue_lists(guard_errors, documentary_traceability["errors"])
+        guard_blocks = self._merge_block_lists(guard_blocks, documentary_traceability["blocks"])
+
         upstream_critical_blocks = self._critical_blocks_from(raw_validation) + self._critical_blocks_from(raw)
         missing_critical_codes = self._find_missing_critical_block_codes(upstream_critical_blocks, mapped_blocks)
         if missing_critical_codes:
@@ -327,6 +332,15 @@ class FinalABResponseEnvelopeGate:
                 "forbidden_field_hits": forbidden_hits,
                 "missing_envelope_fields": missing_envelope_fields,
                 "missing_documentary_packet_fields": documentary_packet_missing,
+                "documentary_traceability_warnings": [
+                    issue.get("code") for issue in documentary_traceability["warnings"] if isinstance(issue, Mapping)
+                ],
+                "documentary_traceability_errors": [
+                    issue.get("code") for issue in documentary_traceability["errors"] if isinstance(issue, Mapping)
+                ],
+                "documentary_traceability_blocks": [
+                    issue.get("code") for issue in documentary_traceability["blocks"] if isinstance(issue, Mapping)
+                ],
                 "reinstated_critical_block_codes": missing_critical_codes,
                 "audit_fragment_present": not self._audit_fragment_missing(audit_fragment),
                 "shadow_fragment_present": not self._shadow_fragment_missing(shadow_fragment),
@@ -368,6 +382,199 @@ class FinalABResponseEnvelopeGate:
         if not isinstance(packet, Mapping):
             return list(self.config.required_documentary_packet_fields)
         return self._find_missing_fields(packet, self.config.required_documentary_packet_fields)
+
+    def _evaluate_documentary_traceability(
+        self,
+        envelope: Mapping[str, Any],
+        packet: Optional[Mapping[str, Any]],
+    ) -> Dict[str, List[Dict[str, Any]]]:
+        warnings: List[Dict[str, Any]] = []
+        errors: List[Dict[str, Any]] = []
+        blocks: List[Dict[str, Any]] = []
+
+        if not isinstance(packet, Mapping):
+            return {"warnings": warnings, "errors": errors, "blocks": blocks}
+
+        sources = self._as_list(packet.get("sources", []))
+        norm_units = self._as_list(packet.get("norm_units", []))
+        citations_valid = self._as_list(packet.get("citations_valid", []))
+        coverage_assessment = packet.get("coverage_assessment")
+        coverage_status = ""
+        if isinstance(coverage_assessment, Mapping):
+            coverage_status = self._normalize_name(
+                coverage_assessment.get("status") or coverage_assessment.get("coverage_status") or ""
+            )
+
+        source_ids = self._collect_entity_ids(
+            sources,
+            keys=("source_id", "id", "source_key", "uri", "uri_ufficiale"),
+        )
+        norm_unit_ids = self._collect_entity_ids(
+            norm_units,
+            keys=("norm_unit_id", "id", "article", "articolo", "uri", "uri_ufficiale"),
+        )
+        citation_source_refs = self._collect_entity_ids(
+            citations_valid,
+            keys=("source_id", "source_ref", "source_id_ref", "source_uri", "uri", "uri_ufficiale"),
+        )
+        citation_norm_refs = self._collect_entity_ids(
+            citations_valid,
+            keys=("norm_unit_id", "norm_unit_ref", "norm_unit_id_ref", "article", "articolo"),
+        )
+
+        for index, citation in enumerate(citations_valid):
+            if not isinstance(citation, Mapping):
+                errors.append(
+                    self._error(
+                        code="CITATION_TRACEABILITY_MISSING",
+                        message=f"Final citation at index {index} is not a structured object.",
+                    )
+                )
+                blocks.append(
+                    self._block(
+                        code="CITATION_INCOMPLETE",
+                        reason="Final citation is not traceable in the DocumentaryPacket.",
+                        category="DOCUMENTARY_TRACEABILITY",
+                    )
+                )
+                continue
+            if not self._citation_has_traceability(citation):
+                errors.append(
+                    self._error(
+                        code="CITATION_TRACEABILITY_MISSING",
+                        message=f"Final citation at index {index} lacks minimum traceability anchors.",
+                    )
+                )
+                blocks.append(
+                    self._block(
+                        code="CITATION_INCOMPLETE",
+                        reason="Final citation lacks traceability anchors in the DocumentaryPacket.",
+                        category="DOCUMENTARY_TRACEABILITY",
+                    )
+                )
+
+        if citations_valid and not sources and not norm_units:
+            errors.append(
+                self._error(
+                    code="CITATION_COVERAGE_MISSING",
+                    message="Final citations exist but sources and norm_units are both empty.",
+                )
+            )
+            blocks.append(
+                self._block(
+                    code="CITATION_INCOMPLETE",
+                    reason="Final citations have no documentary coverage anchors.",
+                    category="DOCUMENTARY_COVERAGE",
+                )
+            )
+
+        if citation_source_refs and source_ids and citation_source_refs.isdisjoint(source_ids):
+            errors.append(
+                self._error(
+                    code="CITATION_SOURCE_LINK_MISSING",
+                    message="Final citations do not match available sources traceability anchors.",
+                )
+            )
+            blocks.append(
+                self._block(
+                    code="CROSSREF_UNRESOLVED",
+                    reason="Final citation-source linkage is not traceable.",
+                    category="DOCUMENTARY_TRACEABILITY",
+                )
+            )
+
+        if citation_norm_refs and norm_unit_ids and citation_norm_refs.isdisjoint(norm_unit_ids):
+            errors.append(
+                self._error(
+                    code="CITATION_NORM_UNIT_LINK_MISSING",
+                    message="Final citations do not match available norm_units traceability anchors.",
+                )
+            )
+            blocks.append(
+                self._block(
+                    code="CROSSREF_UNRESOLVED",
+                    reason="Final citation-norm_unit linkage is not traceable.",
+                    category="DOCUMENTARY_TRACEABILITY",
+                )
+            )
+
+        if coverage_status in {"adequate", "complete", "sufficient"} and not sources:
+            errors.append(
+                self._error(
+                    code="DOCUMENTARY_SOURCES_MISSING",
+                    message="Coverage claims adequacy but final sources are empty.",
+                )
+            )
+            blocks.append(
+                self._block(
+                    code="SOURCE_UNVERIFIED",
+                    reason="Final documentary coverage is not traceable to sources.",
+                    category="DOCUMENTARY_COVERAGE",
+                )
+            )
+
+        if sources and not source_ids:
+            warnings.append(
+                self._error(
+                    code="SOURCES_WEAK_TRACEABILITY",
+                    message="Final sources are present but weakly referenziabili.",
+                )
+            )
+
+        if norm_units and not norm_unit_ids:
+            warnings.append(
+                self._error(
+                    code="NORM_UNITS_WEAK_TRACEABILITY",
+                    message="Final norm_units are present but weakly referenziabili.",
+                )
+            )
+
+        if not citations_valid and (sources or norm_units):
+            warnings.append(
+                self._error(
+                    code="DOCUMENTARY_COMPLETENESS_WARNING",
+                    message="Final documentary packet is minimally coherent but citations are empty.",
+                )
+            )
+
+        envelope_trace_id = str(envelope.get("trace_id") or "").strip()
+        audit_fragment = self._extract_audit_fragment(envelope, packet)
+        shadow_fragment = self._extract_shadow_fragment(envelope, packet)
+        if envelope_trace_id:
+            audit_trace = str(audit_fragment.get("trace_id") or "").strip() if isinstance(audit_fragment, Mapping) else ""
+            shadow_trace = str(shadow_fragment.get("trace_id") or "").strip() if isinstance(shadow_fragment, Mapping) else ""
+
+            if audit_trace and audit_trace != envelope_trace_id:
+                errors.append(
+                    self._error(
+                        code="TRACEABILITY_AUDIT_MISMATCH",
+                        message="Audit trace_id is inconsistent with final envelope trace_id.",
+                    )
+                )
+                blocks.append(
+                    self._block(
+                        code="AUDIT_INCOMPLETE",
+                        reason="Final audit traceability is inconsistent with envelope trace_id.",
+                        category="AUDIT",
+                    )
+                )
+
+            if shadow_trace and shadow_trace != envelope_trace_id:
+                errors.append(
+                    self._error(
+                        code="TRACEABILITY_SHADOW_MISMATCH",
+                        message="Shadow trace_id is inconsistent with final envelope trace_id.",
+                    )
+                )
+                blocks.append(
+                    self._block(
+                        code="AUDIT_INCOMPLETE",
+                        reason="Final shadow traceability is inconsistent with envelope trace_id.",
+                        category="SHADOW",
+                    )
+                )
+
+        return {"warnings": warnings, "errors": errors, "blocks": blocks}
 
     def _extract_documentary_packet(self, envelope: Mapping[str, Any]) -> Optional[Mapping[str, Any]]:
         payload = envelope.get("payload")
@@ -537,6 +744,49 @@ class FinalABResponseEnvelopeGate:
             if value:
                 return str(value)
         return ""
+
+    def _collect_entity_ids(
+        self,
+        items: Sequence[Any],
+        *,
+        keys: Sequence[str],
+    ) -> set[str]:
+        output: set[str] = set()
+        normalized_keys = {self._normalize_name(key) for key in keys}
+        for item in items:
+            if not isinstance(item, Mapping):
+                continue
+            for key, value in item.items():
+                if self._normalize_name(key) not in normalized_keys:
+                    continue
+                if value in (None, "", [], {}):
+                    continue
+                output.add(self._normalize_name(value))
+        return output
+
+    def _citation_has_traceability(self, citation: Mapping[str, Any]) -> bool:
+        traceability_keys = {
+            "citation_id",
+            "id",
+            "source_id",
+            "source_ref",
+            "source_id_ref",
+            "norm_unit_id",
+            "norm_unit_ref",
+            "norm_unit_id_ref",
+            "uri",
+            "uri_ufficiale",
+            "article",
+            "articolo",
+            "act",
+            "atto",
+            "atto_tipo",
+        }
+        normalized_keys = {self._normalize_name(key) for key in traceability_keys}
+        for key, value in citation.items():
+            if self._normalize_name(key) in normalized_keys and value not in (None, "", [], {}):
+                return True
+        return False
 
     def _merge_block_lists(self, *collections: Iterable[Any]) -> List[Dict[str, Any]]:
         merged: List[Dict[str, Any]] = []
