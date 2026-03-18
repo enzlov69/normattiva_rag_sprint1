@@ -1,0 +1,15 @@
+{
+  "registry_name": "final_block_registry_v1",
+  "blocks": [
+    "CORPUS_MISSING",
+    "SOURCE_UNVERIFIED",
+    "CITATION_INCOMPLETE",
+    "VIGENZA_UNCERTAIN",
+    "CROSSREF_UNRESOLVED",
+    "M07_REQUIRED",
+    "RAG_SCOPE_VIOLATION",
+    "AUDIT_INCOMPLETE",
+    "OUTPUT_NOT_OPPONIBLE",
+    "COVERAGE_INADEQUATE"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema_name": "level_b_documentary_packet_schema_v1",
+  "required_fields": [
+    "sources",
+    "norm_units",
+    "citations_valid",
+    "citations_blocked",
+    "vigenza_records",
+    "cross_reference_records",
+    "coverage_assessment",
+    "warnings",
+    "errors",
+    "blocks",
+    "shadow_fragment"
+  ]
+}

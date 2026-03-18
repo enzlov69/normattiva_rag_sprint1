@@ -1,0 +1,14 @@
+{
+  "registry_name": "level_a_runtime_module_registry_v1",
+  "modules": [
+    "A1_OrchestratorePPAV",
+    "FASE_0_CaseClassifier",
+    "M07_Governor",
+    "RAC_Builder",
+    "Final_Compliance_Gate",
+    "Output_Authorizer",
+    "Audit_Logger",
+    "SHADOW_Tracer",
+    "Block_Manager"
+  ]
+}

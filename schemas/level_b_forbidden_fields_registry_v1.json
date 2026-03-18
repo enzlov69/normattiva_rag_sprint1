@@ -1,0 +1,20 @@
+{
+  "registry_name": "level_b_forbidden_fields_registry_v1",
+  "source_layer": "B",
+  "forbidden_fields": [
+    "final_decision",
+    "decision_status",
+    "applicability_final",
+    "authorized_output",
+    "output_authorized",
+    "compliance_go",
+    "compliance_no_go",
+    "m07_closed",
+    "m07_completed",
+    "rac_approved",
+    "signature_ready",
+    "final_validation",
+    "final_authorization",
+    "opponible_output_ready"
+  ]
+}
