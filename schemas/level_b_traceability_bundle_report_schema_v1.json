@@ -1,0 +1,28 @@
+{
+  "report_id": "LB-TB-REPORT-001",
+  "version": "v1",
+  "required_root_keys": [
+    "bundle_id",
+    "bundle_version",
+    "base_dir",
+    "decision",
+    "reasons",
+    "git_status_clean",
+    "available_tags",
+    "tag_results",
+    "path_results",
+    "component_results",
+    "execution_chain",
+    "next_action"
+  ],
+  "decision_values": [
+    "COMPLETE",
+    "HOLD",
+    "ERROR"
+  ],
+  "notes": [
+    "The report is documentary and offline-only.",
+    "The report does not authorize runtime integration.",
+    "The report does not close M07-LPR."
+  ]
+}

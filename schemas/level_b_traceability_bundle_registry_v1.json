@@ -1,0 +1,264 @@
+{
+  "bundle_id": "LB-TB-001",
+  "bundle_version": "v1",
+  "scope": "Level B offline governance stack traceability bundle",
+  "principles": [
+    "Level B remains subordinate to Metodo Cerda",
+    "No runtime integration is introduced by the bundle",
+    "M07-LPR cannot be closed by Level B",
+    "Audit trail and SHADOW remain mandatory",
+    "Golden, gate, runbook and change control remain distinct but linked"
+  ],
+  "required_tags": [
+    "stable-level-b-validation-v2",
+    "stable-level-b-golden-release-v1",
+    "stable-level-b-runbook-v1",
+    "stable-level-b-change-control-v1"
+  ],
+  "required_paths": [
+    {
+      "path_id": "LB-PATH-VAL-DOC-001",
+      "path": "docs/LEVEL_B_VALIDATION_TRACEABILITY_MATRIX_v1.md",
+      "component_id": "validation_kit"
+    },
+    {
+      "path_id": "LB-PATH-VAL-SCHEMA-001",
+      "path": "schemas/level_b_validation_traceability_matrix_v1.json",
+      "component_id": "validation_kit"
+    },
+    {
+      "path_id": "LB-PATH-VAL-TEST-001",
+      "path": "tests/test_level_b_payload_contract.py",
+      "component_id": "validation_kit"
+    },
+    {
+      "path_id": "LB-PATH-VAL-TEST-002",
+      "path": "tests/test_level_b_traceability_matrix.py",
+      "component_id": "validation_kit"
+    },
+    {
+      "path_id": "LB-PATH-GB-DOC-001",
+      "path": "docs/LEVEL_B_GOLDEN_BASELINE_MATRIX_v1.md",
+      "component_id": "golden_baseline"
+    },
+    {
+      "path_id": "LB-PATH-GB-SCHEMA-001",
+      "path": "schemas/level_b_golden_baseline_registry_v1.json",
+      "component_id": "golden_baseline"
+    },
+    {
+      "path_id": "LB-PATH-GB-TEST-001",
+      "path": "tests/test_level_b_golden_baseline.py",
+      "component_id": "golden_baseline"
+    },
+    {
+      "path_id": "LB-PATH-RG-DOC-001",
+      "path": "docs/LEVEL_B_RELEASE_GATE_OFFLINE_v1.md",
+      "component_id": "release_gate"
+    },
+    {
+      "path_id": "LB-PATH-RG-SCHEMA-001",
+      "path": "schemas/level_b_release_gate_manifest_v1.json",
+      "component_id": "release_gate"
+    },
+    {
+      "path_id": "LB-PATH-RG-TOOL-001",
+      "path": "tools/run_level_b_release_gate_offline.py",
+      "component_id": "release_gate"
+    },
+    {
+      "path_id": "LB-PATH-RB-DOC-001",
+      "path": "docs/LEVEL_B_RUNBOOK_OFFLINE_v1.md",
+      "component_id": "runbook"
+    },
+    {
+      "path_id": "LB-PATH-RB-SCHEMA-001",
+      "path": "schemas/level_b_runbook_checklist_v1.json",
+      "component_id": "runbook"
+    },
+    {
+      "path_id": "LB-PATH-RB-TOOL-001",
+      "path": "tools/run_level_b_runbook_preflight.py",
+      "component_id": "runbook"
+    },
+    {
+      "path_id": "LB-PATH-CC-DOC-001",
+      "path": "docs/LEVEL_B_CHANGE_CONTROL_PACK_v1.md",
+      "component_id": "change_control"
+    },
+    {
+      "path_id": "LB-PATH-CC-SCHEMA-001",
+      "path": "schemas/level_b_change_control_registry_v1.json",
+      "component_id": "change_control"
+    },
+    {
+      "path_id": "LB-PATH-CC-TOOL-001",
+      "path": "tools/run_level_b_change_control_precheck.py",
+      "component_id": "change_control"
+    },
+    {
+      "path_id": "LB-PATH-TB-DOC-001",
+      "path": "docs/LEVEL_B_TRACEABILITY_BUNDLE_v1.md",
+      "component_id": "traceability_bundle"
+    },
+    {
+      "path_id": "LB-PATH-TB-SCHEMA-001",
+      "path": "schemas/level_b_traceability_bundle_registry_v1.json",
+      "component_id": "traceability_bundle"
+    },
+    {
+      "path_id": "LB-PATH-TB-TOOL-001",
+      "path": "tools/run_level_b_traceability_bundle.py",
+      "component_id": "traceability_bundle"
+    }
+  ],
+  "components": [
+    {
+      "component_id": "validation_kit",
+      "title": "Validation Kit",
+      "kind": "validation",
+      "depends_on": [],
+      "required_tags": [
+        "stable-level-b-validation-v2"
+      ],
+      "anchor_paths": [
+        "docs/LEVEL_B_VALIDATION_TRACEABILITY_MATRIX_v1.md",
+        "schemas/level_b_validation_traceability_matrix_v1.json",
+        "tests/test_level_b_payload_contract.py",
+        "tests/test_level_b_traceability_matrix.py"
+      ]
+    },
+    {
+      "component_id": "golden_baseline",
+      "title": "Golden Baseline Pack",
+      "kind": "golden",
+      "depends_on": [
+        "validation_kit"
+      ],
+      "required_tags": [
+        "stable-level-b-golden-release-v1"
+      ],
+      "anchor_paths": [
+        "docs/LEVEL_B_GOLDEN_BASELINE_MATRIX_v1.md",
+        "schemas/level_b_golden_baseline_registry_v1.json",
+        "tests/test_level_b_golden_baseline.py"
+      ]
+    },
+    {
+      "component_id": "release_gate",
+      "title": "Release Gate Offline",
+      "kind": "release_gate",
+      "depends_on": [
+        "golden_baseline"
+      ],
+      "required_tags": [
+        "stable-level-b-golden-release-v1"
+      ],
+      "anchor_paths": [
+        "docs/LEVEL_B_RELEASE_GATE_OFFLINE_v1.md",
+        "schemas/level_b_release_gate_manifest_v1.json",
+        "tools/run_level_b_release_gate_offline.py"
+      ]
+    },
+    {
+      "component_id": "runbook",
+      "title": "Runbook Offline",
+      "kind": "runbook",
+      "depends_on": [
+        "release_gate"
+      ],
+      "required_tags": [
+        "stable-level-b-runbook-v1"
+      ],
+      "anchor_paths": [
+        "docs/LEVEL_B_RUNBOOK_OFFLINE_v1.md",
+        "schemas/level_b_runbook_checklist_v1.json",
+        "tools/run_level_b_runbook_preflight.py"
+      ]
+    },
+    {
+      "component_id": "change_control",
+      "title": "Change Control Pack",
+      "kind": "change_control",
+      "depends_on": [
+        "runbook"
+      ],
+      "required_tags": [
+        "stable-level-b-change-control-v1"
+      ],
+      "anchor_paths": [
+        "docs/LEVEL_B_CHANGE_CONTROL_PACK_v1.md",
+        "schemas/level_b_change_control_registry_v1.json",
+        "tools/run_level_b_change_control_precheck.py"
+      ]
+    },
+    {
+      "component_id": "traceability_bundle",
+      "title": "Traceability Bundle",
+      "kind": "traceability",
+      "depends_on": [
+        "change_control"
+      ],
+      "required_tags": [],
+      "anchor_paths": [
+        "docs/LEVEL_B_TRACEABILITY_BUNDLE_v1.md",
+        "schemas/level_b_traceability_bundle_registry_v1.json",
+        "tools/run_level_b_traceability_bundle.py"
+      ]
+    }
+  ],
+  "execution_chain": [
+    {
+      "stage_id": "LB-CHAIN-001",
+      "order": 1,
+      "component_id": "validation_kit",
+      "objective": "Validate Level B contract and traceability matrix"
+    },
+    {
+      "stage_id": "LB-CHAIN-002",
+      "order": 2,
+      "component_id": "golden_baseline",
+      "objective": "Freeze non-negotiable golden cases"
+    },
+    {
+      "stage_id": "LB-CHAIN-003",
+      "order": 3,
+      "component_id": "release_gate",
+      "objective": "Block releases when critical suites or golden are missing"
+    },
+    {
+      "stage_id": "LB-CHAIN-004",
+      "order": 4,
+      "component_id": "runbook",
+      "objective": "Discipline offline execution and preflight"
+    },
+    {
+      "stage_id": "LB-CHAIN-005",
+      "order": 5,
+      "component_id": "change_control",
+      "objective": "Govern modifications on protected offline assets"
+    },
+    {
+      "stage_id": "LB-CHAIN-006",
+      "order": 6,
+      "component_id": "traceability_bundle",
+      "objective": "Reconstruct the unified traceability view of the offline stack"
+    }
+  ],
+  "decision_policy": {
+    "decision_values": [
+      "COMPLETE",
+      "HOLD",
+      "ERROR"
+    ],
+    "worktree_clean_required": true,
+    "report_default_path": "artifacts/level_b_traceability_bundle_report_v1.json"
+  },
+  "stop_conditions": [
+    "Missing required tag",
+    "Missing required path",
+    "Unresolved component anchor set",
+    "Dirty working tree",
+    "Invalid registry structure"
+  ]
+}

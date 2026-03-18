@@ -1,0 +1,213 @@
+{
+  "bundle_id": "LB-TB-001",
+  "bundle_version": "v1",
+  "base_dir": "C:/normattiva_rag_sprint1",
+  "decision": "COMPLETE",
+  "reasons": [],
+  "git_status_clean": true,
+  "available_tags": [
+    "stable-level-b-validation-v2",
+    "stable-level-b-golden-release-v1",
+    "stable-level-b-runbook-v1",
+    "stable-level-b-change-control-v1"
+  ],
+  "tag_results": [
+    {
+      "tag": "stable-level-b-validation-v2",
+      "present": true
+    },
+    {
+      "tag": "stable-level-b-golden-release-v1",
+      "present": true
+    },
+    {
+      "tag": "stable-level-b-runbook-v1",
+      "present": true
+    },
+    {
+      "tag": "stable-level-b-change-control-v1",
+      "present": true
+    }
+  ],
+  "path_results": [
+    {
+      "path_id": "LB-PATH-VAL-DOC-001",
+      "path": "docs/LEVEL_B_VALIDATION_TRACEABILITY_MATRIX_v1.md",
+      "component_id": "validation_kit",
+      "exists": true
+    },
+    {
+      "path_id": "LB-PATH-GB-DOC-001",
+      "path": "docs/LEVEL_B_GOLDEN_BASELINE_MATRIX_v1.md",
+      "component_id": "golden_baseline",
+      "exists": true
+    },
+    {
+      "path_id": "LB-PATH-RG-DOC-001",
+      "path": "docs/LEVEL_B_RELEASE_GATE_OFFLINE_v1.md",
+      "component_id": "release_gate",
+      "exists": true
+    },
+    {
+      "path_id": "LB-PATH-RB-DOC-001",
+      "path": "docs/LEVEL_B_RUNBOOK_OFFLINE_v1.md",
+      "component_id": "runbook",
+      "exists": true
+    },
+    {
+      "path_id": "LB-PATH-CC-DOC-001",
+      "path": "docs/LEVEL_B_CHANGE_CONTROL_PACK_v1.md",
+      "component_id": "change_control",
+      "exists": true
+    },
+    {
+      "path_id": "LB-PATH-TB-DOC-001",
+      "path": "docs/LEVEL_B_TRACEABILITY_BUNDLE_v1.md",
+      "component_id": "traceability_bundle",
+      "exists": true
+    }
+  ],
+  "component_results": [
+    {
+      "component_id": "validation_kit",
+      "title": "Validation Kit",
+      "kind": "validation",
+      "depends_on": [],
+      "anchor_results": [],
+      "tag_results": [
+        {
+          "tag": "stable-level-b-validation-v2",
+          "present": true
+        }
+      ],
+      "anchor_complete": true,
+      "tag_complete": true,
+      "component_complete": true
+    },
+    {
+      "component_id": "golden_baseline",
+      "title": "Golden Baseline Pack",
+      "kind": "golden",
+      "depends_on": [
+        "validation_kit"
+      ],
+      "anchor_results": [],
+      "tag_results": [
+        {
+          "tag": "stable-level-b-golden-release-v1",
+          "present": true
+        }
+      ],
+      "anchor_complete": true,
+      "tag_complete": true,
+      "component_complete": true
+    },
+    {
+      "component_id": "release_gate",
+      "title": "Release Gate Offline",
+      "kind": "release_gate",
+      "depends_on": [
+        "golden_baseline"
+      ],
+      "anchor_results": [],
+      "tag_results": [
+        {
+          "tag": "stable-level-b-golden-release-v1",
+          "present": true
+        }
+      ],
+      "anchor_complete": true,
+      "tag_complete": true,
+      "component_complete": true
+    },
+    {
+      "component_id": "runbook",
+      "title": "Runbook Offline",
+      "kind": "runbook",
+      "depends_on": [
+        "release_gate"
+      ],
+      "anchor_results": [],
+      "tag_results": [
+        {
+          "tag": "stable-level-b-runbook-v1",
+          "present": true
+        }
+      ],
+      "anchor_complete": true,
+      "tag_complete": true,
+      "component_complete": true
+    },
+    {
+      "component_id": "change_control",
+      "title": "Change Control Pack",
+      "kind": "change_control",
+      "depends_on": [
+        "runbook"
+      ],
+      "anchor_results": [],
+      "tag_results": [
+        {
+          "tag": "stable-level-b-change-control-v1",
+          "present": true
+        }
+      ],
+      "anchor_complete": true,
+      "tag_complete": true,
+      "component_complete": true
+    },
+    {
+      "component_id": "traceability_bundle",
+      "title": "Traceability Bundle",
+      "kind": "traceability",
+      "depends_on": [
+        "change_control"
+      ],
+      "anchor_results": [],
+      "tag_results": [],
+      "anchor_complete": true,
+      "tag_complete": true,
+      "component_complete": true
+    }
+  ],
+  "execution_chain": [
+    {
+      "stage_id": "LB-CHAIN-001",
+      "order": 1,
+      "component_id": "validation_kit",
+      "objective": "Validate Level B contract and traceability matrix"
+    },
+    {
+      "stage_id": "LB-CHAIN-002",
+      "order": 2,
+      "component_id": "golden_baseline",
+      "objective": "Freeze non-negotiable golden cases"
+    },
+    {
+      "stage_id": "LB-CHAIN-003",
+      "order": 3,
+      "component_id": "release_gate",
+      "objective": "Block releases when critical suites or golden are missing"
+    },
+    {
+      "stage_id": "LB-CHAIN-004",
+      "order": 4,
+      "component_id": "runbook",
+      "objective": "Discipline offline execution and preflight"
+    },
+    {
+      "stage_id": "LB-CHAIN-005",
+      "order": 5,
+      "component_id": "change_control",
+      "objective": "Govern modifications on protected offline assets"
+    },
+    {
+      "stage_id": "LB-CHAIN-006",
+      "order": 6,
+      "component_id": "traceability_bundle",
+      "objective": "Reconstruct the unified traceability view of the offline stack"
+    }
+  ],
+  "registry_problems": [],
+  "next_action": "Traceability bundle is coherent. You may consolidate the bundle with commit and tag."
+}
