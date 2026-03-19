@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/final_ab_minimum_documentary_packet_schema_v1.json",
+  "schema_id": "final_ab_minimum_documentary_packet_schema_v1",
+  "schema_version": "1.0.0",
+  "title": "FinalABMinimumDocumentaryPacketSchemaV1",
+  "description": "Final handoff minimum documentary packet. Derived from the preliminary Level B documentary packet baseline.",
+  "derives_from": [
+    "schemas/level_b_documentary_packet_schema_v1.json"
+  ],
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_set",
+    "citation_set",
+    "vigenza_findings",
+    "cross_reference_findings",
+    "coverage_findings",
+    "documentary_warnings",
+    "documentary_errors",
+    "documentary_blocks",
+    "completeness_flags",
+    "audit_trace",
+    "shadow_trace"
+  ],
+  "properties": {
+    "source_set": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "source_id"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "citation_set": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "vigenza_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "cross_reference_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "coverage_findings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coverage_status",
+        "critical_gap_flag"
+      ],
+      "properties": {
+        "coverage_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "critical_gap_flag": {
+          "type": "boolean"
+        }
+      }
+    },
+    "documentary_warnings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "documentary_errors": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "documentary_blocks": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "completeness_flags": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimum_integrity",
+        "minimum_traceability",
+        "minimum_coverage"
+      ],
+      "properties": {
+        "minimum_integrity": {
+          "type": "boolean"
+        },
+        "minimum_traceability": {
+          "type": "boolean"
+        },
+        "minimum_coverage": {
+          "type": "boolean"
+        }
+      }
+    },
+    "audit_trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trace_id",
+        "request_id"
+      ],
+      "properties": {
+        "trace_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "shadow_trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trace_id",
+        "request_id"
+      ],
+      "properties": {
+        "trace_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "human_completion_required": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

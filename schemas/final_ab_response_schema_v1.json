@@ -1,21 +1,32 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "FinalABResponse",
+  "$id": "https://example.local/schemas/final_ab_response_schema_v1.json",
+  "schema_id": "final_ab_response_schema_v1",
+  "schema_version": "1.0.0",
+  "title": "FinalABResponseSchemaV1",
+  "description": "Final controlled B->A response contract for Phase 10 pre-runtime handoff.",
   "type": "object",
+  "additionalProperties": false,
   "required": [
+    "response_id",
     "request_id",
     "case_id",
     "trace_id",
-    "api_version",
     "responder_module",
-    "status",
-    "payload",
+    "response_status",
+    "documentary_packet",
     "warnings",
     "errors",
     "blocks",
+    "audit_trace",
+    "shadow_trace",
     "timestamp"
   ],
   "properties": {
+    "response_id": {
+      "type": "string",
+      "minLength": 1
+    },
     "request_id": {
       "type": "string",
       "minLength": 1
@@ -28,15 +39,11 @@
       "type": "string",
       "minLength": 1
     },
-    "api_version": {
-      "type": "string",
-      "minLength": 1
-    },
     "responder_module": {
       "type": "string",
-      "minLength": 1
+      "const": "RAG_NORMATIVO_GOVERNATO_E_FEDERATO"
     },
-    "status": {
+    "response_status": {
       "type": "string",
       "enum": [
         "SUCCESS",
@@ -47,31 +54,100 @@
         "ERROR"
       ]
     },
-    "payload": {
-      "type": "object"
+    "documentary_packet": {
+      "$ref": "final_ab_minimum_documentary_packet_schema_v1.json"
     },
     "warnings": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "object"
       }
     },
     "errors": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "object"
       }
     },
     "blocks": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "object"
+      }
+    },
+    "audit_trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trace_id",
+        "request_id",
+        "contract_validation_passed",
+        "human_approval_required"
+      ],
+      "properties": {
+        "trace_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contract_validation_passed": {
+          "type": "boolean"
+        },
+        "human_approval_required": {
+          "type": "boolean",
+          "const": true
+        },
+        "adapter_stage": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "shadow_trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trace_id",
+        "request_id",
+        "forbidden_fields_detected",
+        "support_only_flag"
+      ],
+      "properties": {
+        "trace_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "forbidden_fields_detected": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "propagated_block_codes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "support_only_flag": {
+          "type": "boolean",
+          "const": true
+        },
+        "m07_boundary_state": {
+          "type": "string"
+        }
       }
     },
     "timestamp": {
       "type": "string",
-      "minLength": 1
+      "format": "date-time"
     }
-  },
-  "additionalProperties": false
+  }
 }

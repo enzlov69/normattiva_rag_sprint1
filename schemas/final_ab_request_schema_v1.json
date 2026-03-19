@@ -1,7 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "FinalABRequest",
+  "$id": "https://example.local/schemas/final_ab_request_schema_v1.json",
+  "schema_id": "final_ab_request_schema_v1",
+  "schema_version": "1.0.0",
+  "title": "FinalABRequestSchemaV1",
+  "description": "Final controlled A->B request contract for Phase 10 pre-runtime handoff.",
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "request_id",
     "case_id",
@@ -9,8 +14,13 @@
     "api_version",
     "caller_module",
     "target_module",
-    "timestamp",
-    "payload"
+    "request_type",
+    "documentary_objective",
+    "legal_scope",
+    "requested_outputs",
+    "documentary_constraints",
+    "m07_context",
+    "audit_context"
   ],
   "properties": {
     "request_id": {
@@ -27,7 +37,7 @@
     },
     "api_version": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^1\\.[0-9]+(\\.[0-9]+)?$"
     },
     "caller_module": {
       "type": "string",
@@ -35,15 +45,170 @@
     },
     "target_module": {
       "type": "string",
-      "minLength": 1
+      "const": "RAG_NORMATIVO_GOVERNATO_E_FEDERATO"
     },
-    "timestamp": {
+    "request_type": {
+      "type": "string",
+      "enum": [
+        "DOCUMENTARY_RETRIEVAL",
+        "CITATION_SUPPORT",
+        "VIGENZA_CHECK",
+        "CROSS_REFERENCE_CHECK",
+        "COVERAGE_CHECK",
+        "M07_DOCUMENTARY_SUPPORT"
+      ]
+    },
+    "documentary_objective": {
       "type": "string",
       "minLength": 1
     },
-    "payload": {
-      "type": "object"
+    "legal_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "domain",
+        "primary_corpus",
+        "normative_perimeter"
+      ],
+      "properties": {
+        "domain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "primary_corpus": {
+          "type": "string",
+          "minLength": 1
+        },
+        "normative_perimeter": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "secondary_corpora": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "requested_outputs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "documentary_packet",
+          "citation_packet",
+          "vigenza_status",
+          "cross_reference_status",
+          "coverage_status",
+          "warnings",
+          "errors",
+          "blocks",
+          "trace_tecnica"
+        ]
+      }
+    },
+    "documentary_constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "support_only",
+        "propagate_critical_blocks",
+        "allow_only_documentary_outputs"
+      ],
+      "properties": {
+        "support_only": {
+          "type": "boolean",
+          "const": true
+        },
+        "propagate_critical_blocks": {
+          "type": "boolean",
+          "const": true
+        },
+        "allow_only_documentary_outputs": {
+          "type": "boolean",
+          "const": true
+        },
+        "coverage_target": {
+          "type": "string",
+          "enum": [
+            "ESSENTIAL_ONLY",
+            "STANDARD",
+            "EXTENDED"
+          ]
+        },
+        "retrieval_hints": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "m07_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "support_requested",
+        "human_completion_required",
+        "closure_requested"
+      ],
+      "properties": {
+        "support_requested": {
+          "type": "boolean"
+        },
+        "human_completion_required": {
+          "type": "boolean",
+          "const": true
+        },
+        "closure_requested": {
+          "type": "boolean",
+          "const": false
+        },
+        "requested_scope": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "DOCUMENTARY_ONLY",
+            "ANNEX_AND_CROSSREF",
+            "FULL_DOCUMENTARY_SUPPORT"
+          ]
+        }
+      }
+    },
+    "audit_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "timestamp",
+        "orchestrator_mode",
+        "human_approval_required"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "orchestrator_mode": {
+          "type": "string",
+          "enum": [
+            "AI_ASSISTED_LEVEL_A"
+          ]
+        },
+        "human_approval_required": {
+          "type": "boolean",
+          "const": true
+        },
+        "audit_channel": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
     }
-  },
-  "additionalProperties": false
+  }
 }

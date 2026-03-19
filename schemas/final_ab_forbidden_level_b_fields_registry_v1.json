@@ -1,0 +1,129 @@
+{
+  "registry_name": "final_ab_forbidden_level_b_fields_registry_v1",
+  "registry_version": "1.0.0",
+  "scope": "final_ab_controlled_pre_runtime_handoff",
+  "derives_from": [
+    "schemas/level_b_forbidden_fields_registry_v1.json",
+    "schemas/final_ab_m07_boundary_registry_v1.json"
+  ],
+  "source_layer": "B",
+  "entries": [
+    {
+      "field_name": "decision",
+      "reason": "Il Livello B non puo' assumere funzione decisoria.",
+      "forbidden_scope": "decisorio",
+      "severity": "CRITICAL",
+      "block_level": "REJECTED",
+      "propagate_to_level_a": true,
+      "notes": "Qualunque decisione finale resta nel Livello A."
+    },
+    {
+      "field_name": "final_decision",
+      "reason": "Il Livello B non puo' produrre esito conclusivo.",
+      "forbidden_scope": "decisorio",
+      "severity": "CRITICAL",
+      "block_level": "REJECTED",
+      "propagate_to_level_a": true,
+      "notes": "Campo conclusivo vietato."
+    },
+    {
+      "field_name": "approval",
+      "reason": "Il Livello B non approva l'istruttoria ne' il provvedimento.",
+      "forbidden_scope": "validativo",
+      "severity": "CRITICAL",
+      "block_level": "REJECTED",
+      "propagate_to_level_a": true,
+      "notes": "L'approvazione umana finale resta esterna al Livello B."
+    },
+    {
+      "field_name": "human_approval",
+      "reason": "Il Livello B non puo' simulare approvazione umana.",
+      "forbidden_scope": "validativo",
+      "severity": "CRITICAL",
+      "block_level": "REJECTED",
+      "propagate_to_level_a": true,
+      "notes": "L'uomo decide e firma."
+    },
+    {
+      "field_name": "normative_prevalence_choice",
+      "reason": "La scelta della norma prevalente resta nel Livello A.",
+      "forbidden_scope": "interpretativo_applicativo",
+      "severity": "CRITICAL",
+      "block_level": "REJECTED",
+      "propagate_to_level_a": true,
+      "notes": "Il Livello B non interpreta applicativamente."
+    },
+    {
+      "field_name": "legal_applicability_decision",
+      "reason": "Il Livello B non valuta l'applicabilita' concreta.",
+      "forbidden_scope": "interpretativo_applicativo",
+      "severity": "CRITICAL",
+      "block_level": "REJECTED",
+      "propagate_to_level_a": true,
+      "notes": "Resta nel Metodo Cerda."
+    },
+    {
+      "field_name": "final_motivation",
+      "reason": "Il Livello B non motiva l'esito finale.",
+      "forbidden_scope": "decisorio",
+      "severity": "CRITICAL",
+      "block_level": "REJECTED",
+      "propagate_to_level_a": true,
+      "notes": "La motivazione finale non e' documentale."
+    },
+    {
+      "field_name": "m07_closed",
+      "reason": "Il supporto documentale non puo' chiudere M07.",
+      "forbidden_scope": "chiusura_indebita_m07",
+      "severity": "CRITICAL",
+      "block_level": "REJECTED",
+      "propagate_to_level_a": true,
+      "notes": "Supporto documentale a M07 non equivale a chiusura M07."
+    },
+    {
+      "field_name": "output_authorized",
+      "reason": "Il Livello B non autorizza output opponibili.",
+      "forbidden_scope": "autorizzativo",
+      "severity": "CRITICAL",
+      "block_level": "REJECTED",
+      "propagate_to_level_a": true,
+      "notes": "L'autorizzazione finale resta nel Livello A."
+    },
+    {
+      "field_name": "final_compliance_passed",
+      "reason": "Il Livello B non sostituisce il Final Compliance Gate.",
+      "forbidden_scope": "validativo",
+      "severity": "CRITICAL",
+      "block_level": "REJECTED",
+      "propagate_to_level_a": true,
+      "notes": "Il gate finale resta nel Livello A."
+    },
+    {
+      "field_name": "provvedimento_generato",
+      "reason": "Il Livello B non genera il provvedimento finale.",
+      "forbidden_scope": "autorizzativo",
+      "severity": "CRITICAL",
+      "block_level": "REJECTED",
+      "propagate_to_level_a": true,
+      "notes": "Il Livello B resta tecnico-documentale."
+    },
+    {
+      "field_name": "rac_finale_decisorio",
+      "reason": "Il Livello B non costruisce RAC decisorio.",
+      "forbidden_scope": "decisorio",
+      "severity": "CRITICAL",
+      "block_level": "REJECTED",
+      "propagate_to_level_a": true,
+      "notes": "Il RAC finale resta nel Livello A."
+    },
+    {
+      "field_name": "esito_istruttoria_conclusivo",
+      "reason": "Il Livello B non conclude l'istruttoria.",
+      "forbidden_scope": "decisorio",
+      "severity": "CRITICAL",
+      "block_level": "REJECTED",
+      "propagate_to_level_a": true,
+      "notes": "Campo istruttorio conclusivo vietato."
+    }
+  ]
+}
