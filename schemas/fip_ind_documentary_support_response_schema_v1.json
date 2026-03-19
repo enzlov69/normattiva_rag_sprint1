@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://normattiva-rag.local/schemas/fip_ind_documentary_support_response_schema_v1.json",
+  "title": "FIP-IND Documentary Support Response v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "case_id",
+    "trace_id",
+    "api_version",
+    "responder_module",
+    "status",
+    "payload",
+    "warnings",
+    "errors",
+    "blocks",
+    "timestamp"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "api_version": {
+      "type": "string",
+      "const": "2.0"
+    },
+    "responder_module": {
+      "type": "string",
+      "const": "B17_FIPINDSupportLayer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "SUCCESS_WITH_WARNINGS",
+        "DEGRADED",
+        "BLOCKED",
+        "REJECTED",
+        "ERROR"
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "documentary_packet"
+      ],
+      "properties": {
+        "documentary_packet": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "question_ids",
+            "support_only_flag"
+          ],
+          "properties": {
+            "question_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Q01",
+                  "Q02",
+                  "Q03",
+                  "Q04",
+                  "Q05",
+                  "Q06",
+                  "Q07",
+                  "Q08",
+                  "Q09",
+                  "Q10"
+                ]
+              }
+            },
+            "citation_packets": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "vigenza_statuses": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "crossref_statuses": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "coverage_status": {
+              "type": "object"
+            },
+            "fip_ind_evidence_pack": {
+              "$ref": "fip_ind_evidence_pack_schema_v1.json"
+            },
+            "technical_trace_ref": {
+              "type": "string"
+            },
+            "support_only_flag": {
+              "type": "boolean",
+              "const": true
+            }
+          }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "blocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "block_id",
+          "case_id",
+          "block_code",
+          "block_category",
+          "block_severity",
+          "origin_module",
+          "block_reason",
+          "block_status"
+        ],
+        "properties": {
+          "block_id": {
+            "type": "string"
+          },
+          "case_id": {
+            "type": "string"
+          },
+          "block_code": {
+            "type": "string",
+            "enum": [
+              "CITATION_INCOMPLETE",
+              "VIGENZA_UNCERTAIN",
+              "CROSSREF_UNRESOLVED",
+              "AUDIT_INCOMPLETE",
+              "OUTPUT_NOT_OPPONIBLE",
+              "COVERAGE_INADEQUATE",
+              "FIP_IND_REQUIRED",
+              "FIP_IND_THRESHOLD_BLOCK",
+              "FIP_IND_EVIDENCE_MISSING",
+              "FIP_IND_SCOPE_VIOLATION"
+            ]
+          },
+          "block_category": {
+            "type": "string"
+          },
+          "block_severity": {
+            "type": "string",
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH",
+              "CRITICAL"
+            ]
+          },
+          "origin_module": {
+            "type": "string"
+          },
+          "block_reason": {
+            "type": "string"
+          },
+          "block_status": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "SUPPORTED",
+              "RELEASED"
+            ]
+          }
+        }
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "not": {
+    "anyOf": [
+      {
+        "required": [
+          "final_act_qualification"
+        ]
+      },
+      {
+        "required": [
+          "gate_result"
+        ]
+      },
+      {
+        "required": [
+          "output_authorized"
+        ]
+      },
+      {
+        "required": [
+          "go_finale"
+        ]
+      }
+    ]
+  }
+}

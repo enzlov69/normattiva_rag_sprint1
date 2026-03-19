@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://normattiva-rag.local/schemas/fip_ind_evidence_pack_schema_v1.json",
+  "title": "FIP-IND Evidence Pack v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "record_type",
+    "case_id",
+    "trace_id",
+    "source_layer",
+    "human_gate_required",
+    "question_support",
+    "fip_ind_support_status"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "record_type": {
+      "type": "string",
+      "const": "FIPIndEvidencePack"
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_layer": {
+      "type": "string",
+      "const": "B"
+    },
+    "human_gate_required": {
+      "type": "boolean",
+      "const": true
+    },
+    "question_support": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "question_id",
+          "support_status",
+          "source_ids"
+        ],
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "enum": [
+              "Q01",
+              "Q02",
+              "Q03",
+              "Q04",
+              "Q05",
+              "Q06",
+              "Q07",
+              "Q08",
+              "Q09",
+              "Q10"
+            ]
+          },
+          "support_status": {
+            "type": "string",
+            "enum": [
+              "SUPPORTED",
+              "PARTIAL",
+              "UNSUPPORTED",
+              "BLOCKED"
+            ]
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "citation_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "fip_ind_support_status": {
+      "type": "string",
+      "enum": [
+        "READY_FOR_HUMAN_GATE",
+        "PARTIAL_SUPPORT",
+        "INCOMPLETE_SUPPORT",
+        "BLOCKED_SUPPORT"
+      ]
+    }
+  },
+  "not": {
+    "anyOf": [
+      {
+        "required": [
+          "final_act_qualification"
+        ]
+      },
+      {
+        "required": [
+          "gate_result"
+        ]
+      },
+      {
+        "required": [
+          "output_authorized"
+        ]
+      },
+      {
+        "required": [
+          "go_finale"
+        ]
+      }
+    ]
+  }
+}

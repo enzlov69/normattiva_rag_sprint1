@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://normattiva-rag.local/schemas/fip_ind_questionnaire_schema_v1.json",
+  "title": "FIP-IND Questionnaire v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "trace_id",
+    "act_type",
+    "act_title",
+    "compiled_by_module",
+    "questions"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "act_type": {
+      "type": "string",
+      "enum": [
+        "DELIBERA_GC",
+        "DELIBERA_CC",
+        "DETERMINA",
+        "PROPOSTA",
+        "ALTRO"
+      ]
+    },
+    "act_title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "compiled_by_module": {
+      "type": "string",
+      "minLength": 1
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "question_id",
+          "question_text",
+          "answer"
+        ],
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "enum": [
+              "Q01",
+              "Q02",
+              "Q03",
+              "Q04",
+              "Q05",
+              "Q06",
+              "Q07",
+              "Q08",
+              "Q09",
+              "Q10"
+            ]
+          },
+          "question_text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "answer": {
+            "type": "string",
+            "enum": [
+              "YES",
+              "NO",
+              "UNKNOWN"
+            ]
+          },
+          "brief_reason": {
+            "type": "string"
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://normattiva-rag.local/schemas/fip_ind_gate_result_schema_v1.json",
+  "title": "FIP-IND Gate Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "trace_id",
+    "total_yes",
+    "total_no",
+    "total_unknown",
+    "gate_result",
+    "blocked",
+    "requalification_required",
+    "human_review_required",
+    "notes"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "total_yes": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "total_no": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "total_unknown": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "gate_result": {
+      "type": "string",
+      "enum": [
+        "INDIRIZZO_PURO",
+        "RISCHIO_FIP_IND",
+        "PROVVEDIMENTO_SOSTANZIALE",
+        "FALSO_INDIRIZZO_BLOCKED"
+      ]
+    },
+    "blocked": {
+      "type": "boolean"
+    },
+    "requalification_required": {
+      "type": "boolean"
+    },
+    "human_review_required": {
+      "type": "boolean",
+      "const": true
+    },
+    "notes": {
+      "type": "string"
+    },
+    "triggered_block_code": {
+      "type": "string"
+    },
+    "answered_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
