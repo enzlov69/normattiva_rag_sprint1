@@ -5,8 +5,9 @@ import json
 from pathlib import Path
 from typing import Any, Callable
 
-from jsonschema import Draft202012Validator, RefResolver
+from jsonschema import Draft202012Validator
 from jsonschema.exceptions import ValidationError
+from referencing import Registry
 
 
 FORBIDDEN_DECISION_KEYS = {
@@ -75,27 +76,32 @@ def _schema_bundle() -> dict[str, dict[str, Any]]:
     }
 
 
+def _build_registry() -> Registry[Any]:
+    schemas = _schema_bundle()
+    schemas_dir = _schemas_dir()
+
+    pairs: list[tuple[str, Any]] = []
+
+    for name, loaded_schema in schemas.items():
+        schema_path = (schemas_dir / name).resolve()
+        file_uri = schema_path.as_uri()
+        schema_id = loaded_schema.get("$id")
+
+        pairs.append((file_uri, loaded_schema))
+        if isinstance(schema_id, str) and schema_id:
+            pairs.append((schema_id, loaded_schema))
+
+    return Registry().with_contents(pairs)
+
+
 def _build_validator(schema_name: str) -> Draft202012Validator:
     schemas = _schema_bundle()
     if schema_name not in schemas:
         raise M07AdapterError(f"Schema non trovato: {schema_name}")
 
     schema = schemas[schema_name]
-    schemas_dir = _schemas_dir()
-
-    store: dict[str, Any] = {}
-    for name, loaded_schema in schemas.items():
-        schema_path = (schemas_dir / name).resolve()
-        file_uri = schema_path.as_uri()
-        schema_id = loaded_schema.get("$id")
-
-        store[file_uri] = loaded_schema
-        if schema_id:
-            store[schema_id] = loaded_schema
-
-    base_uri = (schemas_dir / schema_name).resolve().as_uri()
-    resolver = RefResolver(base_uri=base_uri, referrer=schema, store=store)
-    return Draft202012Validator(schema, resolver=resolver)
+    registry = _build_registry()
+    return Draft202012Validator(schema, registry=registry)
 
 
 def _scan_for_forbidden_keys(value: Any, path: str = "$") -> list[str]:
