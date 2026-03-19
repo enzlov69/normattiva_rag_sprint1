@@ -1,0 +1,39 @@
+name: final-ab-runtime-governance-gate
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  governance-gate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+
+      - name: Run final AB runtime governance gate
+        run: |
+          python -m pytest tests/test_final_ab_runtime_anomaly_registry_consistency.py -q
+          python -m pytest tests/test_final_ab_runtime_outcome_semantics.py -q
+          python -m pytest tests/test_final_ab_runtime_anomaly_validator.py -q
+          python -m pytest tests/test_final_ab_runtime_golden_cases.py -q
+          python -m pytest tests/test_final_ab_runtime_baseline_verifier.py -q
+          python tools/final_ab_runtime_anomaly_validator.py
+          python tools/final_ab_runtime_baseline_verifier.py
+
