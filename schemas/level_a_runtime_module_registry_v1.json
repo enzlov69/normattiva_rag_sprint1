@@ -1,14 +1,126 @@
 {
   "registry_name": "level_a_runtime_module_registry_v1",
+  "registry_version": "1.0.0",
+  "scope": "level_a_runtime_controlled_handoff",
+  "description": "Runtime modules of Level A admitted in the controlled A/B runtime handoff. Only Level A governs, validates and authorizes.",
   "modules": [
-    "A1_OrchestratorePPAV",
-    "FASE_0_CaseClassifier",
-    "M07_Governor",
-    "RAC_Builder",
-    "Final_Compliance_Gate",
-    "Output_Authorizer",
-    "Audit_Logger",
-    "SHADOW_Tracer",
-    "Block_Manager"
+    {
+      "module_code": "A1_OrchestratorePPAV",
+      "title": "Orchestratore PPAV / Metodo Cerda",
+      "responsibility": "Apertura e governo del caso, orchestrazione AI-assistita e instradamento documentale controllato.",
+      "allowed_runtime_actions": [
+        "open_case",
+        "build_level_b_request",
+        "call_level_b_handoff",
+        "receive_documentary_support",
+        "route_blocks_to_level_a"
+      ],
+      "forbidden_runtime_actions": [
+        "delegate_final_decision_to_level_b",
+        "delegate_m07_closure_to_level_b",
+        "delegate_output_authorization_to_level_b"
+      ],
+      "can_call_level_b": true,
+      "can_receive_from_level_b": true,
+      "notes": "Primary runtime caller under Metodo Cerda governance."
+    },
+    {
+      "module_code": "A4_M07Governor",
+      "title": "M07 Governor",
+      "responsibility": "Presidio metodologico di M07-LPR e gestione del supporto documentale senza chiusura delegata.",
+      "allowed_runtime_actions": [
+        "request_m07_documentary_support",
+        "keep_human_completion_required",
+        "evaluate_m07_support_under_level_a"
+      ],
+      "forbidden_runtime_actions": [
+        "accept_m07_closed_from_level_b",
+        "certify_integral_reading_from_level_b",
+        "close_m07_without_human_method_control"
+      ],
+      "can_call_level_b": true,
+      "can_receive_from_level_b": true,
+      "notes": "M07 remains non-delegable."
+    },
+    {
+      "module_code": "A6_RACBuilder",
+      "title": "RAC Builder",
+      "responsibility": "Costruzione del RAC a partire da materiale gia' governato dal Livello A.",
+      "allowed_runtime_actions": [
+        "consume_documentary_support",
+        "build_rac_under_level_a"
+      ],
+      "forbidden_runtime_actions": [
+        "delegate_rac_generation_to_level_b",
+        "treat_level_b_output_as_rac_finale"
+      ],
+      "can_call_level_b": false,
+      "can_receive_from_level_b": true,
+      "notes": "Consumes controlled documentary support after Level A governance."
+    },
+    {
+      "module_code": "A5_FinalComplianceGate",
+      "title": "Final Compliance Gate",
+      "responsibility": "Validazione finale lato Livello A prima di qualsiasi esito opponibile.",
+      "allowed_runtime_actions": [
+        "receive_runtime_blocks",
+        "validate_level_a_output"
+      ],
+      "forbidden_runtime_actions": [
+        "move_final_compliance_to_level_b",
+        "accept_level_b_validation_as_final"
+      ],
+      "can_call_level_b": false,
+      "can_receive_from_level_b": true,
+      "notes": "Remains entirely in Level A."
+    },
+    {
+      "module_code": "A7_OutputAuthorizer",
+      "title": "Output Authorizer",
+      "responsibility": "Autorizzazione finale dell'output opponibile dopo governo metodologico e approvazione umana.",
+      "allowed_runtime_actions": [
+        "authorize_output_after_level_a_checks"
+      ],
+      "forbidden_runtime_actions": [
+        "accept_output_authorized_from_level_b",
+        "authorize_from_documentary_packet_only"
+      ],
+      "can_call_level_b": false,
+      "can_receive_from_level_b": true,
+      "notes": "Never moves to Level B."
+    },
+    {
+      "module_code": "A8_AuditLogger",
+      "title": "Audit Logger",
+      "responsibility": "Registrazione audit trail del collegamento runtime e dei blocchi critici.",
+      "allowed_runtime_actions": [
+        "record_runtime_handoff",
+        "record_block_propagation",
+        "record_gate_events"
+      ],
+      "forbidden_runtime_actions": [
+        "replace_method_governance",
+        "suppress_critical_audit_events"
+      ],
+      "can_call_level_b": false,
+      "can_receive_from_level_b": true,
+      "notes": "Audit remains mandatory."
+    },
+    {
+      "module_code": "A9_SHADOWTracer",
+      "title": "SHADOW Tracer",
+      "responsibility": "Tracciabilita' tecnica del percorso A->B->runner->B->A.",
+      "allowed_runtime_actions": [
+        "record_runtime_shadow",
+        "trace_modules_and_blocks"
+      ],
+      "forbidden_runtime_actions": [
+        "replace_audit_trail",
+        "hide_boundary_violations"
+      ],
+      "can_call_level_b": false,
+      "can_receive_from_level_b": true,
+      "notes": "SHADOW remains mandatory and non-substitutive."
+    }
   ]
 }

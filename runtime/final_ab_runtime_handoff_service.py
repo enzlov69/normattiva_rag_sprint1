@@ -107,6 +107,7 @@ class FinalABRuntimeHandoffService:
             "level_b_runtime_handoff",
             "B_RUNTIME_HANDOFF",
             "B_Runtime",
+            "RAG_NORMATIVO_GOVERNATO_E_FEDERATO",
         }
         if expected_target_module:
             accepted_targets.add(expected_target_module)
