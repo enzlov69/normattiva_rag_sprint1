@@ -1,0 +1,81 @@
+[
+  {
+    "case_id": "pilot_case_001",
+    "title": "Art. 107 TUEL - competenze gestionali del responsabile",
+    "caller_module": "A1_OrchestratorePPAV",
+    "domain_target": "enti_locali",
+    "query_text": "articolo 107 TUEL competenze gestionali del responsabile di settore",
+    "goal_istruttorio": "supporto documentale M07 su competenze gestionali e separazione tra indirizzo politico e gestione",
+    "source_priority": [
+      "corpus_governato",
+      "fonti_ufficiali"
+    ],
+    "reading_focus": [
+      "articoli",
+      "commi",
+      "rinvii"
+    ],
+    "metadata_filters": {
+      "ente_target": "Comune di Cerda",
+      "pilot_type": "governance"
+    },
+    "notes": "Caso pilota ordinario senza blocchi attesi.",
+    "expected_minimum_behavior": "SUCCESS_SUPPORT_PACKET",
+    "expected_blocks_if_any": [],
+    "simulation_profile": "success",
+    "include_m07_evidence_pack": true
+  },
+  {
+    "case_id": "pilot_case_002",
+    "title": "Art. 107 TUEL - citazione incompleta su caso sensibile",
+    "caller_module": "A4_M07Governor",
+    "domain_target": "enti_locali",
+    "query_text": "articolo 107 TUEL citazione incompleta e tracciabilità documentale",
+    "goal_istruttorio": "verificare propagazione blocco su citazione incompleta durante supporto documentale a M07",
+    "source_priority": [
+      "corpus_governato"
+    ],
+    "reading_focus": [
+      "articoli",
+      "commi",
+      "citazioni"
+    ],
+    "metadata_filters": {
+      "ente_target": "Comune di Cerda",
+      "pilot_type": "block"
+    },
+    "notes": "Caso pilota con blocco critico atteso.",
+    "expected_minimum_behavior": "BLOCKED_SUPPORT_PACKET",
+    "expected_blocks_if_any": [
+      "CITATION_INCOMPLETE"
+    ],
+    "simulation_profile": "blocked_citation_incomplete",
+    "include_m07_evidence_pack": true
+  },
+  {
+    "case_id": "pilot_case_003",
+    "title": "Atto di indirizzo vs gestione - coverage parziale con warning",
+    "caller_module": "A2_CaseClassifier",
+    "domain_target": "enti_locali",
+    "query_text": "atto di indirizzo differenza rispetto alla gestione amministrativa coverage parziale",
+    "goal_istruttorio": "supporto documentale M07 con warning di coverage parziale ma senza blocchi critici",
+    "source_priority": [
+      "corpus_governato",
+      "fonti_ufficiali"
+    ],
+    "reading_focus": [
+      "articoli",
+      "commi",
+      "distinzione competenze"
+    ],
+    "metadata_filters": {
+      "ente_target": "Comune di Cerda",
+      "pilot_type": "warning"
+    },
+    "notes": "Caso pilota con warning ma senza autorizzazione decisionale.",
+    "expected_minimum_behavior": "SUCCESS_WITH_WARNINGS_SUPPORT_PACKET",
+    "expected_blocks_if_any": [],
+    "simulation_profile": "success_with_warnings",
+    "include_m07_evidence_pack": true
+  }
+]
