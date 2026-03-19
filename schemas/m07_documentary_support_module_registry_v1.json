@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://normattiva-rag.local/schemas/m07_documentary_support_module_registry_v1.json",
+  "title": "M07 Documentary Support Module Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registry_id",
+    "registry_type",
+    "schema_version",
+    "baseline_tag",
+    "foundation_tag",
+    "runtime_adapter_tag",
+    "modules"
+  ],
+  "properties": {
+    "registry_id": {
+      "type": "string",
+      "const": "m07_documentary_support_module_registry_v1"
+    },
+    "registry_type": {
+      "type": "string",
+      "const": "LEVEL_A_LOCAL_MODULE_REGISTRY"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "baseline_tag": {
+      "type": "string",
+      "const": "stable-final-ab-master-cycle-v1"
+    },
+    "foundation_tag": {
+      "type": "string",
+      "const": "stable-m07-documentary-support-foundation-v1"
+    },
+    "runtime_adapter_tag": {
+      "type": "string",
+      "const": "stable-m07-documentary-support-runtime-adapter-v1"
+    },
+    "modules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "module_id",
+          "module_name",
+          "module_layer",
+          "module_kind",
+          "enabled",
+          "entrypoint",
+          "dispatch_mode",
+          "request_schema",
+          "response_schema",
+          "evidence_schema",
+          "allowed_callers",
+          "target_module",
+          "support_only",
+          "human_completion_required",
+          "can_close_m07",
+          "can_authorize_output",
+          "can_emit_go_no_go",
+          "can_build_rac",
+          "can_modify_runner_federated",
+          "guardrails",
+          "notes"
+        ],
+        "properties": {
+          "module_id": {
+            "type": "string",
+            "const": "A_M07_DOCUMENTARY_SUPPORT_ADAPTER"
+          },
+          "module_name": {
+            "type": "string",
+            "const": "M07 Documentary Support Adapter"
+          },
+          "module_layer": {
+            "type": "string",
+            "const": "A"
+          },
+          "module_kind": {
+            "type": "string",
+            "const": "CONTROLLED_LOCAL_ADAPTER"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "entrypoint": {
+            "type": "string",
+            "const": "runtime.m07_documentary_support_adapter.run_m07_documentary_support_exchange"
+          },
+          "dispatch_mode": {
+            "type": "string",
+            "const": "MANUAL_LEVEL_A_ONLY"
+          },
+          "request_schema": {
+            "type": "string",
+            "const": "schemas/m07_documentary_support_request_schema_v1.json"
+          },
+          "response_schema": {
+            "type": "string",
+            "const": "schemas/m07_documentary_support_response_schema_v1.json"
+          },
+          "evidence_schema": {
+            "type": "string",
+            "const": "schemas/m07_evidence_pack_schema_v1.json"
+          },
+          "allowed_callers": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": [
+                "A1_OrchestratorePPAV",
+                "A2_CaseClassifier",
+                "A4_M07Governor"
+              ]
+            },
+            "uniqueItems": true
+          },
+          "target_module": {
+            "type": "string",
+            "const": "B16_M07SupportLayer"
+          },
+          "support_only": {
+            "type": "boolean",
+            "const": true
+          },
+          "human_completion_required": {
+            "type": "boolean",
+            "const": true
+          },
+          "can_close_m07": {
+            "type": "boolean",
+            "const": false
+          },
+          "can_authorize_output": {
+            "type": "boolean",
+            "const": false
+          },
+          "can_emit_go_no_go": {
+            "type": "boolean",
+            "const": false
+          },
+          "can_build_rac": {
+            "type": "boolean",
+            "const": false
+          },
+          "can_modify_runner_federated": {
+            "type": "boolean",
+            "const": false
+          },
+          "guardrails": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "notes": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}
