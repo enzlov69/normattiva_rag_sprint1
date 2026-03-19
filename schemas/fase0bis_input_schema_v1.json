@@ -1,0 +1,108 @@
+{
+  "type": "object",
+  "required": [
+    "session_id",
+    "method_version",
+    "materia_prevalente",
+    "sensibilita",
+    "rischio_iniziale",
+    "intensita_applicativa"
+  ],
+  "properties": {
+    "session_id": {
+      "type": "string"
+    },
+    "method_version": {
+      "type": "string"
+    },
+    "natura_output": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tipologia_atto": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "materia_prevalente": {
+      "type": "string"
+    },
+    "sensibilita": {
+      "type": "object",
+      "properties": {
+        "dati_personali": {
+          "type": "boolean"
+        },
+        "benefici_economici": {
+          "type": "boolean"
+        },
+        "pnrr_o_finanziamenti_vincolati": {
+          "type": "boolean"
+        },
+        "impatto_esterno_rilevante": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "rischio_iniziale": {
+      "type": "string",
+      "enum": [
+        "BASSO",
+        "MEDIO",
+        "ALTO"
+      ]
+    },
+    "intensita_applicativa": {
+      "type": "string",
+      "enum": [
+        "ESSENZIALE",
+        "STANDARD",
+        "RAFFORZATA"
+      ]
+    },
+    "fast_track": {
+      "type": "boolean"
+    },
+    "zone_rosse": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "conflitto_interessi_rilevato": {
+      "type": "boolean"
+    },
+    "conflitto_interessi_gestito": {
+      "type": "boolean"
+    },
+    "obbligo_pubblicazione_rilevato": {
+      "type": "boolean"
+    },
+    "obbligo_pubblicazione_considerato": {
+      "type": "boolean"
+    },
+    "trattamento_dati_personali_rilevato": {
+      "type": "boolean"
+    },
+    "trattamento_dati_conforme": {
+      "type": "boolean"
+    },
+    "necessita_omissis": {
+      "type": "boolean"
+    },
+    "incidenza_su_obiettivi_piao": {
+      "type": "boolean"
+    },
+    "pertinenza_sicurezza_lavoro": {
+      "type": "boolean"
+    },
+    "obblighi_specifici_codice_comportamento": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}
