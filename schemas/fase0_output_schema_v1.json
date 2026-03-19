@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "phase_id": { "type": "string" },
+    "status": { "type": "string" },
+    "natura_output": { "type": "string" },
+    "tipologia_atto": { "type": ["string", "null"] },
+    "materia_prevalente": { "type": "string" },
+    "rischio_iniziale": { "type": "string" },
+    "intensita_applicativa": { "type": "string" },
+    "fast_track": { "type": "string" },
+    "next_phase": { "type": ["string", "null"] },
+    "blocking_reasons": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

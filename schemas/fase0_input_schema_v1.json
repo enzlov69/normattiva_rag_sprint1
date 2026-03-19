@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "required": [
+    "session_id",
+    "method_version",
+    "natura_output",
+    "materia_prevalente"
+  ],
+  "properties": {
+    "session_id": { "type": "string" },
+    "method_version": { "type": "string" },
+    "natura_output": { "type": "string" },
+    "tipologia_atto": { "type": ["string", "null"] },
+    "materia_prevalente": { "type": "string" },
+    "sensibilita": {
+      "type": "object",
+      "properties": {
+        "dati_personali": { "type": "string" },
+        "benefici_economici": { "type": "string" },
+        "pnrr_vincoli": { "type": "string" },
+        "impatto_esterno": { "type": "string" }
+      }
+    },
+    "zone_rosse": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "fast_track_requested": { "type": "boolean" },
+    "urgenza_motivata": { "type": "boolean" },
+    "debito_fuori_bilancio": { "type": "boolean" },
+    "impatto_economico_significativo": { "type": "boolean" },
+    "profilo_contenzioso_potenziale": { "type": "boolean" }
+  }
+}
