@@ -2,6 +2,8 @@ from dataclasses import asdict, is_dataclass
 from typing import Any, Dict, Iterable, List, Union
 
 from src.adapters.level_a_request_mapper import LevelARequestEnvelope
+from src.utils.ids import build_id
+from src.utils.timestamps import utc_now_iso
 
 
 class LevelAResponseGuard:
@@ -64,6 +66,12 @@ class LevelAResponseGuard:
         'case resolved',
         'm07 closed',
     )
+    CONSUMPTION_MODES = {
+        'ACCEPT_SUPPORT_ONLY': 'DOCUMENTARY_SUPPORT_ONLY',
+        'ACCEPT_WITH_DEGRADATION': 'DEGRADED_SUPPORT',
+        'QUARANTINE': 'QUARANTINED_NOT_CONSUMED',
+        'REJECT': 'REJECTED_NOT_CONSUMED',
+    }
 
     def validate(self, payload: Union[LevelARequestEnvelope, Dict[str, Any]]) -> Dict[str, Any]:
         normalized = self._normalize(payload)
@@ -134,8 +142,15 @@ class LevelAResponseGuard:
             decision = 'ACCEPT_WITH_DEGRADATION'
             requires_human_review = True
 
+        source_signal_class = self._source_signal_class(decision, critical_blocks, traceability_gaps, quarantine_codes, normalized, packet)
+        source_runtime_effect = self._source_runtime_effect(decision)
+
         return {
             'intake_decision': decision,
+            'source_status': status or 'READY',
+            'source_signal_class': source_signal_class,
+            'source_runtime_effect': source_runtime_effect,
+            'consumption_mode': self.CONSUMPTION_MODES[decision],
             'allowed_level_a_targets': list(self.SUPPORT_ONLY_TARGETS),
             'forbidden_level_a_targets': list(self.SENSITIVE_TARGETS),
             'requires_human_review': requires_human_review,
@@ -148,6 +163,65 @@ class LevelAResponseGuard:
             'critical_blocks': critical_blocks,
             'errors': self._unique(reasons),
             'normalized_payload': normalized,
+        }
+
+    def build_consumption_audit_trail(
+        self,
+        payload: Union[LevelARequestEnvelope, Dict[str, Any]],
+        *,
+        target_level_a_module: str,
+        source_response_id: str = '',
+    ) -> Dict[str, Any]:
+        classification = self.classify(payload)
+        normalized = classification['normalized_payload']
+
+        return {
+            'event_id': build_id('aconsaudit'),
+            'trace_id': normalized.get('trace_id', ''),
+            'case_id': normalized.get('case_id', ''),
+            'source_response_id': source_response_id or normalized.get('response_id') or normalized.get('source_response_id') or normalized.get('request_id', ''),
+            'intake_decision': classification['intake_decision'],
+            'source_status': classification['source_status'],
+            'source_signal_class': classification['source_signal_class'],
+            'source_runtime_effect': classification['source_runtime_effect'],
+            'target_level_a_module': target_level_a_module,
+            'consumption_mode': classification['consumption_mode'],
+            'support_only_flag': normalized.get('support_only_flag') is True,
+            'degraded_flag': classification['intake_decision'] == 'ACCEPT_WITH_DEGRADATION',
+            'quarantine_flag': classification['intake_decision'] == 'QUARANTINE',
+            'rejected_flag': classification['intake_decision'] == 'REJECT',
+            'allowed_use': self._allowed_use_for_decision(classification['intake_decision']),
+            'forbidden_use': self._forbidden_use_for_decision(classification['intake_decision']),
+            'audit_timestamp': utc_now_iso(),
+            'notes': list(classification['errors']),
+        }
+
+    def build_decision_isolation_log(
+        self,
+        payload: Union[LevelARequestEnvelope, Dict[str, Any]],
+        *,
+        protected_module: str,
+        source_artifact_type: str = 'final_ab_runtime_response',
+    ) -> Dict[str, Any]:
+        classification = self.classify(payload)
+        normalized = classification['normalized_payload']
+        source_allowed = protected_module in classification['allowed_level_a_targets']
+        violation_type = self._violation_type(classification, normalized)
+        violation_detected = (protected_module in classification['forbidden_level_a_targets']) or bool(violation_type)
+
+        return {
+            'log_id': build_id('aisolog'),
+            'trace_id': normalized.get('trace_id', ''),
+            'case_id': normalized.get('case_id', ''),
+            'protected_module': protected_module,
+            'source_artifact_type': source_artifact_type,
+            'source_allowed': source_allowed,
+            'isolation_result': 'CONSUMPTION_DENIED' if violation_detected else 'ALLOWED_SUPPORT_PATH',
+            'violation_detected': violation_detected,
+            'violation_type': violation_type or ('PROTECTED_MODULE_ISOLATION' if violation_detected else ''),
+            'manual_review_required': classification['requires_human_review'] or violation_detected,
+            'blocks_opponibility': True,
+            'notes': list(classification['errors']),
         }
 
     def _normalize(self, payload: Union[LevelARequestEnvelope, Dict[str, Any]]) -> Dict[str, Any]:
@@ -226,6 +300,32 @@ class LevelAResponseGuard:
             return True
         return False
 
+    def _source_signal_class(
+        self,
+        decision: str,
+        critical_blocks: List[str],
+        traceability_gaps: List[str],
+        quarantine_codes: List[str],
+        normalized: Dict[str, Any],
+        packet: Dict[str, Any],
+    ) -> str:
+        if decision == 'REJECT' or critical_blocks:
+            return 'CRITICAL_BLOCK'
+        if decision == 'QUARANTINE' or traceability_gaps or quarantine_codes:
+            return 'BOUNDARY_OR_TRACEABILITY'
+        if decision == 'ACCEPT_WITH_DEGRADATION' or normalized.get('warnings') or normalized.get('errors') or packet.get('documentary_warnings') or packet.get('documentary_errors'):
+            return 'WARNING_OR_ERROR'
+        return 'DOCUMENTARY'
+
+    def _source_runtime_effect(self, decision: str) -> str:
+        if decision == 'ACCEPT_SUPPORT_ONLY':
+            return 'SUPPORT_ONLY'
+        if decision == 'ACCEPT_WITH_DEGRADATION':
+            return 'DEGRADED_SUPPORT'
+        if decision == 'QUARANTINE':
+            return 'QUARANTINE'
+        return 'REJECT_CONSUMPTION'
+
     def _find_semantic_markers(self, payload: Dict[str, Any], markers: Iterable[str]) -> List[str]:
         haystack = ' '.join(self._flatten_strings(payload)).lower()
         return [marker for marker in markers if marker.lower() in haystack]
@@ -261,3 +361,28 @@ class LevelAResponseGuard:
                 seen.add(item)
                 ordered.append(item)
         return ordered
+
+    def _allowed_use_for_decision(self, decision: str) -> str:
+        if decision == 'ACCEPT_SUPPORT_ONLY':
+            return 'documentary_support_under_level_a_governance'
+        if decision == 'ACCEPT_WITH_DEGRADATION':
+            return 'degraded_documentary_support_with_manual_review'
+        return 'no_direct_consumption'
+
+    def _forbidden_use_for_decision(self, decision: str) -> str:
+        if decision in {'QUARANTINE', 'REJECT'}:
+            return 'direct_level_a_consumption_and_any_decisional_use'
+        return 'decisional_use_m07_closure_final_compliance_output_authorization'
+
+    def _violation_type(self, classification: Dict[str, Any], normalized: Dict[str, Any]) -> str:
+        if classification['forbidden_fields']:
+            return 'FORBIDDEN_FIELDS'
+        if self.QUARANTINE_CODES['m07_boundary'] in classification['quarantine_codes']:
+            return 'M07_CONTAMINATION'
+        if self.QUARANTINE_CODES['authorization_semantics'] in classification['quarantine_codes']:
+            return 'AUTHORIZATION_LIKE_SEMANTICS'
+        if self.QUARANTINE_CODES['critical_blocks'] in classification['quarantine_codes'] or classification['intake_decision'] == 'REJECT':
+            return 'UNRESOLVED_CRITICAL_BLOCKS'
+        if normalized.get('support_only_flag') is not True:
+            return 'SUPPORT_ONLY_BREACH'
+        return ''

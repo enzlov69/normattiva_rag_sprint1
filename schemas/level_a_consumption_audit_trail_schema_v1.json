@@ -1,0 +1,42 @@
+{
+  "schema_name": "level_a_consumption_audit_trail_schema_v1",
+  "schema_version": "1.0.0",
+  "description": "Audit trail for Level A controlled consumption of Level B runtime responses.",
+  "required_fields": [
+    "event_id",
+    "trace_id",
+    "case_id",
+    "source_response_id",
+    "intake_decision",
+    "source_status",
+    "source_signal_class",
+    "source_runtime_effect",
+    "target_level_a_module",
+    "consumption_mode",
+    "support_only_flag",
+    "degraded_flag",
+    "quarantine_flag",
+    "rejected_flag",
+    "allowed_use",
+    "forbidden_use",
+    "audit_timestamp",
+    "notes"
+  ],
+  "consumption_modes": [
+    "DOCUMENTARY_SUPPORT_ONLY",
+    "DEGRADED_SUPPORT",
+    "QUARANTINED_NOT_CONSUMED",
+    "REJECTED_NOT_CONSUMED"
+  ],
+  "intake_decision_map": {
+    "ACCEPT_SUPPORT_ONLY": "DOCUMENTARY_SUPPORT_ONLY",
+    "ACCEPT_WITH_DEGRADATION": "DEGRADED_SUPPORT",
+    "QUARANTINE": "QUARANTINED_NOT_CONSUMED",
+    "REJECT": "REJECTED_NOT_CONSUMED"
+  },
+  "notes": [
+    "The trail records controlled consumption metadata only.",
+    "The trail does not authorize output, close M07 or replace human governance.",
+    "support_only_flag remains the primary semantic anchor for Level A intake traceability."
+  ]
+}

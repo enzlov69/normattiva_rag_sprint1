@@ -1,0 +1,32 @@
+{
+  "schema_name": "level_a_decision_isolation_log_schema_v1",
+  "schema_version": "1.0.0",
+  "description": "Decision isolation log proving that Level B responses do not directly feed Level A protected modules.",
+  "required_fields": [
+    "log_id",
+    "trace_id",
+    "case_id",
+    "protected_module",
+    "source_artifact_type",
+    "source_allowed",
+    "isolation_result",
+    "violation_detected",
+    "violation_type",
+    "manual_review_required",
+    "blocks_opponibility",
+    "notes"
+  ],
+  "covered_violation_types": [
+    "PROTECTED_MODULE_ISOLATION",
+    "SUPPORT_ONLY_BREACH",
+    "M07_CONTAMINATION",
+    "AUTHORIZATION_LIKE_SEMANTICS",
+    "FORBIDDEN_FIELDS",
+    "UNRESOLVED_CRITICAL_BLOCKS"
+  ],
+  "notes": [
+    "The isolation log records consumption denial or controlled isolation outcomes.",
+    "The isolation log does not validate, authorize or decide any administrative outcome.",
+    "Protected modules remain shielded even when documentary support is otherwise acceptable."
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "registry_name": "level_a_consumption_event_registry_v1",
+  "registry_version": "1.0.0",
+  "events": [
+    {
+      "event_code": "EVT_ACCEPT_SUPPORT_ONLY",
+      "description": "Response accepted only as documentary support under Level A governance.",
+      "intake_decision": "ACCEPT_SUPPORT_ONLY",
+      "consumption_mode": "DOCUMENTARY_SUPPORT_ONLY",
+      "allowed_targets": [
+        "A1_OrchestratorePPAV",
+        "A8_AuditLogger",
+        "A9_SHADOWTracer"
+      ],
+      "forbidden_targets": [
+        "A4_M07Governor",
+        "A6_RACBuilder",
+        "A5_FinalComplianceGate",
+        "A7_OutputAuthorizer"
+      ],
+      "requires_audit": true,
+      "requires_isolation_log": true,
+      "notes": "Support-only documentary evidence must remain non-decisional."
+    },
+    {
+      "event_code": "EVT_ACCEPT_WITH_DEGRADATION",
+      "description": "Response accepted with degradation and mandatory methodological review.",
+      "intake_decision": "ACCEPT_WITH_DEGRADATION",
+      "consumption_mode": "DEGRADED_SUPPORT",
+      "allowed_targets": [
+        "A1_OrchestratorePPAV",
+        "A8_AuditLogger",
+        "A9_SHADOWTracer"
+      ],
+      "forbidden_targets": [
+        "A4_M07Governor",
+        "A6_RACBuilder",
+        "A5_FinalComplianceGate",
+        "A7_OutputAuthorizer"
+      ],
+      "requires_audit": true,
+      "requires_isolation_log": true,
+      "notes": "Degraded support remains blocked from sensitive modules."
+    },
+    {
+      "event_code": "EVT_QUARANTINE",
+      "description": "Response quarantined and not consumed due to contamination, traceability gaps or forbidden semantics.",
+      "intake_decision": "QUARANTINE",
+      "consumption_mode": "QUARANTINED_NOT_CONSUMED",
+      "allowed_targets": [
+        "A8_AuditLogger",
+        "A9_SHADOWTracer"
+      ],
+      "forbidden_targets": [
+        "A1_OrchestratorePPAV",
+        "A4_M07Governor",
+        "A6_RACBuilder",
+        "A5_FinalComplianceGate",
+        "A7_OutputAuthorizer"
+      ],
+      "requires_audit": true,
+      "requires_isolation_log": true,
+      "notes": "Quarantine records attempted consumption without allowing downstream use."
+    },
+    {
+      "event_code": "EVT_REJECT",
+      "description": "Response rejected and not consumed due to blocked or error runtime state.",
+      "intake_decision": "REJECT",
+      "consumption_mode": "REJECTED_NOT_CONSUMED",
+      "allowed_targets": [
+        "A8_AuditLogger",
+        "A9_SHADOWTracer"
+      ],
+      "forbidden_targets": [
+        "A1_OrchestratorePPAV",
+        "A4_M07Governor",
+        "A6_RACBuilder",
+        "A5_FinalComplianceGate",
+        "A7_OutputAuthorizer"
+      ],
+      "requires_audit": true,
+      "requires_isolation_log": true,
+      "notes": "Rejected responses remain non-consumable and non-opponible."
+    }
+  ]
+}
