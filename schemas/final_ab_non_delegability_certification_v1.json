@@ -1,0 +1,38 @@
+{
+  "schema_name": "final_ab_non_delegability_certification_v1",
+  "schema_version": "1.0.0",
+  "required_fields": [
+    "certification_id",
+    "trace_id",
+    "protected_function",
+    "delegated_to_level_b",
+    "violation_detected",
+    "certification_status",
+    "rationale",
+    "blocking_effect",
+    "notes"
+  ],
+  "certification_status_values": [
+    "CONFIRMED",
+    "VIOLATED",
+    "REQUIRES_REVIEW"
+  ],
+  "protected_functions": [
+    "qualificazione_del_fatto",
+    "interpretazione",
+    "rac_decisorio",
+    "chiusura_m07",
+    "final_compliance_gate",
+    "output_authorizer",
+    "approvazione_umana_finale"
+  ],
+  "certification_examples": [
+    {
+      "protected_function": "final_compliance_gate",
+      "delegated_to_level_b": false,
+      "violation_detected": false,
+      "certification_status": "CONFIRMED",
+      "blocking_effect": true
+    }
+  ]
+}

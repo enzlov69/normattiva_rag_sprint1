@@ -1,0 +1,33 @@
+{
+  "schema_name": "final_ab_release_readiness_statement_v1",
+  "schema_version": "1.0.0",
+  "required_fields": [
+    "statement_id",
+    "trace_id",
+    "baseline_tag",
+    "baseline_commit",
+    "readiness_status",
+    "required_controls",
+    "passed_controls",
+    "failed_controls",
+    "warnings",
+    "manual_review_required",
+    "human_approval_required",
+    "non_delegability_confirmed",
+    "blocks_opponibility",
+    "notes"
+  ],
+  "readiness_status_values": [
+    "NON_CERTIFIABLE",
+    "CONDITIONALLY_CERTIFIABLE",
+    "CERTIFIABLE"
+  ],
+  "baseline_example": {
+    "baseline_tag": "stable-final-ab-manual-review-gate-v1",
+    "baseline_commit": "bbabc4f",
+    "manual_review_required": true,
+    "human_approval_required": true,
+    "non_delegability_confirmed": true,
+    "blocks_opponibility": true
+  }
+}
