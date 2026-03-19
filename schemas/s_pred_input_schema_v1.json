@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "s_pred_input_schema_v1.json",
+  "title": "S-PRE/D Input Schema v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "session_id",
+    "method_version",
+    "corpus_available",
+    "modules_available",
+    "safeguards_available",
+    "retrieval_available",
+    "citations_available",
+    "audit_trail_available",
+    "block_propagation_available",
+    "version_alignment_ok"
+  ],
+  "properties": {
+    "session_id": { "type": "string", "minLength": 1 },
+    "method_version": { "type": "string", "minLength": 1 },
+    "corpus_available": { "type": "boolean" },
+    "modules_available": { "type": "boolean" },
+    "safeguards_available": { "type": "boolean" },
+    "retrieval_available": { "type": "boolean" },
+    "citations_available": { "type": "boolean" },
+    "audit_trail_available": { "type": "boolean" },
+    "block_propagation_available": { "type": "boolean" },
+    "version_alignment_ok": { "type": "boolean" },
+    "indexing_status": { "type": "string" },
+    "ranking_status": { "type": "string" },
+    "shadow_store_available": { "type": "boolean" },
+    "details": { "type": "object" }
+  }
+}

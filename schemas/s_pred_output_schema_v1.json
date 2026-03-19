@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "s_pred_output_schema_v1.json",
+  "title": "S-PRE/D Output Schema v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "phase_id",
+    "phase_name",
+    "method_version",
+    "session_id",
+    "status",
+    "can_start_fase0",
+    "transition_allowed",
+    "gate_outcome",
+    "blocking_reasons",
+    "warnings",
+    "checks",
+    "trace"
+  ],
+  "properties": {
+    "phase_id": { "type": "string", "const": "S-PRE/D" },
+    "phase_name": { "type": "string" },
+    "method_version": { "type": "string" },
+    "session_id": { "type": "string" },
+    "status": { "type": "string", "enum": ["AVAILABLE", "BLOCKED"] },
+    "can_start_fase0": { "type": "boolean" },
+    "transition_allowed": { "type": "boolean" },
+    "next_phase": {
+      "anyOf": [
+        { "type": "string", "const": "FASE_0" },
+        { "type": "null" }
+      ]
+    },
+    "gate_outcome": { "type": "string", "enum": ["DISPONIBILE", "BLOCCO_SISTEMA_ASSOLUTO"] },
+    "blocking_reasons": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["check_id", "label", "passed", "severity"],
+        "properties": {
+          "check_id": { "type": "string" },
+          "label": { "type": "string" },
+          "passed": { "type": "boolean" },
+          "severity": { "type": "string" },
+          "reason": {
+            "anyOf": [
+              { "type": "string" },
+              { "type": "null" }
+            ]
+          }
+        }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "required": ["phase", "trace_type", "validation_layer"],
+      "properties": {
+        "phase": { "type": "string" },
+        "trace_type": { "type": "string" },
+        "validation_layer": { "type": "string" },
+        "indexing_status": { "type": "string" },
+        "ranking_status": { "type": "string" },
+        "shadow_store_present": {
+          "anyOf": [
+            { "type": "boolean" },
+            { "type": "null" }
+          ]
+        },
+        "details_present": { "type": "boolean" }
+      }
+    }
+  }
+}
