@@ -1,0 +1,98 @@
+{
+  "registry_name": "final_ab_response_consumption_rules_v1",
+  "registry_version": "1.0.0",
+  "rules": [
+    {
+      "rule_code": "RSP_ACCEPT_SUPPORT_ONLY",
+      "source_status": "SUCCESS",
+      "source_signal_class": "DOCUMENTARY",
+      "source_runtime_effect": "SUPPORT_ONLY",
+      "source_block_state": "NO_CRITICAL_BLOCKS",
+      "intake_decision": "ACCEPT_SUPPORT_ONLY",
+      "allowed_level_a_targets": [
+        "A1_OrchestratorePPAV",
+        "A8_AuditLogger",
+        "A9_SHADOWTracer"
+      ],
+      "forbidden_level_a_targets": [
+        "A4_M07Governor",
+        "A6_RACBuilder",
+        "A5_FinalComplianceGate",
+        "A7_OutputAuthorizer"
+      ],
+      "requires_human_review": false,
+      "requires_quarantine": false,
+      "blocks_opponibility": true,
+      "notes": "Acceptable only as documentary support. Sensitive modules remain protected."
+    },
+    {
+      "rule_code": "RSP_ACCEPT_WITH_DEGRADATION",
+      "source_status": "DEGRADED",
+      "source_signal_class": "WARNING_OR_ERROR",
+      "source_runtime_effect": "DEGRADED_SUPPORT",
+      "source_block_state": "NO_CRITICAL_BLOCKS",
+      "intake_decision": "ACCEPT_WITH_DEGRADATION",
+      "allowed_level_a_targets": [
+        "A1_OrchestratorePPAV",
+        "A8_AuditLogger",
+        "A9_SHADOWTracer"
+      ],
+      "forbidden_level_a_targets": [
+        "A4_M07Governor",
+        "A6_RACBuilder",
+        "A5_FinalComplianceGate",
+        "A7_OutputAuthorizer"
+      ],
+      "requires_human_review": true,
+      "requires_quarantine": false,
+      "blocks_opponibility": true,
+      "notes": "Degraded responses require methodological review and cannot feed sensitive modules."
+    },
+    {
+      "rule_code": "RSP_QUARANTINE",
+      "source_status": "SUCCESS_OR_DEGRADED_WITH_CONTAMINATION",
+      "source_signal_class": "BOUNDARY_OR_TRACEABILITY",
+      "source_runtime_effect": "QUARANTINE",
+      "source_block_state": "POTENTIAL_SCOPE_OR_TRACEABILITY_RISK",
+      "intake_decision": "QUARANTINE",
+      "allowed_level_a_targets": [
+        "A1_OrchestratorePPAV",
+        "A8_AuditLogger",
+        "A9_SHADOWTracer"
+      ],
+      "forbidden_level_a_targets": [
+        "A4_M07Governor",
+        "A6_RACBuilder",
+        "A5_FinalComplianceGate",
+        "A7_OutputAuthorizer"
+      ],
+      "requires_human_review": true,
+      "requires_quarantine": true,
+      "blocks_opponibility": true,
+      "notes": "Forbidden semantics, M07 contamination or traceability gaps force quarantine."
+    },
+    {
+      "rule_code": "RSP_REJECT",
+      "source_status": "BLOCKED_OR_REJECTED_OR_ERROR",
+      "source_signal_class": "CRITICAL_BLOCK",
+      "source_runtime_effect": "REJECT_CONSUMPTION",
+      "source_block_state": "CRITICAL_BLOCKS_PRESENT",
+      "intake_decision": "REJECT",
+      "allowed_level_a_targets": [
+        "A1_OrchestratorePPAV",
+        "A8_AuditLogger",
+        "A9_SHADOWTracer"
+      ],
+      "forbidden_level_a_targets": [
+        "A4_M07Governor",
+        "A6_RACBuilder",
+        "A5_FinalComplianceGate",
+        "A7_OutputAuthorizer"
+      ],
+      "requires_human_review": true,
+      "requires_quarantine": false,
+      "blocks_opponibility": true,
+      "notes": "Critical blocked or rejected responses cannot be consumed by sensitive modules."
+    }
+  ]
+}

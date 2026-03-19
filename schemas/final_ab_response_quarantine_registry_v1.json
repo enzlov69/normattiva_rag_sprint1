@@ -1,0 +1,94 @@
+{
+  "registry_name": "final_ab_response_quarantine_registry_v1",
+  "registry_version": "1.0.0",
+  "entries": [
+    {
+      "quarantine_code": "Q_FORBIDDEN_FIELDS",
+      "trigger_condition": "forbidden fields in response",
+      "severity": "CRITICAL",
+      "reason": "Response contains decisional or authorizative fields from Level B.",
+      "affected_modules": [
+        "A4_M07Governor",
+        "A6_RACBuilder",
+        "A5_FinalComplianceGate",
+        "A7_OutputAuthorizer"
+      ],
+      "release_condition": "manual intake review and sanitized response",
+      "requires_manual_review": true,
+      "notes": "Prevents decisional leakage from Level B."
+    },
+    {
+      "quarantine_code": "Q_TRACEABILITY_GAP",
+      "trigger_condition": "traceability gaps",
+      "severity": "HIGH",
+      "reason": "Response lacks required trace_id, audit or shadow completeness.",
+      "affected_modules": [
+        "A4_M07Governor",
+        "A6_RACBuilder",
+        "A5_FinalComplianceGate",
+        "A7_OutputAuthorizer"
+      ],
+      "release_condition": "traceability restored and manually reviewed",
+      "requires_manual_review": true,
+      "notes": "Traceability gaps require quarantine before methodological consumption."
+    },
+    {
+      "quarantine_code": "Q_MISSING_DOCUMENTARY_PACKET",
+      "trigger_condition": "missing documentary packet elements",
+      "severity": "HIGH",
+      "reason": "Response misses required documentary packet nuclei.",
+      "affected_modules": [
+        "A4_M07Governor",
+        "A6_RACBuilder",
+        "A5_FinalComplianceGate",
+        "A7_OutputAuthorizer"
+      ],
+      "release_condition": "documentary packet completed or downgraded under review",
+      "requires_manual_review": true,
+      "notes": "Incomplete documentary packet cannot enter sensitive flows."
+    },
+    {
+      "quarantine_code": "Q_M07_BOUNDARY",
+      "trigger_condition": "boundary or M07 contamination",
+      "severity": "CRITICAL",
+      "reason": "Response suggests closure, certification or completion of M07.",
+      "affected_modules": [
+        "A4_M07Governor",
+        "A6_RACBuilder",
+        "A5_FinalComplianceGate",
+        "A7_OutputAuthorizer"
+      ],
+      "release_condition": "boundary violation removed and manual review completed",
+      "requires_manual_review": true,
+      "notes": "M07 remains non-delegable."
+    },
+    {
+      "quarantine_code": "Q_AUTHORIZATION_SEMANTICS",
+      "trigger_condition": "anomalous authorization-like semantics",
+      "severity": "CRITICAL",
+      "reason": "Response suggests approval, final authorization or signature readiness.",
+      "affected_modules": [
+        "A5_FinalComplianceGate",
+        "A7_OutputAuthorizer"
+      ],
+      "release_condition": "authorization-like semantics removed and reviewed",
+      "requires_manual_review": true,
+      "notes": "Final authorization remains in Level A with human approval."
+    },
+    {
+      "quarantine_code": "Q_UNRESOLVED_CRITICAL_BLOCKS",
+      "trigger_condition": "unresolved critical blocks",
+      "severity": "CRITICAL",
+      "reason": "Critical blocks remain open or unpropagated in intake response.",
+      "affected_modules": [
+        "A4_M07Governor",
+        "A6_RACBuilder",
+        "A5_FinalComplianceGate",
+        "A7_OutputAuthorizer"
+      ],
+      "release_condition": "critical block handling under Level A governance",
+      "requires_manual_review": true,
+      "notes": "Critical blocks prevent direct downstream consumption."
+    }
+  ]
+}

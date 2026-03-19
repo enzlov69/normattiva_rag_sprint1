@@ -1,0 +1,88 @@
+{
+  "policy_name": "level_a_runtime_intake_policy_v1",
+  "policy_version": "1.0.0",
+  "allowed_input_artifacts": [
+    "final_ab_runtime_response_envelope",
+    "documentary_packet",
+    "warnings",
+    "errors",
+    "blocks",
+    "audit_trace",
+    "shadow_trace"
+  ],
+  "required_traces": [
+    "trace_id",
+    "request_id",
+    "audit_fragment_or_audit_trace",
+    "shadow_fragment_or_shadow_trace"
+  ],
+  "required_documentary_components": [
+    "sources",
+    "norm_units",
+    "citations_valid",
+    "citations_blocked",
+    "vigenza_records",
+    "cross_reference_records",
+    "coverage_assessment",
+    "warnings",
+    "errors",
+    "blocks",
+    "shadow_fragment"
+  ],
+  "forbidden_response_fields": [
+    "final_decision",
+    "decision",
+    "approval",
+    "human_approval",
+    "output_authorized",
+    "final_compliance_passed",
+    "m07_closed",
+    "go_finale",
+    "no_go_finale"
+  ],
+  "forbidden_response_semantics": [
+    "decisione finale",
+    "output authorized",
+    "ready to sign",
+    "m07 closed",
+    "final compliance passed",
+    "case resolved"
+  ],
+  "quarantine_conditions": [
+    "forbidden_field_present",
+    "authorization_like_semantics_detected",
+    "m07_boundary_contamination",
+    "traceability_gap_detected",
+    "missing_documentary_packet_elements"
+  ],
+  "block_conditions": [
+    "critical_block_present",
+    "response_status_blocked",
+    "response_status_rejected",
+    "response_status_error",
+    "unresolved_critical_blocks"
+  ],
+  "degrade_conditions": [
+    "response_status_degraded",
+    "warnings_present",
+    "non_critical_errors_present",
+    "partial_documentary_completeness"
+  ],
+  "support_only_conditions": [
+    "support_only_flag_true_or_implied",
+    "documentary_packet_present",
+    "traceability_minimum_present",
+    "no_decisional_or_authorizative_semantics"
+  ],
+  "sensitive_modules_protected": [
+    "A4_M07Governor",
+    "A6_RACBuilder",
+    "A5_FinalComplianceGate",
+    "A7_OutputAuthorizer"
+  ],
+  "notes": [
+    "Le response del Livello B sono ammissibili solo come supporto documentale.",
+    "I moduli sensibili del Livello A non possono consumare response non classificate.",
+    "Quarantine e manual review restano obbligatorie nei casi di contamination o semantiche vietate."
+  ]
+}
