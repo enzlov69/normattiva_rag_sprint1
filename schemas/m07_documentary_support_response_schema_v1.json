@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://normattiva-rag.local/schemas/m07_documentary_support_response_schema_v1.json",
+  "title": "M07 Documentary Support Response v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "case_id",
+    "trace_id",
+    "api_version",
+    "responder_module",
+    "status",
+    "payload",
+    "warnings",
+    "errors",
+    "blocks",
+    "timestamp"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "api_version": {
+      "type": "string",
+      "const": "2.0"
+    },
+    "responder_module": {
+      "type": "string",
+      "const": "B16_M07SupportLayer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "SUCCESS_WITH_WARNINGS",
+        "DEGRADED",
+        "BLOCKED",
+        "REJECTED",
+        "ERROR"
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "documentary_packet"
+      ],
+      "properties": {
+        "documentary_packet": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_ids",
+            "norm_unit_ids",
+            "support_only_flag"
+          ],
+          "properties": {
+            "source_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "norm_unit_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "citation_packets": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "vigenza_statuses": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "crossref_statuses": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "coverage_status": {
+              "type": "object"
+            },
+            "m07_evidence_pack": {
+              "$ref": "m07_evidence_pack_schema_v1.json"
+            },
+            "technical_trace_ref": {
+              "type": "string"
+            },
+            "support_only_flag": {
+              "type": "boolean",
+              "const": true
+            }
+          }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "warning_code",
+          "warning_message"
+        ],
+        "properties": {
+          "warning_code": {
+            "type": "string"
+          },
+          "warning_message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "error_code",
+          "error_message"
+        ],
+        "properties": {
+          "error_code": {
+            "type": "string"
+          },
+          "error_message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "blocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "block_id",
+          "case_id",
+          "block_code",
+          "block_category",
+          "block_severity",
+          "origin_module",
+          "block_reason",
+          "block_status"
+        ],
+        "properties": {
+          "block_id": {
+            "type": "string"
+          },
+          "case_id": {
+            "type": "string"
+          },
+          "block_code": {
+            "type": "string",
+            "enum": [
+              "CORPUS_MISSING",
+              "SOURCE_UNVERIFIED",
+              "METADATA_INSUFFICIENT",
+              "PARSE_INCONSISTENT",
+              "CHUNK_ORPHAN",
+              "RETRIEVAL_EMPTY",
+              "CITATION_INCOMPLETE",
+              "VIGENZA_UNCERTAIN",
+              "CROSSREF_UNRESOLVED",
+              "M07_REQUIRED",
+              "RAG_SCOPE_VIOLATION",
+              "AUDIT_INCOMPLETE",
+              "OUTPUT_NOT_OPPONIBLE",
+              "COVERAGE_INADEQUATE",
+              "FASTTRACK_NOT_ALLOWED"
+            ]
+          },
+          "block_category": {
+            "type": "string"
+          },
+          "block_severity": {
+            "type": "string",
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH",
+              "CRITICAL"
+            ]
+          },
+          "origin_module": {
+            "type": "string"
+          },
+          "block_reason": {
+            "type": "string"
+          },
+          "block_status": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "SUPPORTED",
+              "RELEASED"
+            ]
+          }
+        }
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "not": {
+    "anyOf": [
+      {
+        "required": [
+          "final_decision"
+        ]
+      },
+      {
+        "required": [
+          "final_applicability"
+        ]
+      },
+      {
+        "required": [
+          "legal_conclusion"
+        ]
+      },
+      {
+        "required": [
+          "motivazione_finale"
+        ]
+      },
+      {
+        "required": [
+          "output_authorized"
+        ]
+      },
+      {
+        "required": [
+          "m07_closed"
+        ]
+      },
+      {
+        "required": [
+          "ppav_closed"
+        ]
+      },
+      {
+        "required": [
+          "go_finale"
+        ]
+      }
+    ]
+  }
+}

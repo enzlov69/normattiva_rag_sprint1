@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://normattiva-rag.local/schemas/m07_evidence_pack_schema_v1.json",
+  "title": "M07EvidencePack v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "record_type",
+    "m07_pack_id",
+    "case_id",
+    "source_ids",
+    "norm_unit_ids",
+    "ordered_reading_sequence",
+    "annex_refs",
+    "crossref_refs",
+    "coverage_ref_id",
+    "missing_elements",
+    "m07_support_status",
+    "human_completion_required",
+    "created_at",
+    "updated_at",
+    "schema_version",
+    "record_version",
+    "source_layer",
+    "trace_id",
+    "active_flag"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "record_type": {
+      "type": "string",
+      "const": "M07EvidencePack"
+    },
+    "m07_pack_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "norm_unit_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ordered_reading_sequence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sequence_index",
+          "source_id",
+          "norm_unit_id",
+          "position_index"
+        ],
+        "properties": {
+          "sequence_index": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "source_id": {
+            "type": "string"
+          },
+          "norm_unit_id": {
+            "type": "string"
+          },
+          "position_index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "reading_note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "annex_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "annex_id",
+          "essential_ref_flag",
+          "resolved_flag"
+        ],
+        "properties": {
+          "annex_id": {
+            "type": "string"
+          },
+          "essential_ref_flag": {
+            "type": "boolean"
+          },
+          "resolved_flag": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "crossref_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "crossref_id",
+          "essential_ref_flag",
+          "resolved_flag"
+        ],
+        "properties": {
+          "crossref_id": {
+            "type": "string"
+          },
+          "essential_ref_flag": {
+            "type": "boolean"
+          },
+          "resolved_flag": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "coverage_ref_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "missing_elements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "m07_support_status": {
+      "type": "string",
+      "enum": [
+        "READY_FOR_HUMAN_READING",
+        "PARTIAL_SUPPORT",
+        "INCOMPLETE_SUPPORT",
+        "BLOCKED_SUPPORT"
+      ]
+    },
+    "human_completion_required": {
+      "type": "boolean",
+      "const": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "record_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source_layer": {
+      "type": "string",
+      "const": "B"
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "active_flag": {
+      "type": "boolean"
+    }
+  },
+  "not": {
+    "anyOf": [
+      {
+        "required": [
+          "m07_closed"
+        ]
+      },
+      {
+        "required": [
+          "final_decision"
+        ]
+      },
+      {
+        "required": [
+          "final_applicability"
+        ]
+      },
+      {
+        "required": [
+          "legal_conclusion"
+        ]
+      },
+      {
+        "required": [
+          "motivazione_finale"
+        ]
+      },
+      {
+        "required": [
+          "output_authorized"
+        ]
+      },
+      {
+        "required": [
+          "ppav_closed"
+        ]
+      },
+      {
+        "required": [
+          "go_finale"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://normattiva-rag.local/schemas/m07_documentary_support_request_schema_v1.json",
+  "title": "M07 Documentary Support Request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "case_id",
+    "trace_id",
+    "api_version",
+    "caller_module",
+    "target_module",
+    "timestamp",
+    "payload"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "api_version": {
+      "type": "string",
+      "const": "2.0"
+    },
+    "caller_module": {
+      "type": "string",
+      "enum": [
+        "A1_OrchestratorePPAV",
+        "A2_CaseClassifier",
+        "A4_M07Governor"
+      ]
+    },
+    "target_module": {
+      "type": "string",
+      "const": "B16_M07SupportLayer"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "goal_istruttorio",
+        "domain_target",
+        "query_text",
+        "documentary_scope",
+        "m07_context",
+        "requested_outputs"
+      ],
+      "properties": {
+        "goal_istruttorio": {
+          "type": "string",
+          "minLength": 1
+        },
+        "domain_target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "query_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "documentary_scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_priority",
+            "require_official_uri",
+            "require_vigenza_check",
+            "require_crossref_check",
+            "require_coverage_check"
+          ],
+          "properties": {
+            "source_priority": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "require_official_uri": {
+              "type": "boolean"
+            },
+            "require_vigenza_check": {
+              "type": "boolean"
+            },
+            "require_crossref_check": {
+              "type": "boolean"
+            },
+            "require_coverage_check": {
+              "type": "boolean"
+            },
+            "include_annexes": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "m07_context": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "m07_opened",
+            "human_reading_required"
+          ],
+          "properties": {
+            "m07_opened": {
+              "type": "boolean",
+              "const": true
+            },
+            "human_reading_required": {
+              "type": "boolean",
+              "const": true
+            },
+            "reading_focus": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "notes": {
+              "type": "string"
+            }
+          }
+        },
+        "requested_outputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "documentary_packet",
+              "citation_packets",
+              "vigenza_status",
+              "crossref_status",
+              "coverage_status",
+              "m07_evidence_pack",
+              "warnings",
+              "errors",
+              "blocks",
+              "technical_trace"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "metadata_filters": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}
