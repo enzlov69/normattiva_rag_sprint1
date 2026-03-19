@@ -72,6 +72,13 @@ class LevelAResponseGuard:
         'QUARANTINE': 'QUARANTINED_NOT_CONSUMED',
         'REJECT': 'REJECTED_NOT_CONSUMED',
     }
+    ESCALATION_REVIEW_CODES = {
+        'FORBIDDEN_FIELDS',
+        'M07_CONTAMINATION',
+        'AUTHORIZATION_LIKE_SEMANTICS',
+        'UNRESOLVED_CRITICAL_BLOCKS',
+        'SUPPORT_ONLY_BREACH',
+    }
 
     def validate(self, payload: Union[LevelARequestEnvelope, Dict[str, Any]]) -> Dict[str, Any]:
         normalized = self._normalize(payload)
@@ -222,6 +229,94 @@ class LevelAResponseGuard:
             'manual_review_required': classification['requires_human_review'] or violation_detected,
             'blocks_opponibility': True,
             'notes': list(classification['errors']),
+        }
+
+    def evaluate_manual_review_gate(
+        self,
+        payload: Union[LevelARequestEnvelope, Dict[str, Any]],
+        *,
+        protected_module: str,
+    ) -> Dict[str, Any]:
+        audit_trail = self.build_consumption_audit_trail(
+            payload,
+            target_level_a_module=protected_module,
+        )
+        isolation_log = self.build_decision_isolation_log(
+            payload,
+            protected_module=protected_module,
+        )
+        classification = self.classify(payload)
+        normalized = classification['normalized_payload']
+        blocked_by_condition = isolation_log['violation_type']
+        if not blocked_by_condition and classification['intake_decision'] == 'QUARANTINE':
+            blocked_by_condition = 'QUARANTINE_STATE'
+        if not blocked_by_condition and classification['intake_decision'] == 'REJECT':
+            blocked_by_condition = 'REJECT_STATE'
+        escalation_flag = self._requires_escalation(classification, isolation_log)
+
+        return {
+            'review_event_id': build_id('amanrev'),
+            'trace_id': normalized.get('trace_id', ''),
+            'case_id': normalized.get('case_id', ''),
+            'source_response_id': normalized.get('response_id') or normalized.get('source_response_id') or normalized.get('request_id', ''),
+            'protected_module': protected_module,
+            'intake_decision': classification['intake_decision'],
+            'review_required': True,
+            'review_status': 'REVIEW_REQUIRED',
+            'approval_required': True,
+            'approval_status': 'ESCALATION_REQUIRED' if escalation_flag else 'APPROVAL_DENIED',
+            'escalation_flag': escalation_flag,
+            'blocked_by_condition': blocked_by_condition,
+            'consumption_audit_event_id': audit_trail['event_id'],
+            'decision_isolation_log_id': isolation_log['log_id'],
+            'consumption_mode': classification['consumption_mode'],
+            'support_only_flag': normalized.get('support_only_flag') is True,
+            'audit_timestamp': utc_now_iso(),
+            'notes': list(classification['errors']),
+        }
+
+    def build_final_human_approval_trace(
+        self,
+        payload: Union[LevelARequestEnvelope, Dict[str, Any]],
+        *,
+        protected_module: str,
+        review_event_id: str = '',
+        review_completed: bool = False,
+        approved_by_human: bool = False,
+        approval_basis: str = 'manual_review_gate',
+    ) -> Dict[str, Any]:
+        review_gate = self.evaluate_manual_review_gate(
+            payload,
+            protected_module=protected_module,
+        )
+        normalized = self.classify(payload)['normalized_payload']
+        blocked_by_condition = review_gate['blocked_by_condition']
+        escalation_flag = review_gate['escalation_flag']
+
+        review_status = 'REVIEW_COMPLETED' if review_completed else 'REVIEW_REQUIRED'
+        approval_status = 'APPROVAL_DENIED'
+
+        if escalation_flag and not approved_by_human:
+            approval_status = 'ESCALATION_REQUIRED'
+        elif review_completed and approved_by_human and not blocked_by_condition:
+            approval_status = 'APPROVAL_GRANTED'
+
+        return {
+            'approval_trace_id': build_id('ahumanapproval'),
+            'trace_id': normalized.get('trace_id', ''),
+            'case_id': normalized.get('case_id', ''),
+            'source_response_id': normalized.get('response_id') or normalized.get('source_response_id') or normalized.get('request_id', ''),
+            'review_event_id': review_event_id or review_gate['review_event_id'],
+            'protected_module': protected_module,
+            'review_status': review_status,
+            'approval_status': approval_status,
+            'approval_required': True,
+            'approved_by_human': approved_by_human,
+            'approval_timestamp': utc_now_iso() if review_completed else '',
+            'approval_basis': approval_basis,
+            'blocked_by_condition': blocked_by_condition,
+            'escalation_flag': escalation_flag,
+            'notes': list(review_gate['notes']),
         }
 
     def _normalize(self, payload: Union[LevelARequestEnvelope, Dict[str, Any]]) -> Dict[str, Any]:
@@ -386,3 +481,8 @@ class LevelAResponseGuard:
         if normalized.get('support_only_flag') is not True:
             return 'SUPPORT_ONLY_BREACH'
         return ''
+
+    def _requires_escalation(self, classification: Dict[str, Any], isolation_log: Dict[str, Any]) -> bool:
+        if classification['intake_decision'] in {'QUARANTINE', 'REJECT'}:
+            return True
+        return isolation_log['violation_type'] in self.ESCALATION_REVIEW_CODES

@@ -1,0 +1,60 @@
+{
+  "policy_name": "level_a_manual_review_gate_policy_v1",
+  "policy_version": "1.0.0",
+  "review_required_conditions": [
+    "support_only_consumption_requires_human_review_before_final_closure",
+    "degraded_support_detected",
+    "quarantine_history_present",
+    "manual_review_required_from_intake_classification"
+  ],
+  "escalation_conditions": [
+    "unresolved_critical_blocks",
+    "m07_contamination",
+    "authorization_like_semantics",
+    "forbidden_fields_history",
+    "traceability_gaps",
+    "documentary_incompleteness_on_sensitive_paths"
+  ],
+  "approval_block_conditions": [
+    "approval_derived_from_level_b_response",
+    "approval_derived_from_support_only_flag",
+    "approval_derived_from_decision_isolation_log",
+    "approval_derived_from_final_compliance_gate",
+    "approval_derived_from_output_authorizer",
+    "quarantine_state",
+    "reject_state"
+  ],
+  "required_review_traces": [
+    "consumption_audit_event_id",
+    "decision_isolation_log_id",
+    "review_event_id",
+    "trace_id",
+    "case_id",
+    "source_response_id"
+  ],
+  "sensitive_modules_protected": [
+    "A4_M07Governor",
+    "A6_RACBuilder",
+    "A5_FinalComplianceGate",
+    "A7_OutputAuthorizer"
+  ],
+  "human_approval_required_for": [
+    "final_case_closure",
+    "final_compliance_transition",
+    "output_authorization_transition",
+    "m07_closure_transition",
+    "rac_finalization_transition"
+  ],
+  "forbidden_approval_sources": [
+    "response_b_to_a",
+    "support_only_flag",
+    "decision_isolation_log",
+    "final_compliance_gate",
+    "output_authorizer"
+  ],
+  "notes": [
+    "The manual review gate is a control and traceability layer only.",
+    "Human approval remains external to Level B and cannot be inferred from documentary support.",
+    "FinalComplianceGate and OutputAuthorizer remain distinct downstream components."
+  ]
+}

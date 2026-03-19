@@ -1,0 +1,36 @@
+{
+  "schema_name": "level_a_final_human_approval_trace_schema_v1",
+  "schema_version": "1.0.0",
+  "description": "Trace of manual review and final human approval in Level A, distinct from Level B documentary output and from authorization components.",
+  "required_fields": [
+    "approval_trace_id",
+    "trace_id",
+    "case_id",
+    "source_response_id",
+    "review_event_id",
+    "protected_module",
+    "review_status",
+    "approval_status",
+    "approval_required",
+    "approved_by_human",
+    "approval_timestamp",
+    "approval_basis",
+    "blocked_by_condition",
+    "escalation_flag",
+    "notes"
+  ],
+  "review_status_values": [
+    "REVIEW_REQUIRED",
+    "REVIEW_COMPLETED"
+  ],
+  "approval_status_values": [
+    "APPROVAL_GRANTED",
+    "APPROVAL_DENIED",
+    "ESCALATION_REQUIRED"
+  ],
+  "approval_rules": [
+    "APPROVAL_GRANTED requires approved_by_human=true.",
+    "APPROVAL_GRANTED cannot derive from Level B response content.",
+    "approval_status remains distinct from FinalComplianceGate and OutputAuthorizer results."
+  ]
+}
