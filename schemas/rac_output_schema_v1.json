@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "required": [
+    "phase_id",
+    "phase_name",
+    "status",
+    "output",
+    "blocking_reasons",
+    "next_phase"
+  ],
+  "properties": {
+    "phase_id": { "type": "string" },
+    "phase_name": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["OK", "BLOCKED"]
+    },
+    "output": {
+      "type": "object"
+    },
+    "blocking_reasons": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "next_phase": {
+      "type": "string"
+    }
+  }
+}

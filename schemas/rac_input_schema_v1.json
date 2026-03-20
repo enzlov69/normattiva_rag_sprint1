@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "required": [
+    "session_id",
+    "method_version",
+    "norma",
+    "articoli_rilevanti"
+  ],
+  "properties": {
+    "session_id": { "type": "string" },
+    "method_version": { "type": "string" },
+    "norma": { "type": "string" },
+    "articoli_rilevanti": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "rischio_interpretativo_m07": {
+      "type": "string",
+      "enum": ["BASSO", "MEDIO", "ALTO"]
+    }
+  }
+}
