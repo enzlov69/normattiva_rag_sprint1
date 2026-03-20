@@ -149,14 +149,24 @@ Le colonne obbligatorie della Matrice Test Ufficiale sono:
 ## 7. Regole minime di blocco da considerare vincolanti
 
 1. Nessun salto di fase.
-2. Nessuna produzione `FIRMA_READY` prima di `S10 = GO`.
+   Regola secca: nessun salto di fase è consentito.
+
+2. nessuna produzione `FIRMA_READY` prima di `S10 = GO`.
+
 3. Nessuna fase successiva utile se la precedente è bloccata.
+
 4. `S3 = INCOMPLETO` impedisce a `S4` di produrre RAC valido.
+
 5. `S5 = NON_OPPONIBILE` impedisce a `S11` di produrre `LAYER_ATTO` FIRMA-READY.
+
 6. `S9 = CRITICO` impedisce a `S10` di produrre `GO`.
+
 7. `S10 = NO_GO` impedisce a `S11` di produrre testo FIRMA-READY.
+
 8. Il Livello B non può svolgere funzioni decisorie o validative.
+
 9. Tutte le regole devono essere testate nel `ROOT/tests`.
+
 10. Ogni divergenza tra documento, schema, runtime e test equivale a cantiere non chiuso.
 
 ---
