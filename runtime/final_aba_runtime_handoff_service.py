@@ -1,400 +1,166 @@
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import dataclass
-from typing import Any, Callable, Dict, List, Mapping, MutableMapping, Optional, Sequence, Set
+from datetime import datetime, timezone
+from typing import Any, Callable, Dict, Optional
+
+from runtime.final_aba_runner_real_invoker import FederatedRunnerRealInvoker
+
+JsonDict = Dict[str, Any]
+InvokerCallable = Callable[[JsonDict], JsonDict]
 
 
-ALWAYS_ON_PRESIDIA: Set[str] = {
-    "OP_ANTI_ALLUCINAZIONI_NORMATIVE",
-    "OP_DOPPIA_LENTE_RATIO",
-    "OP_COT++",
-}
-
-ALLOWED_REQUEST_FIELDS: Set[str] = {
-    "request_id",
-    "case_id",
-    "trace_id",
-    "source_level",
-    "target_level",
-    "request_kind",
-    "source_phase",
-    "documentary_scope",
-    "expected_documentary_outputs",
-    "active_presidia",
-    "audit",
-    "shadow",
-}
-
-FORBIDDEN_REQUEST_FIELDS: Set[str] = {
-    "final_decision",
-    "go_no_go",
-    "firma_ready",
-    "output_authorized",
-    "final_opposability",
-    "rac_final_outcome",
-    "cf_atti_result",
-    "m07_closed",
-    "m07_completed",
-    "m07_approved",
-    "final_validation",
-    "output_layer_final",
-    "layer_atto_firma_ready",
-}
-
-REQUIRED_REQUEST_FIELDS: Set[str] = {
-    "request_id",
-    "case_id",
-    "trace_id",
-    "source_level",
-    "target_level",
-    "request_kind",
-    "source_phase",
-    "documentary_scope",
-    "expected_documentary_outputs",
-    "active_presidia",
-    "audit",
-}
-
-ALLOWED_RESPONSE_FIELDS: Set[str] = {
-    "response_id",
-    "request_id",
-    "source_level",
-    "target_level",
-    "response_kind",
-    "documentary_status",
-    "documentary_packet",
-    "citations",
-    "vigency_checks",
-    "cross_references",
-    "coverage_report",
-    "warnings",
-    "errors",
-    "blocks",
-    "m07_documentary_support",
-    "audit",
-    "shadow",
-}
-
-FORBIDDEN_RESPONSE_FIELDS: Set[str] = {
-    "final_decision",
-    "go_no_go",
-    "firma_ready",
-    "output_authorized",
-    "final_opposability",
-    "rac_final_outcome",
-    "cf_atti_result",
-    "m07_closed",
-    "m07_completed",
-    "m07_approved",
-    "final_validation",
-    "output_layer_final",
-    "layer_atto_firma_ready",
-}
-
-REQUIRED_RESPONSE_FIELDS: Set[str] = {
-    "response_id",
-    "request_id",
-    "source_level",
-    "target_level",
-    "response_kind",
-    "documentary_status",
-    "documentary_packet",
-    "warnings",
-    "errors",
-    "blocks",
-    "audit",
-}
-
-ALLOWED_REQUEST_KIND = "DOCUMENTARY_SUPPORT_REQUEST"
-ALLOWED_RESPONSE_KIND = "DOCUMENTARY_SUPPORT_RESPONSE"
-
-ALLOWED_RESPONSE_STATUSES: Set[str] = {
-    "DOCUMENTARY_OK",
-    "DOCUMENTARY_WARNING",
-    "DOCUMENTARY_BLOCKED",
-}
-
-CRITICAL_BLOCK_CODES: Set[str] = {
-    "CRITICAL_DOCUMENTARY_BLOCK",
-    "M07_DOCUMENTARY_INCOMPLETE",
-}
-
-DEGRADING_BLOCK_CODES: Set[str] = {
-    "COVERAGE_INSUFFICIENT",
-    "CITATION_NOT_IDONEA",
-    "VIGENCY_UNCERTAIN",
-}
+class HandoffConfigurationError(Exception):
+    pass
 
 
-@dataclass(frozen=True)
-class ValidationResult:
-    is_valid: bool
-    status: str
-    errors: List[str]
-    warnings: List[str]
+@dataclass(slots=True)
+class FinalABARuntimeHandoffService:
+    """
+    Layer contrattuale A→B→A.
 
-    def as_dict(self) -> Dict[str, Any]:
-        return {
-            "is_valid": self.is_valid,
-            "status": self.status,
-            "errors": list(self.errors),
-            "warnings": list(self.warnings),
-        }
+    Funzioni:
+    - mantiene il primo punto di accoppiamento nel layer di orchestrazione;
+    - seleziona invoker mock o reale senza bypass del servizio di handoff;
+    - propaga blocchi, errori e warning del Livello B verso il Livello A;
+    - arricchisce audit trail e SHADOW tecnico;
+    - impedisce che il pacchetto documentale venga scambiato per esito opponibile.
+    """
 
+    mode: str = "mock"
+    mock_invoker: Optional[InvokerCallable] = None
+    real_invoker: Optional[FederatedRunnerRealInvoker] = None
 
-def _sorted_list(items: Sequence[str] | Set[str]) -> List[str]:
-    return sorted(set(items))
+    def handle(self, request_envelope: JsonDict) -> JsonDict:
+        request = self._normalize_request(request_envelope)
+        self._append_audit_event(request, event="HANDOFF_REQUEST_RECEIVED")
 
+        invoker = self._select_invoker()
+        self._append_audit_event(request, event=f"LEVEL_B_INVOKER_SELECTED:{self.mode.upper()}")
 
-def _missing_required_fields(payload: Mapping[str, Any], required_fields: Set[str]) -> List[str]:
-    return sorted(field for field in required_fields if field not in payload)
+        response = invoker(deepcopy(request))
+        response = self._normalize_response(response, request)
+        response = self._propagate_documentary_blocks(response)
+        response = self._enforce_level_a_governance(response)
+        response = self._enrich_shadow(response, request)
+        response = self._enrich_audit(response)
+        return response
 
+    def _select_invoker(self) -> InvokerCallable:
+        if self.mode == "real":
+            if self.real_invoker is None:
+                raise HandoffConfigurationError("Real invoker is required when mode='real'.")
+            return self.real_invoker.invoke
+        if self.mode == "mock":
+            if self.mock_invoker is None:
+                raise HandoffConfigurationError("Mock invoker is required when mode='mock'.")
+            return self.mock_invoker
+        raise HandoffConfigurationError(f"Unsupported handoff mode: {self.mode}")
 
-def _forbidden_fields_present(payload: Mapping[str, Any], forbidden_fields: Set[str]) -> List[str]:
-    return sorted(field for field in forbidden_fields if field in payload)
+    def _normalize_request(self, request_envelope: JsonDict) -> JsonDict:
+        request = deepcopy(request_envelope)
+        request.setdefault("status", "READY_FOR_LEVEL_B")
+        request.setdefault("warnings", [])
+        request.setdefault("errors", [])
+        request.setdefault("blocks", [])
+        request.setdefault("payload", {})
+        request.setdefault("timestamp", self._now_iso())
+        request.setdefault("audit", {"trail_events": []})
+        request.setdefault("shadow", {"fragments": []})
+        return request
 
+    def _normalize_response(self, response_envelope: JsonDict, request_envelope: JsonDict) -> JsonDict:
+        response = deepcopy(response_envelope)
+        response.setdefault("request_id", request_envelope.get("request_id"))
+        response.setdefault("case_id", request_envelope.get("case_id"))
+        response.setdefault("trace_id", request_envelope.get("trace_id"))
+        response.setdefault("timestamp", self._now_iso())
+        response.setdefault("warnings", [])
+        response.setdefault("errors", [])
+        response.setdefault("blocks", [])
+        response.setdefault("payload", {})
+        response.setdefault("audit", {"trail_events": []})
+        response.setdefault("shadow", {"fragments": []})
+        return response
 
-def _unexpected_fields_present(payload: Mapping[str, Any], allowed_fields: Set[str]) -> List[str]:
-    return sorted(field for field in payload.keys() if field not in allowed_fields)
+    def _propagate_documentary_blocks(self, response_envelope: JsonDict) -> JsonDict:
+        response = deepcopy(response_envelope)
+        packet = response.get("payload", {}).get("documentary_packet", {})
+        packet_blocks = packet.get("blocks", []) if isinstance(packet, dict) else []
+        packet_errors = packet.get("errors", []) if isinstance(packet, dict) else []
+        packet_warnings = packet.get("warnings", []) if isinstance(packet, dict) else []
 
+        response["blocks"] = self._dedupe(response.get("blocks", []) + packet_blocks)
+        response["errors"] = self._dedupe(response.get("errors", []) + packet_errors)
+        response["warnings"] = self._dedupe(response.get("warnings", []) + packet_warnings)
 
-def validate_level_a_request(payload: Mapping[str, Any]) -> ValidationResult:
-    errors: List[str] = []
-    warnings: List[str] = []
+        if response["blocks"] and response.get("status") not in {"REJECTED", "ERROR"}:
+            response["status"] = "BLOCKED"
+        elif response["warnings"] and response.get("status") == "SUCCESS":
+            response["status"] = "SUCCESS_WITH_WARNINGS"
 
-    missing_fields = _missing_required_fields(payload, REQUIRED_REQUEST_FIELDS)
-    forbidden_fields = _forbidden_fields_present(payload, FORBIDDEN_REQUEST_FIELDS)
-    unexpected_fields = _unexpected_fields_present(payload, ALLOWED_REQUEST_FIELDS)
+        return response
 
-    if missing_fields:
-        errors.append(f"Missing required request fields: {', '.join(missing_fields)}")
-    if forbidden_fields:
-        errors.append(f"Forbidden request fields present: {', '.join(forbidden_fields)}")
-    if unexpected_fields:
-        errors.append(f"Unexpected request fields present: {', '.join(unexpected_fields)}")
+    def _enforce_level_a_governance(self, response_envelope: JsonDict) -> JsonDict:
+        response = deepcopy(response_envelope)
+        packet = response.get("payload", {}).get("documentary_packet", {})
+        coverage = packet.get("coverage_assessment", {}) if isinstance(packet, dict) else {}
 
-    if payload.get("source_level") != "LEVEL_A":
-        errors.append("source_level must be LEVEL_A")
+        # Nessun pacchetto del Livello B è opponibile di per sé.
+        response["payload"].setdefault("level_a_next_step", "M07_LPR_GOVERNED_BY_LEVEL_A")
+        response["payload"]["level_b_documentary_only"] = True
+        response["payload"]["opponibility_status"] = "NOT_OPPONIBLE_OUTSIDE_LEVEL_A"
 
-    if payload.get("target_level") != "LEVEL_B":
-        errors.append("target_level must be LEVEL_B")
+        if coverage.get("critical_gap_flag") is True:
+            response["blocks"] = self._dedupe(response.get("blocks", []) + ["COVERAGE_INADEQUATE"])
+            if response.get("status") not in {"REJECTED", "ERROR"}:
+                response["status"] = "BLOCKED"
 
-    if payload.get("request_kind") != ALLOWED_REQUEST_KIND:
-        errors.append("request_kind must be DOCUMENTARY_SUPPORT_REQUEST")
+        if any(block in response.get("blocks", []) for block in ["M07_REQUIRED", "M07_DOCUMENTARY_INCOMPLETE"]):
+            response["payload"]["level_a_next_step"] = "M07_LPR_MANDATORY_CONTINUATION_IN_LEVEL_A"
 
-    documentary_scope = payload.get("documentary_scope")
-    if not isinstance(documentary_scope, Mapping):
-        errors.append("documentary_scope must be a mapping")
-    else:
-        if documentary_scope.get("must_return_documentary_only") is not True:
-            errors.append("documentary_scope.must_return_documentary_only must be True")
-        if documentary_scope.get("level_b_is_non_decisional") is not True:
-            errors.append("documentary_scope.level_b_is_non_decisional must be True")
+        return response
 
-    expected_outputs = payload.get("expected_documentary_outputs")
-    if not isinstance(expected_outputs, list) or len(expected_outputs) == 0:
-        errors.append("expected_documentary_outputs must be a non-empty list")
-
-    active_presidia = payload.get("active_presidia")
-    if not isinstance(active_presidia, list):
-        errors.append("active_presidia must be a list")
-    else:
-        missing_presidia = ALWAYS_ON_PRESIDIA.difference(active_presidia)
-        if missing_presidia:
-            errors.append(
-                "Missing always-on presidia in request: "
-                + ", ".join(_sorted_list(missing_presidia))
-            )
-
-    audit = payload.get("audit")
-    if not isinstance(audit, Mapping):
-        errors.append("audit must be a mapping")
-    else:
-        if "created_by" not in audit:
-            warnings.append("audit.created_by not present")
-        if audit.get("internal_only") is not True:
-            warnings.append("audit.internal_only should be True")
-
-    status = "REQUEST_VALID" if not errors else "REQUEST_INVALID"
-    return ValidationResult(
-        is_valid=not errors,
-        status=status,
-        errors=errors,
-        warnings=warnings,
-    )
-
-
-def validate_level_b_response(payload: Mapping[str, Any]) -> ValidationResult:
-    errors: List[str] = []
-    warnings: List[str] = []
-
-    missing_fields = _missing_required_fields(payload, REQUIRED_RESPONSE_FIELDS)
-    forbidden_fields = _forbidden_fields_present(payload, FORBIDDEN_RESPONSE_FIELDS)
-    unexpected_fields = _unexpected_fields_present(payload, ALLOWED_RESPONSE_FIELDS)
-
-    if missing_fields:
-        errors.append(f"Missing required response fields: {', '.join(missing_fields)}")
-    if forbidden_fields:
-        errors.append(f"Forbidden response fields present: {', '.join(forbidden_fields)}")
-    if unexpected_fields:
-        errors.append(f"Unexpected response fields present: {', '.join(unexpected_fields)}")
-
-    if payload.get("source_level") != "LEVEL_B":
-        errors.append("source_level must be LEVEL_B")
-
-    if payload.get("target_level") != "LEVEL_A":
-        errors.append("target_level must be LEVEL_A")
-
-    if payload.get("response_kind") != ALLOWED_RESPONSE_KIND:
-        errors.append("response_kind must be DOCUMENTARY_SUPPORT_RESPONSE")
-
-    documentary_status = payload.get("documentary_status")
-    if documentary_status not in ALLOWED_RESPONSE_STATUSES:
-        errors.append(
-            "documentary_status must be one of: "
-            + ", ".join(_sorted_list(ALLOWED_RESPONSE_STATUSES))
+    def _enrich_shadow(self, response_envelope: JsonDict, request_envelope: JsonDict) -> JsonDict:
+        response = deepcopy(response_envelope)
+        shadow = response.setdefault("shadow", {"fragments": []})
+        fragments = shadow.setdefault("fragments", [])
+        fragments.append(
+            {
+                "trace_id": request_envelope.get("trace_id"),
+                "handoff_mode": self.mode,
+                "documentary_only": True,
+                "opponibility": "forbidden_in_level_b",
+                "timestamp": response.get("timestamp"),
+            }
         )
+        return response
 
-    documentary_packet = payload.get("documentary_packet")
-    if not isinstance(documentary_packet, Mapping):
-        errors.append("documentary_packet must be a mapping")
-    else:
-        if documentary_packet.get("documentary_only") is not True:
-            errors.append("documentary_packet.documentary_only must be True")
-        if documentary_packet.get("contains_decision") is not False:
-            errors.append("documentary_packet.contains_decision must be False")
+    def _enrich_audit(self, response_envelope: JsonDict) -> JsonDict:
+        response = deepcopy(response_envelope)
+        audit = response.setdefault("audit", {"trail_events": []})
+        events = audit.setdefault("trail_events", [])
+        events.append(
+            {
+                "event": "LEVEL_B_RESPONSE_ACCEPTED_BY_HANDOFF",
+                "status": response.get("status"),
+                "blocks": list(response.get("blocks", [])),
+                "errors": list(response.get("errors", [])),
+                "timestamp": response.get("timestamp"),
+            }
+        )
+        return response
 
-    for list_field in ("warnings", "errors", "blocks"):
-        value = payload.get(list_field)
-        if not isinstance(value, list):
-            errors.append(f"{list_field} must be a list")
+    def _append_audit_event(self, envelope: JsonDict, *, event: str) -> None:
+        audit = envelope.setdefault("audit", {"trail_events": []})
+        events = audit.setdefault("trail_events", [])
+        events.append({"event": event, "timestamp": envelope.get("timestamp", self._now_iso())})
 
-    m07_support = payload.get("m07_documentary_support")
-    if m07_support is not None:
-        if not isinstance(m07_support, Mapping):
-            errors.append("m07_documentary_support must be a mapping when present")
-        else:
-            if m07_support.get("documentary_only") is not True:
-                errors.append("m07_documentary_support.documentary_only must be True")
-            if m07_support.get("completion_declared") is True:
-                errors.append("Level B cannot declare m07 completion")
+    @staticmethod
+    def _dedupe(values: list[str]) -> list[str]:
+        return list(dict.fromkeys(values))
 
-    audit = payload.get("audit")
-    if not isinstance(audit, Mapping):
-        errors.append("audit must be a mapping")
-    else:
-        if audit.get("internal_only") is not True:
-            warnings.append("audit.internal_only should be True")
-
-    status = "RESPONSE_VALID" if not errors else "RESPONSE_INVALID"
-    return ValidationResult(
-        is_valid=not errors,
-        status=status,
-        errors=errors,
-        warnings=warnings,
-    )
-
-
-def propagate_documentary_blocks(response_payload: Mapping[str, Any]) -> Dict[str, Any]:
-    blocks = response_payload.get("blocks", [])
-    block_codes = {
-        block.get("code")
-        for block in blocks
-        if isinstance(block, Mapping) and "code" in block
-    }
-
-    has_critical_block = bool(block_codes.intersection(CRITICAL_BLOCK_CODES))
-    has_degrading_block = bool(block_codes.intersection(DEGRADING_BLOCK_CODES))
-
-    if has_critical_block:
-        runtime_status = "ROUNDTRIP_BLOCKED"
-    elif has_degrading_block:
-        runtime_status = "ROUNDTRIP_DEGRADED"
-    else:
-        runtime_status = "ROUNDTRIP_GREEN"
-
-    return {
-        "runtime_status": runtime_status,
-        "documentary_block_propagated": len(block_codes) > 0,
-        "critical_block_present": has_critical_block,
-        "degrading_block_present": has_degrading_block,
-        "block_codes_received": _sorted_list({code for code in block_codes if code}),
-        "can_emit_go_no_go": False,
-        "can_emit_firma_ready": False,
-        "can_authorize_output": False,
-    }
-
-
-def build_level_a_internal_envelope(
-    request_payload: Mapping[str, Any],
-    response_payload: Mapping[str, Any],
-    propagation_result: Mapping[str, Any],
-) -> Dict[str, Any]:
-    return {
-        "envelope_kind": "LEVEL_A_INTERNAL_DOCUMENTARY_RETURN",
-        "request_id": request_payload.get("request_id"),
-        "response_id": response_payload.get("response_id"),
-        "case_id": request_payload.get("case_id"),
-        "trace_id": request_payload.get("trace_id"),
-        "source_level": "LEVEL_B",
-        "target_level": "LEVEL_A",
-        "runtime_status": propagation_result.get("runtime_status"),
-        "documentary_block_propagated": propagation_result.get("documentary_block_propagated"),
-        "critical_block_present": propagation_result.get("critical_block_present"),
-        "degrading_block_present": propagation_result.get("degrading_block_present"),
-        "block_codes_received": propagation_result.get("block_codes_received", []),
-        "documentary_payload": dict(response_payload),
-        "audit": {
-            "internal_only": True,
-            "request_validated": True,
-            "response_validated": True,
-            "blocks_propagated": True,
-        },
-        "shadow": {
-            "internal_use_only": True,
-            "non_opposable": True,
-            "contains_no_final_decision": True,
-        },
-        "can_emit_go_no_go": False,
-        "can_emit_firma_ready": False,
-        "can_authorize_output": False,
-    }
-
-
-def perform_runtime_roundtrip(
-    request_payload: Mapping[str, Any],
-    level_b_invoker: Callable[[Mapping[str, Any]], Mapping[str, Any]],
-) -> Dict[str, Any]:
-    request_validation = validate_level_a_request(request_payload)
-    if not request_validation.is_valid:
-        return {
-            "runtime_status": "REQUEST_INVALID",
-            "request_validation": request_validation.as_dict(),
-            "response_validation": None,
-            "internal_envelope": None,
-        }
-
-    response_payload = level_b_invoker(request_payload)
-
-    response_validation = validate_level_b_response(response_payload)
-    if not response_validation.is_valid:
-        return {
-            "runtime_status": "RESPONSE_INVALID",
-            "request_validation": request_validation.as_dict(),
-            "response_validation": response_validation.as_dict(),
-            "internal_envelope": None,
-        }
-
-    propagation_result = propagate_documentary_blocks(response_payload)
-    internal_envelope = build_level_a_internal_envelope(
-        request_payload=request_payload,
-        response_payload=response_payload,
-        propagation_result=propagation_result,
-    )
-
-    return {
-        "runtime_status": propagation_result["runtime_status"],
-        "request_validation": request_validation.as_dict(),
-        "response_validation": response_validation.as_dict(),
-        "internal_envelope": internal_envelope,
-    }
+    @staticmethod
+    def _now_iso() -> str:
+        return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
