@@ -1,0 +1,877 @@
+{
+  "registry_id": "ppav_phase_gate_registry_v1",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "scope": "Gate ufficiali di fase per la Matrice Test Ufficiale PPAV S0-S11",
+  "global_rules": {
+    "no_phase_skips": true,
+    "adjacent_transitions_only": true,
+    "useful_successor_output_forbidden_if_previous_invalid_or_incomplete": true,
+    "no_firma_ready_before_s10_go": true,
+    "level_b_never_decides": true,
+    "level_b_never_validates": true,
+    "level_b_never_closes_m07": true,
+    "level_b_never_emits_go_no_go": true,
+    "level_b_never_authorizes_opposable_output": true,
+    "cotpp_is_summary_only": true,
+    "root_tests_required": true
+  },
+  "always_on_presidia": [
+    "OP_ANTI_ALLUCINAZIONI_NORMATIVE",
+    "OP_DOPPIA_LENTE_RATIO",
+    "OP_COT++"
+  ],
+  "phases": {
+    "SPRE_D": {
+      "phase_label": "S-PRE/D",
+      "function": "Apertura sessione e verifica di disponibilita e integrita del sistema",
+      "preconditions": [],
+      "input_minimum": [
+        "session_or_case_context",
+        "phase_sequence_registry",
+        "phase_gate_registry"
+      ],
+      "action_expected": "Verifica integrita registry, disponibilita catena, caricamento presidi trasversali",
+      "positive_outcomes": [
+        "READY"
+      ],
+      "negative_outcomes": [
+        "NOT_READY"
+      ],
+      "blocking_outcomes": [
+        "SESSION_NOT_READY"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "SPRE_F"
+        ],
+        "forbidden_if_negative": [
+          "SPRE_F",
+          "S0",
+          "S0_BIS",
+          "S0_TER",
+          "S1",
+          "S2",
+          "S3",
+          "S4",
+          "S5",
+          "S6",
+          "S7",
+          "S8",
+          "S9",
+          "S10",
+          "S11"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "BLK",
+        "REP"
+      ],
+      "repo_presidia": [
+        "docs/MATRICE_TEST_UFFICIALE_PPAV_S0_S11_v1.md",
+        "schemas/ppav_phase_sequence_registry_v1.json",
+        "schemas/ppav_phase_gate_registry_v1.json",
+        "tests/test_ppav_phase_order_matrix.py"
+      ],
+      "priority": "P0",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "can_produce_opposable_output": false
+    },
+    "SPRE_F": {
+      "phase_label": "S-PRE/F",
+      "function": "Verifica del singolo modulo o della singola fase prima dell'esecuzione",
+      "preconditions": [
+        "SPRE_D=READY"
+      ],
+      "input_minimum": [
+        "target_phase_id",
+        "phase_local_prerequisites"
+      ],
+      "action_expected": "Verifica readiness locale della fase richiesta",
+      "positive_outcomes": [
+        "PHASE_READY"
+      ],
+      "negative_outcomes": [
+        "PHASE_NOT_READY"
+      ],
+      "blocking_outcomes": [
+        "PHASE_PRECHECK_FAILED"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "S0"
+        ],
+        "forbidden_if_negative": [
+          "S0"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "TRN",
+        "BLK",
+        "REP"
+      ],
+      "repo_presidia": [
+        "schemas/ppav_phase_gate_registry_v1.json",
+        "tests/test_ppav_phase_transition_matrix.py"
+      ],
+      "priority": "P0",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "can_produce_opposable_output": false
+    },
+    "S0": {
+      "phase_label": "S0",
+      "function": "Classificazione del tipo di output richiesto e determinazione dell'intensita applicativa",
+      "preconditions": [
+        "SPRE_F=PHASE_READY"
+      ],
+      "input_minimum": [
+        "natura_output",
+        "bisogno_istruttorio_o_redazionale",
+        "materia_preliminare"
+      ],
+      "action_expected": "Classificare l'output e assegnare intensita ESSENZIALE, STANDARD o RAFFORZATA",
+      "positive_outcomes": [
+        "CLASSIFIED_ESSENZIALE",
+        "CLASSIFIED_STANDARD",
+        "CLASSIFIED_RAFFORZATA"
+      ],
+      "negative_outcomes": [
+        "UNCLASSIFIED",
+        "AMBIGUOUS_CLASSIFICATION"
+      ],
+      "blocking_outcomes": [
+        "CLASSIFICATION_REQUIRED"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "S0_BIS"
+        ],
+        "forbidden_if_negative": [
+          "S0_BIS",
+          "S0_TER",
+          "S1",
+          "S2",
+          "S3",
+          "S4",
+          "S5",
+          "S6",
+          "S7",
+          "S8",
+          "S9",
+          "S10",
+          "S11"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "TRN",
+        "E2E"
+      ],
+      "repo_presidia": [
+        "tests/test_fase0_classifier.py",
+        "docs/PPAV_TEST_COVERAGE_MAP_v1.md"
+      ],
+      "priority": "P0",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "can_produce_opposable_output": false
+    },
+    "S0_BIS": {
+      "phase_label": "S0-bis",
+      "function": "Verifica dei presidi trasversali di compliance",
+      "preconditions": [
+        "S0 in stato classificato"
+      ],
+      "input_minimum": [
+        "fase0_output",
+        "rischio_iniziale",
+        "zone_rosse",
+        "fast_track"
+      ],
+      "action_expected": "Attivare i presidi trasversali rilevanti o attestare NESSUNA_INCIDENZA",
+      "positive_outcomes": [
+        "OK",
+        "NESSUNA_INCIDENZA"
+      ],
+      "negative_outcomes": [
+        "CRITICAL_PRESIDIUM_OPEN"
+      ],
+      "blocking_outcomes": [
+        "TRANSVERSAL_COMPLIANCE_BLOCK"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "S0_TER"
+        ],
+        "forbidden_if_negative": [
+          "S0_TER",
+          "S1",
+          "S2",
+          "S3",
+          "S4",
+          "S5",
+          "S6",
+          "S7",
+          "S8",
+          "S9",
+          "S10",
+          "S11"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "TRN",
+        "BLK",
+        "E2E"
+      ],
+      "repo_presidia": [
+        "tests/test_fase0bis_compliance_gate.py",
+        "schemas/ppav_phase_gate_registry_v1.json"
+      ],
+      "priority": "P0",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "can_produce_opposable_output": false
+    },
+    "S0_TER": {
+      "phase_label": "S0-ter",
+      "function": "Attivazione di normativa settoriale, regolamenti comunali e procedure obbligatorie",
+      "preconditions": [
+        "S0_BIS non bloccato"
+      ],
+      "input_minimum": [
+        "fase0_output",
+        "fase0bis_output",
+        "materia_prevalente",
+        "regolamenti_comunali_pertinenti"
+      ],
+      "action_expected": "Individuare normativa speciale, regolamenti e procedure obbligatorie",
+      "positive_outcomes": [
+        "OK"
+      ],
+      "negative_outcomes": [
+        "MISSING_SECTORAL_NORMATIVE",
+        "MISSING_LOCAL_REGULATION"
+      ],
+      "blocking_outcomes": [
+        "SECTORAL_NORMATIVE_BLOCK"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "S1"
+        ],
+        "forbidden_if_negative": [
+          "S1",
+          "S2",
+          "S3",
+          "S4",
+          "S5",
+          "S6",
+          "S7",
+          "S8",
+          "S9",
+          "S10",
+          "S11"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "TRN",
+        "BLK",
+        "E2E"
+      ],
+      "repo_presidia": [
+        "tests/test_fase0ter_normative_gate.py",
+        "docs/PPAV_TEST_COVERAGE_MAP_v1.md"
+      ],
+      "priority": "P0",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "can_produce_opposable_output": false
+    },
+    "S1": {
+      "phase_label": "S1",
+      "function": "Filtro indirizzo vs provvedimento",
+      "preconditions": [
+        "S0_TER=OK"
+      ],
+      "input_minimum": [
+        "tipologia_atto",
+        "effetti_su_terzi",
+        "contenuto_dispositivo",
+        "allocazione_competenze"
+      ],
+      "action_expected": "Distinguere indirizzo puro, indirizzo con rischi, provvedimento gestionale o falso indirizzo",
+      "positive_outcomes": [
+        "INDIRIZZO_PURO",
+        "INDIRIZZO_CON_RISCHI",
+        "PROVVEDIMENTO_GESTIONALE"
+      ],
+      "negative_outcomes": [
+        "FALSO_INDIRIZZO",
+        "UNDECIDABLE_FIP_IND"
+      ],
+      "blocking_outcomes": [
+        "FIP_IND_FALSE_INDIRIZZO_BLOCK"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "S2"
+        ],
+        "forbidden_if_negative": [
+          "S2",
+          "S3",
+          "S4",
+          "S5",
+          "S6",
+          "S7",
+          "S8",
+          "S9",
+          "S10",
+          "S11"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "TRN",
+        "BLK",
+        "ND"
+      ],
+      "repo_presidia": [
+        "tests/test_fip_ind_gate.py"
+      ],
+      "priority": "P0",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "can_produce_opposable_output": false
+    },
+    "S2": {
+      "phase_label": "S2",
+      "function": "Integrita, tracciabilita e DB-LOCK sui dati essenziali dell'atto",
+      "preconditions": [
+        "S1 non bloccato"
+      ],
+      "input_minimum": [
+        "essential_act_data",
+        "draft_state",
+        "lockable_identifiers"
+      ],
+      "action_expected": "Verificare completezza dei dati essenziali e attivare DB-LOCK",
+      "positive_outcomes": [
+        "DB_LOCK_OK",
+        "STATE_BOZZA",
+        "STATE_PRE_FIRMA",
+        "STATE_FIRMA_READY_TECHNICAL_ONLY"
+      ],
+      "negative_outcomes": [
+        "MISSING_ESSENTIAL_DATA",
+        "DB_LOCK_MISSING"
+      ],
+      "blocking_outcomes": [
+        "RAP_ATTI_DB_LOCK_BLOCK"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "S3"
+        ],
+        "forbidden_if_negative": [
+          "S3",
+          "S4",
+          "S5",
+          "S6",
+          "S7",
+          "S8",
+          "S9",
+          "S10",
+          "S11"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "TRN",
+        "BLK",
+        "REP"
+      ],
+      "repo_presidia": [
+        "runtime/ppav_phase_chain.py",
+        "tests/test_rap_atti_gate.py"
+      ],
+      "priority": "P0",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "can_produce_opposable_output": false
+    },
+    "S3": {
+      "phase_label": "S3",
+      "function": "M07-LPR - lettura rigo per rigo della fonte normativa",
+      "preconditions": [
+        "S2 valido",
+        "perimetro_normativo_disponibile"
+      ],
+      "input_minimum": [
+        "fonti_normative",
+        "segmenti_normativi",
+        "rinvii",
+        "allegati",
+        "traccia_lettura"
+      ],
+      "action_expected": "Verificare completamento della lettura integrale con controllo ultimo comma",
+      "positive_outcomes": [
+        "COMPLETO"
+      ],
+      "negative_outcomes": [
+        "INCOMPLETO"
+      ],
+      "blocking_outcomes": [
+        "M07_INCOMPLETE_BLOCK"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "S4"
+        ],
+        "forbidden_if_negative": [
+          "S4",
+          "S5",
+          "S6",
+          "S7",
+          "S8",
+          "S9",
+          "S10",
+          "S11"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "TRN",
+        "BLK",
+        "ND",
+        "LB"
+      ],
+      "repo_presidia": [
+        "tests/test_ppav_gate_block_propagation.py",
+        "tests/test_ppav_level_b_subordination.py"
+      ],
+      "priority": "P0",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "hard_non_delegable": true,
+      "can_produce_opposable_output": false
+    },
+    "S4": {
+      "phase_label": "S4",
+      "function": "RAC - Report Applicativo Comunale",
+      "preconditions": [
+        "S3=COMPLETO"
+      ],
+      "input_minimum": [
+        "m07_output",
+        "quadro_fonti",
+        "competenza_comunale",
+        "atti_da_adottare",
+        "adempimenti",
+        "prove_documentali"
+      ],
+      "action_expected": "Costruire RAC con esito OK o BLOCCO",
+      "positive_outcomes": [
+        "OK"
+      ],
+      "negative_outcomes": [
+        "BLOCCO"
+      ],
+      "blocking_outcomes": [
+        "RAC_BLOCK"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "S5"
+        ],
+        "forbidden_if_negative": [
+          "S5",
+          "S6",
+          "S7",
+          "S8",
+          "S9",
+          "S10",
+          "S11"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "TRN",
+        "BLK",
+        "ND"
+      ],
+      "repo_presidia": [
+        "runtime/rac_gate.py",
+        "tests/test_rac_gate.py",
+        "tests/test_ppav_non_delegability_matrix.py"
+      ],
+      "priority": "P0",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "hard_non_delegable": true,
+      "can_produce_opposable_output": false
+    },
+    "S5": {
+      "phase_label": "S5",
+      "function": "LAYER - regime dell'output e opponibilita",
+      "preconditions": [
+        "S4=OK"
+      ],
+      "input_minimum": [
+        "rac_output",
+        "documentary_proofs",
+        "db_lock_state",
+        "open_blocks"
+      ],
+      "action_expected": "Determinare il regime OPPONIBILE o NON_OPPONIBILE e il layer ammissibile",
+      "positive_outcomes": [
+        "OPPONIBILE",
+        "L_AR_ONLY_DEGRADED"
+      ],
+      "negative_outcomes": [
+        "NON_OPPONIBILE"
+      ],
+      "blocking_outcomes": [
+        "OUTPUT_NOT_OPPONIBILE_BLOCK"
+      ],
+      "conditional_rules": [
+        "If proofs_missing_or_db_lock_missing_or_AAN_BLOCK_OPEN_then_only_L_AR_allowed",
+        "If NON_OPPONIBILE_then_S11_LAYER_ATTO_FIRMA_READY_forbidden"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "S6"
+        ],
+        "forbidden_if_negative": [
+          "S6",
+          "S7",
+          "S8",
+          "S9",
+          "S10",
+          "S11"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "TRN",
+        "BLK",
+        "REP"
+      ],
+      "repo_presidia": [
+        "runtime/layer_gate.py",
+        "tests/test_ppav_layer_gate.py",
+        "tests/test_ppav_output_firma_ready_rules.py"
+      ],
+      "priority": "P0",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "hard_non_delegable": true,
+      "can_produce_opposable_output": false
+    },
+    "S6": {
+      "phase_label": "S6",
+      "function": "Attivazione moduli PPAV M01-M06 + PM",
+      "preconditions": [
+        "S5 definito"
+      ],
+      "input_minimum": [
+        "materia",
+        "intensita_applicativa",
+        "rischio",
+        "zone_rosse",
+        "esiti_precedenti"
+      ],
+      "action_expected": "Attivare i moduli pertinenti e verificare i controlli obbligatori",
+      "positive_outcomes": [
+        "MODULES_OK"
+      ],
+      "negative_outcomes": [
+        "MODULES_MISSING",
+        "MANDATORY_CONTROL_MISSING"
+      ],
+      "blocking_outcomes": [
+        "PPAV_MODULE_ACTIVATION_BLOCK"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "S7"
+        ],
+        "forbidden_if_negative": [
+          "S7",
+          "S8",
+          "S9",
+          "S10",
+          "S11"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "TRN",
+        "BLK"
+      ],
+      "repo_presidia": [
+        "runtime/ppav_module_activation.py",
+        "tests/test_ppav_module_activation.py"
+      ],
+      "priority": "P1",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "can_produce_opposable_output": false
+    },
+    "S7": {
+      "phase_label": "S7",
+      "function": "CS-PPAV - controllo di stabilita complessiva",
+      "preconditions": [
+        "S6=MODULES_OK"
+      ],
+      "input_minimum": [
+        "module_outputs",
+        "residual_blocks",
+        "stability_dimensions"
+      ],
+      "action_expected": "Classificare stabilita complessiva in VERDE, GIALLO o ROSSO",
+      "positive_outcomes": [
+        "VERDE",
+        "GIALLO"
+      ],
+      "negative_outcomes": [
+        "ROSSO"
+      ],
+      "blocking_outcomes": [
+        "CS_PPAV_RED_BLOCK"
+      ],
+      "conditional_rules": [
+        "If ROSSO_then_firma_ready_path_forbidden",
+        "If GIALLO_then_only_governed_transition_allowed"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "S8"
+        ],
+        "forbidden_if_negative": [
+          "S8",
+          "S9",
+          "S10",
+          "S11"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "TRN",
+        "BLK"
+      ],
+      "repo_presidia": [
+        "runtime/cs_ppav_gate.py",
+        "tests/test_cs_ppav_gate.py"
+      ],
+      "priority": "P1",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "can_produce_opposable_output": false
+    },
+    "S8": {
+      "phase_label": "S8",
+      "function": "SCM-PRO - controlli manuali obbligatori pre-firma",
+      "preconditions": [
+        "S7 non ROSSO"
+      ],
+      "input_minimum": [
+        "manual_checklist",
+        "human_verifications",
+        "documentary_proofs"
+      ],
+      "action_expected": "Registrare GO, GO_CON_RISERVA o NO_GO",
+      "positive_outcomes": [
+        "GO",
+        "GO_CON_RISERVA"
+      ],
+      "negative_outcomes": [
+        "NO_GO"
+      ],
+      "blocking_outcomes": [
+        "SCM_PRO_NO_GO_BLOCK"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "S9"
+        ],
+        "forbidden_if_negative": [
+          "S9",
+          "S10",
+          "S11"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "TRN",
+        "BLK"
+      ],
+      "repo_presidia": [
+        "runtime/scm_pro_gate.py",
+        "tests/test_scm_pro_gate.py"
+      ],
+      "priority": "P1",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "hard_non_delegable": true,
+      "can_produce_opposable_output": false
+    },
+    "S9": {
+      "phase_label": "S9",
+      "function": "CRITIC v4 - stress test di legittimita e tenuta difensiva",
+      "preconditions": [
+        "S8 non NO_GO"
+      ],
+      "input_minimum": [
+        "act_text",
+        "motivational_frame",
+        "residual_risks"
+      ],
+      "action_expected": "Restituire esito OK, ATTENZIONE o CRITICO",
+      "positive_outcomes": [
+        "OK",
+        "ATTENZIONE"
+      ],
+      "negative_outcomes": [
+        "CRITICO"
+      ],
+      "blocking_outcomes": [
+        "CRITIC_V4_BLOCK"
+      ],
+      "conditional_rules": [
+        "If CRITICO_then_S10_GO_forbidden"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "S10"
+        ],
+        "forbidden_if_negative": [
+          "S10",
+          "S11"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "TRN",
+        "BLK",
+        "ND"
+      ],
+      "repo_presidia": [
+        "runtime/critic_v4_gate.py",
+        "tests/test_critic_v4_gate.py",
+        "tests/test_ppav_gate_block_propagation.py"
+      ],
+      "priority": "P0",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "hard_non_delegable": true,
+      "can_produce_opposable_output": false
+    },
+    "S10": {
+      "phase_label": "S10",
+      "function": "CF-ATTI - gate finale pre-firma",
+      "preconditions": [
+        "S9 non CRITICO"
+      ],
+      "input_minimum": [
+        "all_phase_outputs",
+        "audit_trail",
+        "shadow_trace",
+        "open_blocks"
+      ],
+      "action_expected": "Emettere GO o NO_GO finale del Livello A",
+      "positive_outcomes": [
+        "GO"
+      ],
+      "negative_outcomes": [
+        "NO_GO"
+      ],
+      "blocking_outcomes": [
+        "CF_ATTI_NO_GO_BLOCK"
+      ],
+      "conditional_rules": [
+        "If NO_GO_then_S11_FIRMA_READY_forbidden"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [
+          "S11"
+        ],
+        "forbidden_if_negative": [
+          "S11"
+        ]
+      },
+      "test_classes": [
+        "UNIT",
+        "TRN",
+        "BLK"
+      ],
+      "repo_presidia": [
+        "runtime/cf_atti_gate.py",
+        "tests/test_cf_atti_gate.py",
+        "tests/test_ppav_output_firma_ready_rules.py"
+      ],
+      "priority": "P0",
+      "level_a_decides": true,
+      "level_b_support_only": false,
+      "hard_non_delegable": true,
+      "can_produce_opposable_output": false
+    },
+    "S11": {
+      "phase_label": "S11",
+      "function": "OUTPUT - produzione finale a doppio layer",
+      "preconditions": [
+        "S10=GO"
+      ],
+      "input_minimum": [
+        "layer_regime",
+        "act_text",
+        "shadow_payload",
+        "audit_trail_complete"
+      ],
+      "action_expected": "Produrre LAYER_ATTO e LAYER_SHADOW; dichiarare FIRMA_READY solo se tutti i gate sono superati",
+      "positive_outcomes": [
+        "OUTPUT_OK",
+        "FIRMA_READY_TRUE"
+      ],
+      "negative_outcomes": [
+        "OUTPUT_INCOMPLETE",
+        "FIRMA_READY_FALSE"
+      ],
+      "blocking_outcomes": [
+        "OUTPUT_FINAL_BLOCK"
+      ],
+      "conditional_rules": [
+        "If any_previous_phase_blocked_then_FIRMA_READY_FALSE",
+        "If S5=NON_OPPONIBILE_then_LAYER_ATTO_FIRMA_READY_forbidden",
+        "If S10!=GO_then_FIRMA_READY_TRUE_forbidden"
+      ],
+      "successor_phase_rules": {
+        "allowed_if_positive": [],
+        "forbidden_if_negative": []
+      },
+      "test_classes": [
+        "E2E",
+        "BLK",
+        "ND",
+        "LB",
+        "REP"
+      ],
+      "repo_presidia": [
+        "runtime/output_gate.py",
+        "tests/test_ppav_end_to_end_official_flow.py",
+        "tests/test_ppav_output_firma_ready_rules.py",
+        "tests/test_ppav_repo_coverage_integrity.py"
+      ],
+      "priority": "P0",
+      "level_a_decides": true,
+      "level_b_support_only": true,
+      "hard_non_delegable": true,
+      "can_produce_opposable_output": true
+    }
+  }
+}

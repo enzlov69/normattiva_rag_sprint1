@@ -1,0 +1,198 @@
+{
+  "registry_id": "ppav_phase_sequence_registry_v1",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "scope": "Metodo Cerda - PPAV 2.2 / Matrice Test Ufficiale S0-S11",
+  "baseline": {
+    "ab_master": "stable-final-ab-master-cycle-v1",
+    "local_m07": "stable-m07-documentary-support-acceptance-pack-v1",
+    "local_fip_ind": "stable-fip-ind-gate-foundation-v1"
+  },
+  "principles": [
+    "Metodo Cerda governa il ragionamento; il RAG governa il reperimento delle fonti.",
+    "Il Livello B resta subordinato e non decisorio.",
+    "Nessuna fase successiva puo produrre esito utile opponibile se la precedente non e valida o completa.",
+    "Nessun salto di fase e consentito.",
+    "Nessuna produzione FIRMA_READY e consentita prima di S10 = GO.",
+    "COT++ riepiloga gli esiti ma non sostituisce i gate.",
+    "I test devono esistere nel ROOT del sistema."
+  ],
+  "always_on_presidia": [
+    "OP_ANTI_ALLUCINAZIONI_NORMATIVE",
+    "OP_DOPPIA_LENTE_RATIO",
+    "OP_COT++"
+  ],
+  "invariants": {
+    "no_phase_skips": true,
+    "strict_adjacent_transition_only": true,
+    "previous_blocked_forbids_useful_successor_output": true,
+    "no_firma_ready_before_s10_go": true,
+    "level_b_cannot_decide": true,
+    "level_b_cannot_validate": true,
+    "level_b_cannot_close_m07": true,
+    "level_b_cannot_authorize_output": true,
+    "root_tests_mandatory": true
+  },
+  "phases": [
+    {
+      "ordinal": 1,
+      "phase_id": "SPRE_D",
+      "phase_label": "S-PRE/D",
+      "phase_name": "Apertura sessione e verifica integrita sistema",
+      "previous_phase_id": null,
+      "next_phase_id": "SPRE_F",
+      "kind": "PRECHECK",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 2,
+      "phase_id": "SPRE_F",
+      "phase_label": "S-PRE/F",
+      "phase_name": "Verifica del singolo modulo prima della fase",
+      "previous_phase_id": "SPRE_D",
+      "next_phase_id": "S0",
+      "kind": "PRECHECK",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 3,
+      "phase_id": "S0",
+      "phase_label": "S0",
+      "phase_name": "FASE 0",
+      "previous_phase_id": "SPRE_F",
+      "next_phase_id": "S0_BIS",
+      "kind": "CLASSIFICATION",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 4,
+      "phase_id": "S0_BIS",
+      "phase_label": "S0-bis",
+      "phase_name": "FASE 0-bis",
+      "previous_phase_id": "S0",
+      "next_phase_id": "S0_TER",
+      "kind": "COMPLIANCE",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 5,
+      "phase_id": "S0_TER",
+      "phase_label": "S0-ter",
+      "phase_name": "FASE 0-ter",
+      "previous_phase_id": "S0_BIS",
+      "next_phase_id": "S1",
+      "kind": "NORMATIVE_ACTIVATION",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 6,
+      "phase_id": "S1",
+      "phase_label": "S1",
+      "phase_name": "FIP-IND",
+      "previous_phase_id": "S0_TER",
+      "next_phase_id": "S2",
+      "kind": "QUALIFICATION_FILTER",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 7,
+      "phase_id": "S2",
+      "phase_label": "S2",
+      "phase_name": "RAP-ATTI",
+      "previous_phase_id": "S1",
+      "next_phase_id": "S3",
+      "kind": "INTEGRITY_LOCK",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 8,
+      "phase_id": "S3",
+      "phase_label": "S3",
+      "phase_name": "M07-LPR",
+      "previous_phase_id": "S2",
+      "next_phase_id": "S4",
+      "kind": "READING_GATE",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 9,
+      "phase_id": "S4",
+      "phase_label": "S4",
+      "phase_name": "RAC",
+      "previous_phase_id": "S3",
+      "next_phase_id": "S5",
+      "kind": "APPLICATIVE_REPORT",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 10,
+      "phase_id": "S5",
+      "phase_label": "S5",
+      "phase_name": "LAYER",
+      "previous_phase_id": "S4",
+      "next_phase_id": "S6",
+      "kind": "OPPOSABILITY_REGIME",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 11,
+      "phase_id": "S6",
+      "phase_label": "S6",
+      "phase_name": "MODULI PPAV",
+      "previous_phase_id": "S5",
+      "next_phase_id": "S7",
+      "kind": "MODULE_ACTIVATION",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 12,
+      "phase_id": "S7",
+      "phase_label": "S7",
+      "phase_name": "CS-PPAV",
+      "previous_phase_id": "S6",
+      "next_phase_id": "S8",
+      "kind": "STABILITY_GATE",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 13,
+      "phase_id": "S8",
+      "phase_label": "S8",
+      "phase_name": "SCM-PRO",
+      "previous_phase_id": "S7",
+      "next_phase_id": "S9",
+      "kind": "MANUAL_CONTROLS",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 14,
+      "phase_id": "S9",
+      "phase_label": "S9",
+      "phase_name": "CRITIC v4",
+      "previous_phase_id": "S8",
+      "next_phase_id": "S10",
+      "kind": "DEFENSIVE_STRESS_TEST",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 15,
+      "phase_id": "S10",
+      "phase_label": "S10",
+      "phase_name": "CF-ATTI",
+      "previous_phase_id": "S9",
+      "next_phase_id": "S11",
+      "kind": "FINAL_PRE_SIGNATURE_GATE",
+      "can_produce_opposable_output": false
+    },
+    {
+      "ordinal": 16,
+      "phase_id": "S11",
+      "phase_label": "S11",
+      "phase_name": "OUTPUT",
+      "previous_phase_id": "S10",
+      "next_phase_id": null,
+      "kind": "FINAL_OUTPUT",
+      "can_produce_opposable_output": true
+    }
+  ]
+}
