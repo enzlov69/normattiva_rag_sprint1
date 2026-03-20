@@ -171,7 +171,7 @@ La versione estesa del primo ciclo conferma, in modo testato, che:
 4. warning, errors e blocks documentali si propagano correttamente ad A;
 5. il **Livello B** non può:
    - chiudere M07-LPR;
-   - emettere GO/NO_GO;
+   - emettere GO/NO-GO;
    - produrre FIRMA_READY;
    - autorizzare output opponibili;
    - decidere l’esito finale del caso;
