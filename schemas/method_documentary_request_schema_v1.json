@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/method_documentary_request_schema_v1.json",
+  "schema_id": "method_documentary_request_schema_v1",
+  "schema_version": "1.0.0",
+  "title": "MethodDocumentaryRequestSchemaV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "case_id",
+    "trace_id",
+    "api_version",
+    "caller_module",
+    "target_module",
+    "timestamp",
+    "status",
+    "warnings",
+    "errors",
+    "blocks",
+    "payload",
+    "audit",
+    "shadow"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "api_version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+(\\.[0-9]+)?$"
+    },
+    "caller_module": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_module": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "const": "READY_FOR_LEVEL_B"
+    },
+    "warnings": {
+      "type": "array"
+    },
+    "errors": {
+      "type": "array"
+    },
+    "blocks": {
+      "type": "array"
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "request_kind",
+        "request_type",
+        "documentary_channel_policy",
+        "documentary_request",
+        "documentary_scope",
+        "expected_documentary_outputs",
+        "audit_context"
+      ],
+      "properties": {
+        "request_kind": {
+          "type": "string",
+          "const": "METHOD_DOCUMENTARY_SUPPORT"
+        },
+        "request_type": {
+          "type": "string",
+          "const": "DOCUMENTARY_SUPPORT_REQUEST"
+        },
+        "documentary_channel_policy": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "preferred_channel",
+            "allowed_channels",
+            "federated_is_not_official_source"
+          ]
+        },
+        "documentary_request": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "natura_output",
+            "tipologia_atto",
+            "materia_prevalente",
+            "sensibilita",
+            "rischio_iniziale",
+            "intensita_applicativa",
+            "zone_rosse",
+            "fast_track",
+            "moduli_attivati",
+            "esigenza_documentale",
+            "obiettivo_documentale",
+            "query_guidata",
+            "corpora_preferiti",
+            "contesto_metodologico"
+          ],
+          "properties": {
+            "natura_output": {
+              "type": "string",
+              "minLength": 1
+            },
+            "tipologia_atto": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "materia_prevalente": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sensibilita": {
+              "type": "string",
+              "minLength": 1
+            },
+            "rischio_iniziale": {
+              "type": "string",
+              "minLength": 1
+            },
+            "intensita_applicativa": {
+              "type": "string",
+              "minLength": 1
+            },
+            "zone_rosse": {
+              "type": "array"
+            },
+            "fast_track": {
+              "type": "boolean"
+            },
+            "moduli_attivati": {
+              "type": "array"
+            },
+            "esigenza_documentale": {},
+            "obiettivo_documentale": {},
+            "query_guidata": {},
+            "corpora_preferiti": {
+              "type": "array"
+            },
+            "contesto_metodologico": {
+              "type": "object"
+            }
+          }
+        },
+        "documentary_scope": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "must_return_documentary_only",
+            "level_b_is_non_decisional",
+            "support_only",
+            "propagate_critical_blocks",
+            "allow_only_documentary_outputs"
+          ]
+        },
+        "expected_documentary_outputs": {
+          "type": "array",
+          "minItems": 1
+        },
+        "audit_context": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "audit": {
+      "type": "object"
+    },
+    "shadow": {
+      "type": "object"
+    }
+  }
+}

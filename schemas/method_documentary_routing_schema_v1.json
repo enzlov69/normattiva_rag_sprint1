@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/method_documentary_routing_schema_v1.json",
+  "schema_id": "method_documentary_routing_schema_v1",
+  "schema_version": "1.0.0",
+  "title": "MethodDocumentaryRoutingSchemaV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "case_id",
+    "trace_id",
+    "routing_status",
+    "destinations",
+    "m07_evidence_pack_ref",
+    "rac_documentary_input_ref",
+    "ppav_documentary_input_refs",
+    "fascicolo_entry_ref",
+    "audit_event_ref",
+    "shadow_update_ref",
+    "documentary_channel",
+    "institutional_web_refs"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "routing_status": {
+      "type": "string",
+      "enum": [
+        "ROUTED",
+        "PARTIAL",
+        "BLOCKED",
+        "SKIPPED"
+      ]
+    },
+    "destinations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "m07_evidence_pack_ref": {},
+    "rac_documentary_input_ref": {},
+    "ppav_documentary_input_refs": {
+      "type": "array"
+    },
+    "fascicolo_entry_ref": {},
+    "audit_event_ref": {},
+    "shadow_update_ref": {}
+    ,
+    "documentary_channel": {
+      "type": "string",
+      "enum": [
+        "FEDERATED_ONLY",
+        "FEDERATED_PLUS_INSTITUTIONAL_WEB",
+        "INSTITUTIONAL_WEB_ONLY"
+      ]
+    },
+    "institutional_web_refs": {
+      "type": "array"
+    }
+  }
+}

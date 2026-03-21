@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/method_documentary_gate_output_schema_v1.json",
+  "schema_id": "method_documentary_gate_output_schema_v1",
+  "schema_version": "1.0.0",
+  "title": "MethodDocumentaryGateOutputSchemaV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "case_id",
+    "trace_id",
+    "gate_status",
+    "level_b_status",
+    "critical_blocks",
+    "warning_flags",
+    "degradation_reasons",
+    "forbidden_field_detected",
+    "packet_complete",
+    "allowed_routes",
+    "audit_required",
+    "shadow_required",
+    "documentary_channel",
+    "institutional_web_required",
+    "institutional_web_reason"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trace_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gate_status": {
+      "type": "string",
+      "enum": [
+        "PROCEED",
+        "DEGRADE",
+        "BLOCK",
+        "NOT_REQUIRED"
+      ]
+    },
+    "level_b_status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "critical_blocks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "warning_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "degradation_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forbidden_field_detected": {
+      "type": "boolean"
+    },
+    "forbidden_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "packet_complete": {
+      "type": "boolean"
+    },
+    "allowed_routes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "audit_required": {
+      "type": "boolean"
+    },
+    "shadow_required": {
+      "type": "boolean"
+    },
+    "documentary_channel": {
+      "type": "string",
+      "enum": [
+        "FEDERATED_ONLY",
+        "FEDERATED_PLUS_INSTITUTIONAL_WEB",
+        "INSTITUTIONAL_WEB_ONLY"
+      ]
+    },
+    "institutional_web_required": {
+      "type": "boolean"
+    },
+    "institutional_web_reason": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
