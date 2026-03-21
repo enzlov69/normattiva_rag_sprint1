@@ -158,8 +158,12 @@ class FinalABARuntimeHandoffService:
         events.append({"event": event, "timestamp": envelope.get("timestamp", self._now_iso())})
 
     @staticmethod
-    def _dedupe(values: list[str]) -> list[str]:
-        return list(dict.fromkeys(values))
+    def _dedupe(values: list[Any]) -> list[Any]:
+        deduped: list[Any] = []
+        for value in values:
+            if value not in deduped:
+                deduped.append(value)
+        return deduped
 
     @staticmethod
     def _now_iso() -> str:

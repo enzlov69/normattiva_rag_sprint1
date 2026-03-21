@@ -4,6 +4,8 @@ import json
 import os
 import time
 from dataclasses import dataclass
+from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, Mapping, Optional
 from urllib import error, request
 
@@ -63,6 +65,15 @@ class LiveTransportSettings:
     backoff_seconds: float = DEFAULT_BACKOFF_SECONDS
     retryable_http_statuses: tuple[int, ...] = DEFAULT_RETRYABLE_HTTP_STATUSES
     bearer_token: Optional[str] = None
+
+
+def _utc_now_iso() -> str:
+    return (
+        datetime.now(timezone.utc)
+        .replace(microsecond=0)
+        .isoformat()
+        .replace("+00:00", "Z")
+    )
 
 
 def _env_int(name: str, default: int) -> int:
@@ -158,18 +169,26 @@ def build_transport(
                 method="POST",
             )
             try:
-                with effective_opener(http_request, timeout=settings.timeout_seconds) as response:
+                with effective_opener(
+                    http_request, timeout=settings.timeout_seconds
+                ) as response:
                     raw = response.read().decode("utf-8")
+
                 return _parse_json_response(raw)
+
             except error.HTTPError as exc:
                 last_error = exc
-                if exc.code in settings.retryable_http_statuses and attempt < settings.max_attempts:
+                if (
+                    exc.code in settings.retryable_http_statuses
+                    and attempt < settings.max_attempts
+                ):
                     effective_sleep(settings.backoff_seconds * attempt)
                     continue
                 detail = _safe_http_error_body(exc)
                 raise FederatedRunnerLiveTransportError(
                     f"HTTP error from federated runner: {exc.code} {detail}"
                 ) from exc
+
             except error.URLError as exc:
                 last_error = exc
                 if attempt < settings.max_attempts:
@@ -178,6 +197,7 @@ def build_transport(
                 raise FederatedRunnerLiveTransportError(
                     f"Connection error to federated runner: {exc}"
                 ) from exc
+
             except TimeoutError as exc:
                 last_error = exc
                 if attempt < settings.max_attempts:
@@ -214,11 +234,242 @@ def _parse_json_response(raw: str) -> JsonDict:
             "Federated runner response is not valid JSON."
         ) from exc
 
+    _maybe_dump_raw_response(parsed)
+
     if not isinstance(parsed, dict):
         raise FederatedRunnerLiveTransportContractError(
             "Federated runner response must be a JSON object."
         )
+
+    return _normalize_live_response_envelope(parsed)
+
+
+def _maybe_dump_raw_response(parsed: Any) -> None:
+    debug_path = os.getenv("FEDERATED_RUNNER_LIVE_DEBUG_PATH")
+    if not debug_path:
+        return
+
+    try:
+        path = Path(debug_path)
+        path.write_text(
+            json.dumps(parsed, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+    except Exception:
+        # debug opzionale: non deve mai rompere il transport
+        pass
+
+
+def _normalize_live_response_envelope(parsed: Mapping[str, Any]) -> JsonDict:
+    """
+    Normalizza in modo minimale la response del Livello B senza attribuire
+    funzioni decisorie o validative al runner federato.
+
+    Obiettivi:
+    - colmare i campi top-level minimi richiesti dal Livello A;
+    - supportare wrapper comuni (response/data/result);
+    - supportare alias documentali legacy;
+    - preservare la natura documentale e non opponibile del ritorno B.
+    """
+    candidate = _unwrap_common_response_container(parsed)
+
+    envelope: JsonDict = dict(candidate)
+
+    payload = envelope.get("payload")
+    if not isinstance(payload, Mapping):
+        payload = {}
+
+    documentary_packet = _extract_and_normalize_documentary_packet(
+        candidate=candidate,
+        payload=payload,
+    )
+
+    normalized_payload: JsonDict = dict(payload)
+    normalized_payload["documentary_packet"] = documentary_packet
+
+    envelope["api_version"] = str(envelope.get("api_version") or "1.0")
+    envelope["responder_module"] = str(
+        envelope.get("responder_module") or "B_REAL_FEDERATED_RUNNER"
+    )
+    envelope["timestamp"] = str(envelope.get("timestamp") or _utc_now_iso())
+    envelope["status"] = str(envelope.get("status") or "COMPLETED")
+    envelope["warnings"] = _coerce_list(envelope.get("warnings"))
+    envelope["errors"] = _coerce_list(envelope.get("errors"))
+    envelope["blocks"] = _coerce_list(envelope.get("blocks"))
+    envelope["payload"] = normalized_payload
+
+    audit = envelope.get("audit")
+    if not isinstance(audit, Mapping):
+        audit = {}
+    audit_dict: JsonDict = dict(audit)
+    audit_dict["trail_events"] = _coerce_list(audit_dict.get("trail_events"))
+    envelope["audit"] = audit_dict
+
+    shadow = envelope.get("shadow")
+    if not isinstance(shadow, Mapping):
+        shadow = {}
+    shadow_dict: JsonDict = dict(shadow)
+    shadow_dict["fragments"] = _coerce_list(shadow_dict.get("fragments"))
+    shadow_dict["fragments"].append(
+        {
+            "kind": "live_response_normalization",
+            "normalized_top_level_fields": [
+                "api_version",
+                "responder_module",
+                "timestamp",
+                "status",
+                "warnings",
+                "errors",
+                "blocks",
+            ],
+            "documentary_only": True,
+            "timestamp": envelope["timestamp"],
+        }
+    )
+    envelope["shadow"] = shadow_dict
+
+    return envelope
+
+
+def _unwrap_common_response_container(parsed: Mapping[str, Any]) -> Mapping[str, Any]:
+    for key in ("response", "data", "result"):
+        value = parsed.get(key)
+        if isinstance(value, Mapping):
+            return value
     return parsed
+
+
+def _extract_and_normalize_documentary_packet(
+    *,
+    candidate: Mapping[str, Any],
+    payload: Mapping[str, Any],
+) -> JsonDict:
+    raw_packet = payload.get("documentary_packet")
+    if not isinstance(raw_packet, Mapping):
+        raw_packet = {}
+
+    if not raw_packet:
+        # supporto a payload documentale già "piatto"
+        if _looks_like_documentary_packet(payload):
+            raw_packet = payload
+        elif _looks_like_documentary_packet(candidate):
+            raw_packet = candidate
+
+    packet = dict(raw_packet)
+
+    normative_units = (
+        packet.get("normative_units")
+        or packet.get("norm_units")
+        or packet.get("norm_units_relevant")
+        or []
+    )
+    citations = (
+        packet.get("citations")
+        or packet.get("citations_valid")
+        or packet.get("valid_citations")
+        or []
+    )
+    incomplete_citations = (
+        packet.get("incomplete_citations")
+        or packet.get("citations_blocked")
+        or packet.get("blocked_citations")
+        or []
+    )
+
+    coverage = packet.get("coverage")
+    if coverage in (None, ""):
+        coverage = _extract_coverage_alias(packet)
+
+    vigenza_status = packet.get("vigenza_status")
+    if vigenza_status in (None, ""):
+        vigenza_status = _extract_vigenza_alias(packet)
+
+    rinvii_status = packet.get("rinvii_status")
+    if rinvii_status in (None, ""):
+        rinvii_status = _extract_rinvii_alias(packet)
+
+    normalized_packet: JsonDict = {
+        "sources": _coerce_list(packet.get("sources")),
+        "normative_units": _coerce_list(normative_units),
+        "citations": _coerce_list(citations),
+        "incomplete_citations": _coerce_list(incomplete_citations),
+        "vigenza_status": _preserve_documentary_status_value(vigenza_status),
+        "rinvii_status": _preserve_documentary_status_value(rinvii_status),
+        "coverage": _preserve_documentary_status_value(coverage),
+    }
+
+    # preserva eventuali metadati aggiuntivi utili al Livello A
+    for extra_key in (
+        "norm_units",
+        "citations_valid",
+        "citations_blocked",
+        "vigenza_records",
+        "cross_reference_records",
+        "coverage_assessment",
+        "warnings",
+        "errors",
+        "blocks",
+        "shadow_fragment",
+    ):
+        if extra_key in packet and extra_key not in normalized_packet:
+            normalized_packet[extra_key] = packet[extra_key]
+
+    return normalized_packet
+
+
+def _looks_like_documentary_packet(node: Mapping[str, Any]) -> bool:
+    documentary_markers = {
+        "sources",
+        "normative_units",
+        "norm_units",
+        "citations",
+        "citations_valid",
+        "citations_blocked",
+        "incomplete_citations",
+        "vigenza_status",
+        "vigenza_records",
+        "rinvii_status",
+        "cross_reference_records",
+        "coverage",
+        "coverage_assessment",
+    }
+    return any(key in node for key in documentary_markers)
+
+
+def _extract_coverage_alias(packet: Mapping[str, Any]) -> str:
+    coverage_assessment = packet.get("coverage_assessment")
+    if isinstance(coverage_assessment, Mapping):
+        if coverage_assessment.get("coverage_status"):
+            return str(coverage_assessment["coverage_status"])
+    return "UNKNOWN"
+
+
+def _extract_vigenza_alias(packet: Mapping[str, Any]) -> str:
+    value = packet.get("vigenza_records")
+    if isinstance(value, Mapping) and value.get("status"):
+        return str(value["status"])
+    return "UNKNOWN"
+
+
+def _extract_rinvii_alias(packet: Mapping[str, Any]) -> str:
+    value = packet.get("cross_reference_records")
+    if isinstance(value, Mapping) and value.get("status"):
+        return str(value["status"])
+    return "UNKNOWN"
+
+
+def _preserve_documentary_status_value(value: Any) -> Any:
+    if isinstance(value, Mapping):
+        return dict(value)
+    if value in (None, ""):
+        return "UNKNOWN"
+    return str(value)
+
+
+def _coerce_list(value: Any) -> list[Any]:
+    if isinstance(value, list):
+        return value
+    return []
 
 
 def _safe_http_error_body(exc: error.HTTPError) -> str:
@@ -242,7 +493,12 @@ def invoke_transport_with_guarded_fallback(
         response_envelope = effective_transport(request_envelope)
         _assert_no_forbidden_level_b_fields(response_envelope)
         return append_documentary_evidence_matrix(response_envelope)
-    except (FederatedRunnerLiveTransportError, FederatedRunnerLiveTransportContractError, RuntimeError, ValueError) as exc:
+    except (
+        FederatedRunnerLiveTransportError,
+        FederatedRunnerLiveTransportContractError,
+        RuntimeError,
+        ValueError,
+    ) as exc:
         fallback = _build_blocked_fallback_envelope(
             request_envelope=request_envelope,
             reason=str(exc),
@@ -344,10 +600,22 @@ def append_documentary_evidence_matrix(response_envelope: JsonDict) -> JsonDict:
     matrix = build_documentary_evidence_matrix(packet)
 
     payload = response_envelope.setdefault("payload", {})
+    if not isinstance(payload, dict):
+        payload = {}
+        response_envelope["payload"] = payload
+
     payload["documentary_evidence_matrix"] = matrix
 
     audit = response_envelope.setdefault("audit", {})
+    if not isinstance(audit, dict):
+        audit = {}
+        response_envelope["audit"] = audit
+
     trail_events = audit.setdefault("trail_events", [])
+    if not isinstance(trail_events, list):
+        trail_events = []
+        audit["trail_events"] = trail_events
+
     trail_events.append(
         {
             "event": "documentary_evidence_matrix_built",
@@ -358,7 +626,15 @@ def append_documentary_evidence_matrix(response_envelope: JsonDict) -> JsonDict:
     )
 
     shadow = response_envelope.setdefault("shadow", {})
+    if not isinstance(shadow, dict):
+        shadow = {}
+        response_envelope["shadow"] = shadow
+
     fragments = shadow.setdefault("fragments", [])
+    if not isinstance(fragments, list):
+        fragments = []
+        shadow["fragments"] = fragments
+
     fragments.append(
         {
             "kind": "documentary_evidence_matrix",
@@ -381,13 +657,12 @@ def build_documentary_evidence_matrix(packet: Mapping[str, Any]) -> JsonDict:
     normative_units = _as_list(packet.get("normative_units"))
     citations = _as_list(packet.get("citations"))
     incomplete_citations = _as_list(packet.get("incomplete_citations"))
-    vigenza_status = str(packet.get("vigenza_status", "UNKNOWN") or "UNKNOWN")
-    rinvii_status = str(packet.get("rinvii_status", "UNKNOWN") or "UNKNOWN")
-    coverage_raw = str(packet.get("coverage", "UNKNOWN") or "UNKNOWN")
+    vigenza_status = _extract_documentary_status(packet.get("vigenza_status"))
+    rinvii_status = _extract_documentary_status(packet.get("rinvii_status"))
+    coverage_status = _extract_documentary_status(packet.get("coverage"))
 
     blocking_reasons: list[str] = []
 
-    coverage_status = coverage_raw.upper()
     if coverage_status in {"INADEQUATE", "UNKNOWN"}:
         blocking_reasons.append("COVERAGE_NOT_ADEQUATE")
     if vigenza_status.upper() in {"UNKNOWN", "UNCERTAIN", "BLOCKED"}:
@@ -422,6 +697,15 @@ def build_documentary_evidence_matrix(packet: Mapping[str, Any]) -> JsonDict:
         "documentary_only": True,
         "non_opponible_outside_level_a": True,
     }
+
+
+def _extract_documentary_status(value: Any) -> str:
+    if isinstance(value, Mapping):
+        nested_status = value.get("status")
+        if nested_status not in (None, ""):
+            return str(nested_status).upper()
+        return "UNKNOWN"
+    return str(value or "UNKNOWN").upper()
 
 
 def _get_documentary_packet(response_envelope: Mapping[str, Any]) -> Mapping[str, Any]:

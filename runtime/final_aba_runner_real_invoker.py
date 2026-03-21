@@ -53,28 +53,21 @@ REQUIRED_RESPONSE_FIELDS: Tuple[str, ...] = (
     "request_id",
     "case_id",
     "trace_id",
-    "api_version",
-    "responder_module",
     "status",
     "payload",
     "warnings",
     "errors",
     "blocks",
-    "timestamp",
 )
 
 REQUIRED_DOCUMENTARY_PACKET_FIELDS: Tuple[str, ...] = (
     "sources",
-    "norm_units",
-    "citations_valid",
-    "citations_blocked",
-    "vigenza_records",
-    "cross_reference_records",
-    "coverage_assessment",
-    "warnings",
-    "errors",
-    "blocks",
-    "shadow_fragment",
+    "normative_units",
+    "citations",
+    "incomplete_citations",
+    "vigenza_status",
+    "rinvii_status",
+    "coverage",
 )
 
 REQUEST_DEFAULT_STATUS = "READY_FOR_LEVEL_B"
@@ -302,7 +295,8 @@ class FederatedRunnerRealInvoker:
         return payload
 
     def _validate_documentary_packet(self, packet: JsonDict) -> None:
-        missing = [field for field in REQUIRED_DOCUMENTARY_PACKET_FIELDS if field not in packet]
+        normalized_packet = self._normalize_documentary_packet(packet)
+        missing = [field for field in REQUIRED_DOCUMENTARY_PACKET_FIELDS if field not in normalized_packet]
         if missing:
             raise RealInvokerValidationError(
                 f"Missing documentary packet fields: {', '.join(missing)}",
@@ -312,35 +306,75 @@ class FederatedRunnerRealInvoker:
 
         for list_field in (
             "sources",
-            "norm_units",
-            "citations_valid",
-            "citations_blocked",
-            "vigenza_records",
-            "cross_reference_records",
-            "warnings",
-            "errors",
-            "blocks",
+            "normative_units",
+            "citations",
+            "incomplete_citations",
         ):
-            if not isinstance(packet[list_field], list):
+            if not isinstance(normalized_packet[list_field], list):
                 raise RealInvokerValidationError(
                     f"Documentary packet field '{list_field}' must be a list.",
                     code="INVALID_DOCUMENTARY_PACKET",
                     blocks=["OUTPUT_NOT_OPPONIBLE"],
                 )
 
-        if not isinstance(packet["coverage_assessment"], dict):
-            raise RealInvokerValidationError(
-                "Documentary packet field 'coverage_assessment' must be a dict.",
-                code="INVALID_DOCUMENTARY_PACKET",
-                blocks=["COVERAGE_INADEQUATE", "OUTPUT_NOT_OPPONIBLE"],
-            )
+        for status_field in ("vigenza_status", "rinvii_status", "coverage"):
+            if not self._is_supported_documentary_status(normalized_packet[status_field]):
+                raise RealInvokerValidationError(
+                    f"Documentary packet field '{status_field}' must be a string or an object with 'status'.",
+                    code="INVALID_DOCUMENTARY_PACKET",
+                    blocks=["OUTPUT_NOT_OPPONIBLE"],
+                )
 
-        if not isinstance(packet["shadow_fragment"], dict):
-            raise RealInvokerValidationError(
-                "Documentary packet field 'shadow_fragment' must be a dict.",
-                code="INVALID_DOCUMENTARY_PACKET",
-                blocks=["AUDIT_INCOMPLETE", "OUTPUT_NOT_OPPONIBLE"],
+    def _normalize_documentary_packet(self, packet: JsonDict) -> JsonDict:
+        normalized = deepcopy(packet)
+        normalized["normative_units"] = normalized.get("normative_units", normalized.get("norm_units"))
+        normalized["citations"] = normalized.get("citations", normalized.get("citations_valid"))
+        normalized["incomplete_citations"] = normalized.get(
+            "incomplete_citations",
+            normalized.get("citations_blocked"),
+        )
+
+        if "vigenza_status" not in normalized:
+            normalized["vigenza_status"] = self._extract_status_from_legacy_records(
+                normalized.get("vigenza_records")
             )
+        if "rinvii_status" not in normalized:
+            normalized["rinvii_status"] = self._extract_status_from_legacy_records(
+                normalized.get("cross_reference_records")
+            )
+        if "coverage" not in normalized:
+            normalized["coverage"] = self._extract_coverage_from_legacy_assessment(
+                normalized.get("coverage_assessment")
+            )
+        return normalized
+
+    def _extract_status_from_legacy_records(self, records: Any) -> Optional[str]:
+        if isinstance(records, dict):
+            status = records.get("status")
+            if isinstance(status, str) and status:
+                return status
+        if isinstance(records, list):
+            for item in records:
+                if isinstance(item, dict):
+                    status = item.get("status")
+                    if isinstance(status, str) and status:
+                        return status
+        return "UNKNOWN"
+
+    def _extract_coverage_from_legacy_assessment(self, coverage_assessment: Any) -> Optional[str]:
+        if isinstance(coverage_assessment, dict):
+            coverage = coverage_assessment.get("coverage_status")
+            if isinstance(coverage, str) and coverage:
+                return coverage
+        return "UNKNOWN"
+
+    def _is_supported_documentary_status(self, value: Any) -> bool:
+        if isinstance(value, str):
+            return True
+        if isinstance(value, dict):
+            status = value.get("status")
+            return isinstance(status, str) and bool(status)
+        return False
 
     def _find_forbidden_fields(self, data: Any) -> List[str]:
         hits: Set[str] = set()
